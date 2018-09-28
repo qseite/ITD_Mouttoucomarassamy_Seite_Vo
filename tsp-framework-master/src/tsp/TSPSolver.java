@@ -80,6 +80,7 @@ public class TSPSolver {
 			// Code a loop base on time here
 			int variabledemerde=2;
 			int dummy=3;
+			String testAjay="je crois que c'est bon";
 			spentTime = System.currentTimeMillis() - startTime;
 		}while(spentTime < (m_timeLimit * 1000 - 100) );
 		
