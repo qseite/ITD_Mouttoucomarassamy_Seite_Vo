@@ -1,0 +1,70 @@
+\hypertarget{classtsp_1_1_main}{}\section{tsp.\+Main Class Reference}
+\label{classtsp_1_1_main}\index{tsp.\+Main@{tsp.\+Main}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classtsp_1_1_main_a84c085f37861f74d26600c5c5f0c29b0}{main}} (String\mbox{[}$\,$\mbox{]} args)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class contains the \mbox{\hyperlink{classtsp_1_1_main}{Main}} function, that is the function that is launched when the program is run.
+
+DO N\+OT W\+R\+I\+TE OR M\+O\+D\+I\+FY T\+H\+IS C\+L\+A\+SS.
+
+Read the description of the \mbox{\hyperlink{classtsp_1_1_main}{Main}} method below, it describes how to set some parameters for the program (such as the filename of the problem to solve).
+
+When the program is run, the input data file is loaded in an \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object. A \mbox{\hyperlink{classtsp_1_1_t_s_p_solver}{T\+S\+P\+Solver}} object is then created, given the \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object, and its solve method \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a9d4e4f4559a537b2af395fb8ab930906}{T\+S\+P\+Solver\+::solve}} is called. This is where you have to code your algorithms.
+
+The class to be modified is \mbox{\hyperlink{classtsp_1_1_t_s_p_solver}{T\+S\+P\+Solver}}, from where you may also create your own classes.
+
+\begin{DoxyAuthor}{Author}
+Damien Prot, Fabien Lehuede, Axel Grimault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2017 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtsp_1_1_main_a84c085f37861f74d26600c5c5f0c29b0}\label{classtsp_1_1_main_a84c085f37861f74d26600c5c5f0c29b0}} 
+\index{tsp\+::\+Main@{tsp\+::\+Main}!main@{main}}
+\index{main@{main}!tsp\+::\+Main@{tsp\+::\+Main}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void tsp.\+Main.\+main (\begin{DoxyParamCaption}\item[{String \mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\hyperlink{classtsp_1_1_main}{Main}} method.
+
+DO N\+OT M\+O\+D\+I\+FY T\+H\+IS M\+E\+T\+H\+OD.
+
+The parameters of the java program are described below\+:
+
+{\bfseries command}\+: java \mbox{\hyperlink{classtsp_1_1_main}{Main}} \mbox{[}options\mbox{]} datafile
+
+{\bfseries Options}\+:
+\begin{DoxyItemize}
+\item -\/help \+: prints this parameter description
+\item -\/t (int) \+:maximum number of seconds given to the algorithm
+\item -\/g \+: graphical output of the solution
+\item -\/v \+: trace level (print the solution at the end if true)
+\end{DoxyItemize}
+
+{\bfseries Program output}\+: file\+Name;route\+Length;time;e
+
+e is an error code\+:
+\begin{DoxyItemize}
+\item e = 0 -\/$>$ the solution is feasible and returned within the time limit
+\item e = 1 -\/$>$ unfeasible solution
+\item e = 2 -\/$>$ overtime.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & program parameters. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tsp/Main.\+java\end{DoxyCompactItemize}

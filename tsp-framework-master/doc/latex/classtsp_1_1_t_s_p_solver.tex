@@ -1,0 +1,146 @@
+\hypertarget{classtsp_1_1_t_s_p_solver}{}\section{tsp.\+T\+S\+P\+Solver Class Reference}
+\label{classtsp_1_1_t_s_p_solver}\index{tsp.\+T\+S\+P\+Solver@{tsp.\+T\+S\+P\+Solver}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a0f6712f49bdce5b161b1bfd9f1112e91}{T\+S\+P\+Solver}} (\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} instance, long time\+Limit)
+\item 
+void \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a9d4e4f4559a537b2af395fb8ab930906}{solve}} ()  throws Exception 	
+\item 
+\mbox{\hyperlink{classtsp_1_1_solution}{Solution}} \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a036aa2d65bd855929ff84886cb01f004}{get\+Solution}} ()
+\item 
+\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a981fdbf2b80722b258d99be5c22a2fab}{get\+Instance}} ()
+\item 
+long \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_afa2c693c928addd2bee76ad2a4aed108}{get\+Time\+Limit}} ()
+\item 
+void \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_af58c18bddbdd6d8fb67a8d1335913f14}{set\+Solution}} (\mbox{\hyperlink{classtsp_1_1_solution}{Solution}} solution)
+\item 
+void \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a962cd00f504347f89a69b2142dc9a400}{set\+Instance}} (\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} instance)
+\item 
+void \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a13dec1ff9423995aa911859122b416a9}{set\+Time\+Limit}} (long time)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is the place where you should enter your code and from which you can create your own objects.
+
+The method you must implement is \mbox{\hyperlink{classtsp_1_1_t_s_p_solver_a9d4e4f4559a537b2af395fb8ab930906}{solve()}}. This method is called by the programmer after loading the data.
+
+The \mbox{\hyperlink{classtsp_1_1_t_s_p_solver}{T\+S\+P\+Solver}} object is created by the \mbox{\hyperlink{classtsp_1_1_main}{Main}} class. The other objects that are created in \mbox{\hyperlink{classtsp_1_1_main}{Main}} can be accessed through the following \mbox{\hyperlink{classtsp_1_1_t_s_p_solver}{T\+S\+P\+Solver}} attributes\+:
+\begin{DoxyItemize}
+\item \#m\+\_\+instance \+: the \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object which contains the problem data
+\item \#m\+\_\+solution \+: the \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} object to modify. This object will store the result of the program.
+\item \#m\+\_\+time\+Limit \+: the maximum time limit (in seconds) given to the program.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Damien Prot, Fabien Lehuede, Axel Grimault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2017 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a0f6712f49bdce5b161b1bfd9f1112e91}\label{classtsp_1_1_t_s_p_solver_a0f6712f49bdce5b161b1bfd9f1112e91}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!T\+S\+P\+Solver@{T\+S\+P\+Solver}}
+\index{T\+S\+P\+Solver@{T\+S\+P\+Solver}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{T\+S\+P\+Solver()}{TSPSolver()}}
+{\footnotesize\ttfamily tsp.\+T\+S\+P\+Solver.\+T\+S\+P\+Solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_instance}{Instance}}}]{instance,  }\item[{long}]{time\+Limit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates an object of the class \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} for the problem data loaded in \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} 
+\begin{DoxyParams}{Parameters}
+{\em instance} & the instance of the problem \\
+\hline
+{\em time\+Limit} & the time limit in seconds \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a981fdbf2b80722b258d99be5c22a2fab}\label{classtsp_1_1_t_s_p_solver_a981fdbf2b80722b258d99be5c22a2fab}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} tsp.\+T\+S\+P\+Solver.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+problem data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a036aa2d65bd855929ff84886cb01f004}\label{classtsp_1_1_t_s_p_solver_a036aa2d65bd855929ff84886cb01f004}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!get\+Solution@{get\+Solution}}
+\index{get\+Solution@{get\+Solution}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{get\+Solution()}{getSolution()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} tsp.\+T\+S\+P\+Solver.\+get\+Solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the problem \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_afa2c693c928addd2bee76ad2a4aed108}\label{classtsp_1_1_t_s_p_solver_afa2c693c928addd2bee76ad2a4aed108}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!get\+Time\+Limit@{get\+Time\+Limit}}
+\index{get\+Time\+Limit@{get\+Time\+Limit}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{get\+Time\+Limit()}{getTimeLimit()}}
+{\footnotesize\ttfamily long tsp.\+T\+S\+P\+Solver.\+get\+Time\+Limit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Time given to solve the problem 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a962cd00f504347f89a69b2142dc9a400}\label{classtsp_1_1_t_s_p_solver_a962cd00f504347f89a69b2142dc9a400}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!set\+Instance@{set\+Instance}}
+\index{set\+Instance@{set\+Instance}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{set\+Instance()}{setInstance()}}
+{\footnotesize\ttfamily void tsp.\+T\+S\+P\+Solver.\+set\+Instance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_instance}{Instance}}}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the problem data 
+\begin{DoxyParams}{Parameters}
+{\em instance} & the \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object which contains the data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_af58c18bddbdd6d8fb67a8d1335913f14}\label{classtsp_1_1_t_s_p_solver_af58c18bddbdd6d8fb67a8d1335913f14}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!set\+Solution@{set\+Solution}}
+\index{set\+Solution@{set\+Solution}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{set\+Solution()}{setSolution()}}
+{\footnotesize\ttfamily void tsp.\+T\+S\+P\+Solver.\+set\+Solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_solution}{Solution}}}]{solution }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initializes the problem solution with a new \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} object (the old one will be deleted). 
+\begin{DoxyParams}{Parameters}
+{\em solution} & \+: new solution \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a13dec1ff9423995aa911859122b416a9}\label{classtsp_1_1_t_s_p_solver_a13dec1ff9423995aa911859122b416a9}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!set\+Time\+Limit@{set\+Time\+Limit}}
+\index{set\+Time\+Limit@{set\+Time\+Limit}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{set\+Time\+Limit()}{setTimeLimit()}}
+{\footnotesize\ttfamily void tsp.\+T\+S\+P\+Solver.\+set\+Time\+Limit (\begin{DoxyParamCaption}\item[{long}]{time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the time limit (in seconds). 
+\begin{DoxyParams}{Parameters}
+{\em time} & time given to solve the problem \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtsp_1_1_t_s_p_solver_a9d4e4f4559a537b2af395fb8ab930906}\label{classtsp_1_1_t_s_p_solver_a9d4e4f4559a537b2af395fb8ab930906}} 
+\index{tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}!solve@{solve}}
+\index{solve@{solve}!tsp\+::\+T\+S\+P\+Solver@{tsp\+::\+T\+S\+P\+Solver}}
+\subsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily void tsp.\+T\+S\+P\+Solver.\+solve (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+{\bfseries T\+O\+DO} Modify this method to solve the problem.
+
+Do not print text on the standard output (eg. using {\ttfamily System.\+out.\+print()} or {\ttfamily System.\+out.\+println()}). This output is dedicated to the result analyzer that will be used to evaluate your code on multiple instances.
+
+You can print using the error output ({\ttfamily System.\+err.\+print()} or {\ttfamily System.\+err.\+println()}).
+
+When your algorithm terminates, make sure the attribute \#m\+\_\+solution in this class points to the solution you want to return.
+
+You have to make sure that your algorithm does not take more time than the time limit \#m\+\_\+time\+Limit.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & may return some error, in particular if some vertices index are wrong. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tsp/T\+S\+P\+Solver.\+java\end{DoxyCompactItemize}

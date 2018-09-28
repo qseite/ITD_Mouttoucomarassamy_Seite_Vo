@@ -1,0 +1,253 @@
+\hypertarget{classtsp_1_1_solution}{}\section{tsp.\+Solution Class Reference}
+\label{classtsp_1_1_solution}\index{tsp.\+Solution@{tsp.\+Solution}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtsp_1_1_solution_a1d6b0b25fa67c11755bb5f753c610fa1}{Solution}} (\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} instance)
+\item 
+\mbox{\hyperlink{classtsp_1_1_solution}{Solution}} \mbox{\hyperlink{classtsp_1_1_solution_a8d9f2e3624443e569000155e3795bba9}{copy}} ()
+\item 
+void \mbox{\hyperlink{classtsp_1_1_solution_ac412146a40e865c6f0b2b8e44e4ba5e2}{set\+City\+Position}} (int index\+City, int position)  throws Exception 
+\item 
+double \mbox{\hyperlink{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}{evaluate}} ()  throws Exception 
+\item 
+boolean \mbox{\hyperlink{classtsp_1_1_solution_a93a7045acd93ccac25da9c471618f9bc}{is\+Feasible}} ()  throws Exception 
+\item 
+void \mbox{\hyperlink{classtsp_1_1_solution_ad51fdef9006419915ba1485d268bc307}{print}} (Print\+Stream out)
+\item 
+long \mbox{\hyperlink{classtsp_1_1_solution_ab6cbf5af2427f51dc8cad69cb4c7b0f5}{get\+Objective\+Value}} ()
+\item 
+void \mbox{\hyperlink{classtsp_1_1_solution_a5cff3a62643a336a021da631afd9f9cb}{set\+Objective\+Value}} (long new\+Value)
+\item 
+\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} \mbox{\hyperlink{classtsp_1_1_solution_adfcfa57062ec8aaba3b71de852788bb1}{get\+Instance}} ()
+\item 
+int \mbox{\hyperlink{classtsp_1_1_solution_a591955a31b69922e07c98958ab129f90}{get\+City}} (int position)  throws Exception 
+\item 
+String \mbox{\hyperlink{classtsp_1_1_solution_acd7f1ed6324f49a3b539905cd15c34bf}{get\+Error}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class models a T\+SP \mbox{\hyperlink{classtsp_1_1_solution}{Solution}}.
+
+{\bfseries Internal structure of the class\+:}
+
+This solution itself is stored in the array \#m\+\_\+cities.
+
+\#m\+\_\+cities\mbox{[}i\mbox{]} should be the index of the element at index i in the solution.
+
+The attribute \#m\+\_\+nb\+Cities is the number of cities in the problem. The array \#m\+\_\+cities has size m\+\_\+nb\+Cities+1 and it should start with the first city for the route and end with the same city.
+
+For example, suppose a problem with 5 customers (hence, the corresponding cities index range from 0 to 4). The following array represents a T\+SP solution (tour) that visit all customers by index order\+:
+
+
+\begin{DoxyCode}
+m\_cities = [0, 1, 2, 3, 4, 0];
+\end{DoxyCode}
+
+
+A recommendation is to always have {\bfseries m\+\_\+cities\mbox{[}0\mbox{]}=m\+\_\+cities\mbox{[}m\+\_\+nb\+Cities\mbox{]}= 0}.
+
+So a complete feasible solution should respect the following rules\+:
+\begin{DoxyItemize}
+\item m\+\_\+cities\mbox{[}0\mbox{]}=m\+\_\+cities\mbox{[}m\+\_\+nb\+Cities\mbox{]}
+\item Apart from the city at indices 0 and \#m\+\_\+nb\+Cities, each customer index should be represented once and only one in \#m\+\_\+cities.
+\end{DoxyItemize}
+
+$\ast$$\ast$ Creating, accessing or modifying a solution\+:$\ast$$\ast$
+
+A \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} object is created for a given T\+SP problem, represented by an \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object. Let instance be an object of class \mbox{\hyperlink{classtsp_1_1_instance}{Instance}}, the following code creates a solution for this problem\+:
+
+
+\begin{DoxyCode}
+\mbox{\hyperlink{classtsp_1_1_solution_a1d6b0b25fa67c11755bb5f753c610fa1}{Solution}} mySolution = \textcolor{keyword}{new} \mbox{\hyperlink{classtsp_1_1_solution_a1d6b0b25fa67c11755bb5f753c610fa1}{Solution}}(instance);
+\end{DoxyCode}
+
+
+During its creation, this object is initialized with city 0 at all position. It should be modified to represent a feasible solution. This modification is done by the method \mbox{\hyperlink{classtsp_1_1_solution_ac412146a40e865c6f0b2b8e44e4ba5e2}{set\+City\+Position(int city, int position)}}, which sets city s at position in the solution. For example, the following code creates a T\+SP solution that visits all customers in increasing city order\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i < instance.getNbCities(); i++)
+\{
+    mySolution.setVertexPosition(i, i);
+\}
+mySolution.setVertexPosition(0, instance.getNbCities());
+\end{DoxyCode}
+
+
+To explore a \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} object, the city at position can be obtained calling \mbox{\hyperlink{classtsp_1_1_solution_a591955a31b69922e07c98958ab129f90}{get\+City(int position)}}.
+
+The \mbox{\hyperlink{classtsp_1_1_solution_a93a7045acd93ccac25da9c471618f9bc}{is\+Feasible}} method allows to check the feasibility of a solution.
+
+To calculate the cost of a solution, you can call \mbox{\hyperlink{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}{evaluate}}.
+
+Note that \mbox{\hyperlink{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}{evaluate()}} recomputes every distance from zero. If you do a slight modification of the solution it is less time consuming to update yourself the cost of the modified solution using the function \mbox{\hyperlink{classtsp_1_1_solution_a5cff3a62643a336a021da631afd9f9cb}{set\+Objective\+Value(long new\+Value)}}.
+
+\begin{DoxyAuthor}{Author}
+Damien Prot, Fabien Lehuede, Axel Grimault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2017 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtsp_1_1_solution_a1d6b0b25fa67c11755bb5f753c610fa1}\label{classtsp_1_1_solution_a1d6b0b25fa67c11755bb5f753c610fa1}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!Solution@{Solution}}
+\index{Solution@{Solution}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{Solution()}{Solution()}}
+{\footnotesize\ttfamily tsp.\+Solution.\+Solution (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_instance}{Instance}}}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates an object of the class \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} for the problem data loaded in \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} 
+\begin{DoxyParams}{Parameters}
+{\em instance} & The instance of the problem \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtsp_1_1_solution_a8d9f2e3624443e569000155e3795bba9}\label{classtsp_1_1_solution_a8d9f2e3624443e569000155e3795bba9}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!copy@{copy}}
+\index{copy@{copy}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} tsp.\+Solution.\+copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a copy of this object solution \mbox{\Hypertarget{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}\label{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily double tsp.\+Solution.\+evaluate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Recomputes the objective value of the solution and return its value.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_solution_a591955a31b69922e07c98958ab129f90}\label{classtsp_1_1_solution_a591955a31b69922e07c98958ab129f90}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!get\+City@{get\+City}}
+\index{get\+City@{get\+City}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{get\+City()}{getCity()}}
+{\footnotesize\ttfamily int tsp.\+Solution.\+get\+City (\begin{DoxyParamCaption}\item[{int}]{position }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the index of the city at position in the tour. 
+\begin{DoxyParams}{Parameters}
+{\em position} & the position of the city \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em exception} & returns an error if i is not a valid position. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_solution_acd7f1ed6324f49a3b539905cd15c34bf}\label{classtsp_1_1_solution_acd7f1ed6324f49a3b539905cd15c34bf}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!get\+Error@{get\+Error}}
+\index{get\+Error@{get\+Error}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{get\+Error()}{getError()}}
+{\footnotesize\ttfamily String tsp.\+Solution.\+get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+error code returned by {\ttfamily validate} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_solution_adfcfa57062ec8aaba3b71de852788bb1}\label{classtsp_1_1_solution_adfcfa57062ec8aaba3b71de852788bb1}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} tsp.\+Solution.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+return a link to the data of the problem associated with the solution. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_solution_ab6cbf5af2427f51dc8cad69cb4c7b0f5}\label{classtsp_1_1_solution_ab6cbf5af2427f51dc8cad69cb4c7b0f5}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!get\+Objective\+Value@{get\+Objective\+Value}}
+\index{get\+Objective\+Value@{get\+Objective\+Value}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{get\+Objective\+Value()}{getObjectiveValue()}}
+{\footnotesize\ttfamily long tsp.\+Solution.\+get\+Objective\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+The objective value of the function. This value should be updated when the solution is modified, either calling \mbox{\hyperlink{classtsp_1_1_solution_aab96d9400180cc1854a1a48b848f92a4}{evaluate}} which recomputes the cost or \mbox{\hyperlink{classtsp_1_1_solution_a5cff3a62643a336a021da631afd9f9cb}{set\+Objective\+Value}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_solution_a93a7045acd93ccac25da9c471618f9bc}\label{classtsp_1_1_solution_a93a7045acd93ccac25da9c471618f9bc}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!is\+Feasible@{is\+Feasible}}
+\index{is\+Feasible@{is\+Feasible}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{is\+Feasible()}{isFeasible()}}
+{\footnotesize\ttfamily boolean tsp.\+Solution.\+is\+Feasible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check that the solution is feasible.
+
+The performed tests are the following \+:
+\begin{DoxyItemize}
+\item \#m\+\_\+cities\mbox{[}0\mbox{]}=\#m\+\_\+cities\mbox{[}\#m\+\_\+nb\+Cities\mbox{]}
+\item apart from the city at index 0 and \#m\+\_\+nb\+Cities, each customer index should be represented once and only one in \#m\+\_\+cities.
+\end{DoxyItemize}
+
+The cost is recomputed.
+
+When an error is met, the error code can be obtained calling the method \mbox{\hyperlink{classtsp_1_1_solution_acd7f1ed6324f49a3b539905cd15c34bf}{get\+Error()}}.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the solution is feasible {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_solution_ad51fdef9006419915ba1485d268bc307}\label{classtsp_1_1_solution_ad51fdef9006419915ba1485d268bc307}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!print@{print}}
+\index{print@{print}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void tsp.\+Solution.\+print (\begin{DoxyParamCaption}\item[{Print\+Stream}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Print the solution on output {\ttfamily out}. The solution is printed using cities numbers and not labels.
+
+For example if you want to print a solution {\ttfamily mysol} on the screen, use \+:
+
+{\ttfamily mysol.\+print(System.\+err);}
+
+Reminder\+: do not print on System.\+out.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & output \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtsp_1_1_solution_ac412146a40e865c6f0b2b8e44e4ba5e2}\label{classtsp_1_1_solution_ac412146a40e865c6f0b2b8e44e4ba5e2}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!set\+City\+Position@{set\+City\+Position}}
+\index{set\+City\+Position@{set\+City\+Position}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{set\+City\+Position()}{setCityPosition()}}
+{\footnotesize\ttfamily void tsp.\+Solution.\+set\+City\+Position (\begin{DoxyParamCaption}\item[{int}]{index\+City,  }\item[{int}]{position }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set city index\+City at position position in the solution.~\newline
+ Note that if there is already a city index at position then this city is replaced by index\+City.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index\+City} & index of the city to insert. \\
+\hline
+{\em position} & insertion position. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & returns an error if position is not a valid insertion position or index\+City is not a valid city number. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_solution_a5cff3a62643a336a021da631afd9f9cb}\label{classtsp_1_1_solution_a5cff3a62643a336a021da631afd9f9cb}} 
+\index{tsp\+::\+Solution@{tsp\+::\+Solution}!set\+Objective\+Value@{set\+Objective\+Value}}
+\index{set\+Objective\+Value@{set\+Objective\+Value}!tsp\+::\+Solution@{tsp\+::\+Solution}}
+\subsubsection{\texorpdfstring{set\+Objective\+Value()}{setObjectiveValue()}}
+{\footnotesize\ttfamily void tsp.\+Solution.\+set\+Objective\+Value (\begin{DoxyParamCaption}\item[{long}]{new\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets the cost of the solution. 
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & he new solution cost \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tsp/Solution.\+java\end{DoxyCompactItemize}
