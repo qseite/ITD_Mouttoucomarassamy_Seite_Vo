@@ -1,0 +1,252 @@
+\hypertarget{classtsp_1_1_instance}{}\section{tsp.\+Instance Class Reference}
+\label{classtsp_1_1_instance}\index{tsp.\+Instance@{tsp.\+Instance}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtsp_1_1_instance_ae035e937c11c3832e06cf562f470a21e}{Instance}} (String file\+Name, int type\+Instance)  throws I\+O\+Exception 
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_ace537c157ffb558343c9a38796987dd1}{get\+MaxX}} ()
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_aff99be18538e727e6aa8b9de7c96f781}{get\+MaxY}} ()
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_af3a908c0ce382a0a0dcac8442b4dc45c}{get\+MinX}} ()
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_a2cb9f47796458eb11d04c57ba4aefec6}{get\+MinY}} ()
+\item 
+void \mbox{\hyperlink{classtsp_1_1_instance_af3fac8f6b1104d6cbfaa15228aaa6e71}{print}} (Print\+Stream out)
+\item 
+int \mbox{\hyperlink{classtsp_1_1_instance_ad7b27560e9d3b5fff61cfb3056bdb3af}{get\+Nb\+Cities}} ()
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_aaf681fa6bd2c5cca6a7b8ec8baf36800}{getX}} (int i)  throws Exception 
+\item 
+double \mbox{\hyperlink{classtsp_1_1_instance_aebda0a2b0ded89e41e077f61840e6086}{getY}} (int i)  throws Exception 
+\item 
+boolean \mbox{\hyperlink{classtsp_1_1_instance_a38f72c0ba953f2a70571d47233b62c69}{m\+\_\+is\+Geographic}} ()
+\item 
+void \mbox{\hyperlink{classtsp_1_1_instance_a72144d15fab405a9069aa9af271959e1}{set\+Geographic}} (boolean is\+Geographic)
+\item 
+String \mbox{\hyperlink{classtsp_1_1_instance_a71339bdd0942060e28b4fb4e601cf504}{get\+Label}} (int i)  throws Exception 
+\item 
+long \mbox{\hyperlink{classtsp_1_1_instance_a571eec5c3eea92d13a0ec59f2d983c6f}{get\+Distances}} (int i, int j)  throws Exception 
+\item 
+long \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classtsp_1_1_instance_aea035555dcc3a08ab00b87757eb5c128}{get\+Distances}} ()
+\item 
+String \mbox{\hyperlink{classtsp_1_1_instance_a26abbb00653df23df3f0d360cd3fa3ff}{get\+File\+Name}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} class allows to create an object that contains the data stored in a tsp file. ~\newline
+ ~\newline
+ Only 2D E\+U\+C\+L\+I\+D\+E\+AN and G\+E\+O\+G\+R\+A\+P\+H\+I\+C\+AL problems can be read, that is problems where the customer coordinates are given and the distance between two customers is the euclidean distance or the G\+E\+O\+G\+R\+A\+P\+H\+I\+C\+AL one. ~\newline
+ ~\newline
+ The class is created through its constructor that takes the data file as parameter. The data file is read and the data are stored in the \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} object. The data can then be access calling the object methods.
+
+\begin{DoxyAuthor}{Author}
+Damien Prot, Fabien Lehuede, Axel Grimault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2017 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtsp_1_1_instance_ae035e937c11c3832e06cf562f470a21e}\label{classtsp_1_1_instance_ae035e937c11c3832e06cf562f470a21e}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!Instance@{Instance}}
+\index{Instance@{Instance}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{Instance()}{Instance()}}
+{\footnotesize\ttfamily tsp.\+Instance.\+Instance (\begin{DoxyParamCaption}\item[{String}]{file\+Name,  }\item[{int}]{type\+Instance }\end{DoxyParamCaption}) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor\+: this method creates an object of class \mbox{\hyperlink{classtsp_1_1_instance}{Instance}}. It calls the read method to load the data file given as parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & instance file \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em I\+O\+Exception} & Returns an error when a problem is met reading the data file. \\
+\hline
+\end{DoxyExceptions}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtsp_1_1_instance_a571eec5c3eea92d13a0ec59f2d983c6f}\label{classtsp_1_1_instance_a571eec5c3eea92d13a0ec59f2d983c6f}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+Distances@{get\+Distances}}
+\index{get\+Distances@{get\+Distances}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Distances()}{getDistances()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily long tsp.\+Instance.\+get\+Distances (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the euclidean distance rounded to the nearest integer value between two cities. All distances are calculated when the tsp file is loaded, so this function does not calculate distances. Note\+: problems are symmetric, the distance from city i to city j is equal to the distance from j to i.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & origin city (should range between 0 and nbcity-\/1). \\
+\hline
+{\em j} & destination city (should range between 0 and nbcity-\/1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the euclidean distance from i to j rounded to the nearest integer value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & returns an error if i or j are not valid city numbers. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_instance_aea035555dcc3a08ab00b87757eb5c128}\label{classtsp_1_1_instance_aea035555dcc3a08ab00b87757eb5c128}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+Distances@{get\+Distances}}
+\index{get\+Distances@{get\+Distances}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Distances()}{getDistances()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily long \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} tsp.\+Instance.\+get\+Distances (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Returns the whole distance matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_a26abbb00653df23df3f0d360cd3fa3ff}\label{classtsp_1_1_instance_a26abbb00653df23df3f0d360cd3fa3ff}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+File\+Name@{get\+File\+Name}}
+\index{get\+File\+Name@{get\+File\+Name}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+File\+Name()}{getFileName()}}
+{\footnotesize\ttfamily String tsp.\+Instance.\+get\+File\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Return the name of the instance file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_a71339bdd0942060e28b4fb4e601cf504}\label{classtsp_1_1_instance_a71339bdd0942060e28b4fb4e601cf504}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+Label@{get\+Label}}
+\index{get\+Label@{get\+Label}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Label()}{getLabel()}}
+{\footnotesize\ttfamily String tsp.\+Instance.\+get\+Label (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & city number (should be defined between 0 an the number of cities in the problem minus one). {\bfseries Note the city number is not the label !} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the label of city i. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_instance_ace537c157ffb558343c9a38796987dd1}\label{classtsp_1_1_instance_ace537c157ffb558343c9a38796987dd1}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+MaxX@{get\+MaxX}}
+\index{get\+MaxX@{get\+MaxX}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Max\+X()}{getMaxX()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+get\+MaxX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the greatest x coordinate. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_aff99be18538e727e6aa8b9de7c96f781}\label{classtsp_1_1_instance_aff99be18538e727e6aa8b9de7c96f781}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+MaxY@{get\+MaxY}}
+\index{get\+MaxY@{get\+MaxY}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Max\+Y()}{getMaxY()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+get\+MaxY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the greatest y coordinate. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_af3a908c0ce382a0a0dcac8442b4dc45c}\label{classtsp_1_1_instance_af3a908c0ce382a0a0dcac8442b4dc45c}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+MinX@{get\+MinX}}
+\index{get\+MinX@{get\+MinX}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Min\+X()}{getMinX()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+get\+MinX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the smallest x 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_a2cb9f47796458eb11d04c57ba4aefec6}\label{classtsp_1_1_instance_a2cb9f47796458eb11d04c57ba4aefec6}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+MinY@{get\+MinY}}
+\index{get\+MinY@{get\+MinY}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Min\+Y()}{getMinY()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+get\+MinY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the smallest y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_ad7b27560e9d3b5fff61cfb3056bdb3af}\label{classtsp_1_1_instance_ad7b27560e9d3b5fff61cfb3056bdb3af}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!get\+Nb\+Cities@{get\+Nb\+Cities}}
+\index{get\+Nb\+Cities@{get\+Nb\+Cities}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Nb\+Cities()}{getNbCities()}}
+{\footnotesize\ttfamily int tsp.\+Instance.\+get\+Nb\+Cities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+the number of cities in the problem 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtsp_1_1_instance_aaf681fa6bd2c5cca6a7b8ec8baf36800}\label{classtsp_1_1_instance_aaf681fa6bd2c5cca6a7b8ec8baf36800}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!getX@{getX}}
+\index{getX@{getX}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+X()}{getX()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+getX (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & city number (should be defined between 0 an the number of cities in the problem minus one). Note the city number is not the label ! \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the x coordinate of city i. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_instance_aebda0a2b0ded89e41e077f61840e6086}\label{classtsp_1_1_instance_aebda0a2b0ded89e41e077f61840e6086}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!getY@{getY}}
+\index{getY@{getY}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{get\+Y()}{getY()}}
+{\footnotesize\ttfamily double tsp.\+Instance.\+getY (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & city number (should be defined between 0 an the number of cities in the problem minus one). Note the city number is not the label ! \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the y coordinate of city i. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classtsp_1_1_instance_a38f72c0ba953f2a70571d47233b62c69}\label{classtsp_1_1_instance_a38f72c0ba953f2a70571d47233b62c69}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!m\+\_\+is\+Geographic@{m\+\_\+is\+Geographic}}
+\index{m\+\_\+is\+Geographic@{m\+\_\+is\+Geographic}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{m\+\_\+is\+Geographic()}{m\_isGeographic()}}
+{\footnotesize\ttfamily boolean tsp.\+Instance.\+m\+\_\+is\+Geographic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Boolean to set if coordinates are geographical or not \mbox{\Hypertarget{classtsp_1_1_instance_af3fac8f6b1104d6cbfaa15228aaa6e71}\label{classtsp_1_1_instance_af3fac8f6b1104d6cbfaa15228aaa6e71}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!print@{print}}
+\index{print@{print}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void tsp.\+Instance.\+print (\begin{DoxyParamCaption}\item[{Print\+Stream}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Print data on the output given as a parameter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & \+: output stream \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtsp_1_1_instance_a72144d15fab405a9069aa9af271959e1}\label{classtsp_1_1_instance_a72144d15fab405a9069aa9af271959e1}} 
+\index{tsp\+::\+Instance@{tsp\+::\+Instance}!set\+Geographic@{set\+Geographic}}
+\index{set\+Geographic@{set\+Geographic}!tsp\+::\+Instance@{tsp\+::\+Instance}}
+\subsubsection{\texorpdfstring{set\+Geographic()}{setGeographic()}}
+{\footnotesize\ttfamily void tsp.\+Instance.\+set\+Geographic (\begin{DoxyParamCaption}\item[{boolean}]{is\+Geographic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the coordinates attribute 
+\begin{DoxyParams}{Parameters}
+{\em is\+Geographic} & the value of the coordinate {\ttfamily true} if coordinates are geographical \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tsp/Instance.\+java\end{DoxyCompactItemize}

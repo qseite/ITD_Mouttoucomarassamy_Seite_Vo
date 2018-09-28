@@ -1,0 +1,78 @@
+\hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood}{}\section{tsp.\+neighborhood.\+A\+Neighborhood Class Reference}
+\label{classtsp_1_1neighborhood_1_1_a_neighborhood}\index{tsp.\+neighborhood.\+A\+Neighborhood@{tsp.\+neighborhood.\+A\+Neighborhood}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtsp_1_1neighborhood_1_1_a_neighborhood_aec2c19f05baf76258fd83483b8637da2}{A\+Neighborhood}} (\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} instance, String name)  throws Exception 
+\item 
+abstract List$<$ \mbox{\hyperlink{classtsp_1_1_solution}{Solution}} $>$ \mbox{\hyperlink{classtsp_1_1neighborhood_1_1_a_neighborhood_a5b8c16fd20fb089c86c831e6a884b8f3}{get\+Neighborhood}} (\mbox{\hyperlink{classtsp_1_1_solution}{Solution}} sol)  throws Exception 
+\item 
+String \mbox{\hyperlink{classtsp_1_1neighborhood_1_1_a_neighborhood_a87ac72c2bdfadde28119eb996f92544e}{get\+Name}} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtsp_1_1_instance}{Instance}} \mbox{\hyperlink{classtsp_1_1neighborhood_1_1_a_neighborhood_a6429b45bcc40a067c68f677a4754be9c}{m\+\_\+instance}}
+\item 
+String \mbox{\hyperlink{classtsp_1_1neighborhood_1_1_a_neighborhood_a8b6fb5f32e75265e1fd670a8158066b5}{m\+\_\+name}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the abstract class for Neighborhood \begin{DoxyAuthor}{Author}
+Axel Grimault 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2017 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood_aec2c19f05baf76258fd83483b8637da2}\label{classtsp_1_1neighborhood_1_1_a_neighborhood_aec2c19f05baf76258fd83483b8637da2}} 
+\index{tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}!A\+Neighborhood@{A\+Neighborhood}}
+\index{A\+Neighborhood@{A\+Neighborhood}!tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}}
+\subsubsection{\texorpdfstring{A\+Neighborhood()}{ANeighborhood()}}
+{\footnotesize\ttfamily tsp.\+neighborhood.\+A\+Neighborhood.\+A\+Neighborhood (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_instance}{Instance}}}]{instance,  }\item[{String}]{name }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em instance} & the instance of the problem \\
+\hline
+{\em name} & the name of the neighborhood \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood_a87ac72c2bdfadde28119eb996f92544e}\label{classtsp_1_1neighborhood_1_1_a_neighborhood_a87ac72c2bdfadde28119eb996f92544e}} 
+\index{tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily String tsp.\+neighborhood.\+A\+Neighborhood.\+get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the name of the neighborhood \mbox{\Hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood_a5b8c16fd20fb089c86c831e6a884b8f3}\label{classtsp_1_1neighborhood_1_1_a_neighborhood_a5b8c16fd20fb089c86c831e6a884b8f3}} 
+\index{tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}!get\+Neighborhood@{get\+Neighborhood}}
+\index{get\+Neighborhood@{get\+Neighborhood}!tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}}
+\subsubsection{\texorpdfstring{get\+Neighborhood()}{getNeighborhood()}}
+{\footnotesize\ttfamily abstract List$<$\mbox{\hyperlink{classtsp_1_1_solution}{Solution}}$>$ tsp.\+neighborhood.\+A\+Neighborhood.\+get\+Neighborhood (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtsp_1_1_solution}{Solution}}}]{sol }\end{DoxyParamCaption}) throws Exception\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Apply the neighborhood to get a neighbor 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood_a6429b45bcc40a067c68f677a4754be9c}\label{classtsp_1_1neighborhood_1_1_a_neighborhood_a6429b45bcc40a067c68f677a4754be9c}} 
+\index{tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}!m\+\_\+instance@{m\+\_\+instance}}
+\index{m\+\_\+instance@{m\+\_\+instance}!tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}}
+\subsubsection{\texorpdfstring{m\+\_\+instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtsp_1_1_instance}{Instance}} tsp.\+neighborhood.\+A\+Neighborhood.\+m\+\_\+instance\hspace{0.3cm}{\ttfamily [protected]}}
+
+The data of the problem \mbox{\Hypertarget{classtsp_1_1neighborhood_1_1_a_neighborhood_a8b6fb5f32e75265e1fd670a8158066b5}\label{classtsp_1_1neighborhood_1_1_a_neighborhood_a8b6fb5f32e75265e1fd670a8158066b5}} 
+\index{tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}!m\+\_\+name@{m\+\_\+name}}
+\index{m\+\_\+name@{m\+\_\+name}!tsp\+::neighborhood\+::\+A\+Neighborhood@{tsp\+::neighborhood\+::\+A\+Neighborhood}}
+\subsubsection{\texorpdfstring{m\+\_\+name}{m\_name}}
+{\footnotesize\ttfamily String tsp.\+neighborhood.\+A\+Neighborhood.\+m\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of the neighborhood 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/tsp/neighborhood/A\+Neighborhood.\+java\end{DoxyCompactItemize}
