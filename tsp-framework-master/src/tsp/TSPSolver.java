@@ -79,7 +79,7 @@ public class TSPSolver {
 			// TODO
 			// Code a loop base on time here
 			int variabledemerde=2;
-			int dummy=4;
+			int dummy=3;
 			spentTime = System.currentTimeMillis() - startTime;
 		}while(spentTime < (m_timeLimit * 1000 - 100) );
 		
