@@ -18,7 +18,7 @@ public class Fourmi {
 		this.villesVisitees = new ArrayList<Integer>();
 		this.elite=false;
 		
-		int availableProcessors = Runtime.getRuntime().availableProcessors();
+		/*int availableProcessors = Runtime.getRuntime().availableProcessors();
 		for(int i=0; i<availableProcessors; i++) {
 			final int i2=i;
 			new Thread( () -> {
@@ -26,7 +26,7 @@ public class Fourmi {
 					System.out.println("Le coeur " + i2 + " affiche " + j);
 				}
 			}).start();
-		}
+		}*/
 	}
 	
 	public int getNumeroFourmi() {
