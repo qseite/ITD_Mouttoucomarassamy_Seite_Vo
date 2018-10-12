@@ -32,8 +32,16 @@ public class TSPSolver {
 
 	/** Time given to solve the problem. */
 	private long m_timeLimit;
-
 	
+	public static int NOMBRE_FOURMI=51;
+	public static double ALPHA=1; 
+	public static double BETA=2; 
+	public static double Q=100; 
+	public static double P=0.5;
+	public static boolean ELITISTE=false;
+	public static int NOMBRE_ELITISTE=10;
+	public static int MAX_TIME=60;
+	public static double CONSTANTE_PHEROMONE=0.1;
 	// -----------------------------
 	// ----- CONSTRUCTOR -----------
 	// -----------------------------
@@ -70,17 +78,59 @@ public class TSPSolver {
 	public void solve() throws Exception
 	{
 		m_solution.print(System.err);
-		int varTestPourRien=0;
 		// Example of a time loop
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
-		do
-		{
-			// TODO
-			// Code a loop base on time here
-			spentTime = System.currentTimeMillis() - startTime;
-		}while(spentTime < (m_timeLimit * 1000 - 100) );
+		long t0=0;
+		long t1=0;
+		double index=0;
+		boolean sameWay = false;
 		
+		do {
+			t0=System.currentTimeMillis();
+			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
+				this.getInstance().getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
+			}
+			//System.err.println("Liste des villes : "+this.getInstance().getListeVilles());
+			//System.err.println("Villes visitées par f8 : "+this.getInstance().getFourmi(8).getVillesVisitees());
+			//System.err.println("Villes non visitées par f8 : "+this.getInstance().getFourmi(8).getVillesNonVisitees());
+			//System.err.println("Quantité de phéromone entre v8 et v1 : "+this.getInstance().getPheromones()[8][1]);
+			//System.err.println("Distance entre v8 et v1 : "+m_instance.getDistances(8,1));
+			//System.err.println("Proba pour f8 d'aller de v8 à v1 : "+this.getInstance().getFourmi(8).getProbaIaJ(8, 1));
+			//System.err.println("Derniere ville visitée par f8 : "+this.getInstance().getFourmi(8).getDerniereVilleVisitee());
+			
+			for (Fourmi four : this.getInstance().getFourmis()) {
+				for (int i=0;i<m_instance.getNbCities()-1;i++) {
+					four.setProchaineVille();	
+				}
+				four.setLongueur();
+	
+			}
+
+			this.getInstance().majBestSolution();
+			if (TSPSolver.ELITISTE) {
+				this.getInstance().setElitiste(NOMBRE_ELITISTE);
+			}
+			this.getInstance().evaporation();
+			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
+				this.getInstance().getFourmi(i).majPheromones();
+				this.getInstance().getFourmi(i).resetFourmi();
+			}
+			
+			spentTime = System.currentTimeMillis() - startTime;
+			index++;	
+			t1=System.currentTimeMillis();
+			//System.err.println(this.getInstance().getBestLongueur());
+			System.err.println((t1-t0)+" ms");
+		} while(spentTime < (TSPSolver.MAX_TIME * 1000 - 100) && index<100 && !sameWay);
+		
+		for (int i=0;i<m_instance.getNbCities();i++) {
+			this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(i), i);
+		}
+		this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(0), m_instance.getNbCities());
+		System.err.println(index+" itérations pour obtenir ce résultat");
+		System.err.println(spentTime/index+" ms par itération");
+
 	}
 
 	// -----------------------------
