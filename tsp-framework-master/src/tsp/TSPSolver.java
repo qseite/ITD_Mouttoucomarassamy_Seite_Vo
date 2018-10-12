@@ -86,6 +86,8 @@ public class TSPSolver {
 		double index=0;
 		boolean sameWay = false;
 		
+		int rien =0;
+		
 		do {
 			t0=System.currentTimeMillis();
 			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
