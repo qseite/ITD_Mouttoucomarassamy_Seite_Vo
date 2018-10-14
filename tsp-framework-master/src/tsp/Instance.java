@@ -52,30 +52,28 @@ public class Instance {
 	/** Instance type */
 	private int m_typeInstance;
 	
-	private double[][] pheromones;
-	
+	private double[][] pheromoneSurArc;
 	private double bestLongueur;
-	
 	private ArrayList<Integer> solutionTemp;
-	
 	private ArrayList<Fourmi> listeFourmis;
-	
-	private ArrayList<Integer> listeVilles;
-	
+	private Instance m_instance;
+	private int nombreFourmi;
+
+
 	// -----------------------------
-	// ----- GETTERS/SETTERS -------
+	// ----- METHODES --------------
 	// -----------------------------
 	
-	public double[][] getPheromones() {
-		return this.pheromones;
+	public Fourmi getFourmi(int index) {
+		return this.listeFourmis.get(index);
 	}
 	
 	public ArrayList<Fourmi> getFourmis() {
 		return this.listeFourmis;
 	}
 	
-	public Fourmi getFourmi(int index) {
-		return this.getFourmis().get(index);
+	public double[][] getPheromoneSurArc() {
+		return this.pheromoneSurArc;
 	}
 	
 	public double getBestLongueur() {
@@ -86,19 +84,20 @@ public class Instance {
 		return this.solutionTemp;
 	}
 	
-	public ArrayList<Integer> getListeVilles() {
-		return this.listeVilles;
-	}
-	
-	// ----------------------------
-	// -------- METHODES ----------
-	// ----------------------------
-	
-	public void evaporation() {
-		for (int i=0; i<this.getNbCities();i++) {
-			for (int j=0; j<=i;j++) {
-				this.getPheromones()[i][j]=TSPSolver.P*this.getPheromones()[i][j];
-				this.getPheromones()[j][i]=this.getPheromones()[i][j];
+	public void majPheromone() {
+		for (int i=0;i<m_nbCities;i++) {
+			for (int j=0;j<=i;j++) {
+				this.getPheromoneSurArc()[i][j]=TSPSolver.P*this.getPheromoneSurArc()[i][j];
+				for (Fourmi four : this.getFourmis()) {
+					if (!four.getElitiste()) {
+						this.getPheromoneSurArc()[i][j]
+								+=four.getPassage()[i][j]*(TSPSolver.Q/four.getLongueur());
+					} else {
+						this.getPheromoneSurArc()[i][j]
+								+=four.getPassage()[i][j]*TSPSolver.COEF_ELITISTE*(TSPSolver.Q/four.getLongueur());
+					}
+				}
+				this.getPheromoneSurArc()[j][i]=this.getPheromoneSurArc()[i][j];				
 			}
 		}
 	}
@@ -119,30 +118,31 @@ public class Instance {
 			this.bestLongueur=best;
 			this.solutionTemp=bestF.getVillesVisitees();
 		}
+
 	}
 	
 	public void setElitiste(int nbr) {
 		for (int i=0;i<nbr;i++) {
 			double best=this.getFourmi(0).getLongueur();
 			Fourmi bestF=this.getFourmi(0);
-			for (Fourmi four : this.getFourmis()) {
-				if (four.getLongueur()<best && !four.getElite()) {
-					best = four.getLongueur();
-					bestF = four;
+			for (int j=0; j<this.getFourmis().size();j++) {
+				if (this.getFourmi(j).getLongueur()<best && !this.getFourmi(j).getElitiste()) {
+					best = this.getFourmi(j).getLongueur();
+					bestF = this.getFourmi(j);
 				}
 			}
-			this.getFourmi(i).setElite(true);
+			bestF.setElitiste(true);
 		}
 	}
 	
 	public void resetFourmis() {
 		this.listeFourmis.clear();
 		this.listeFourmis = new ArrayList<Fourmi>();
-		for (int i=0; i<TSPSolver.NOMBRE_FOURMI;i++) {
+		for (int i=0; i<m_nbCities;i++) {
 			this.listeFourmis.add(new Fourmi(this,i));
 		}
 	}
-		
+
 	// -----------------------------
 	// ----- CONSTRUCTOR -----------
 	// -----------------------------
@@ -166,21 +166,19 @@ public class Instance {
 			parse();
 		}
 		
-		this.listeVilles = new ArrayList<Integer>();
-		for (int i=0; i<this.getNbCities();i++) {
-			this.listeVilles.add(i);
-		}
-		this.pheromones=new double[this.m_nbCities][this.m_nbCities];
-		for (int i=0; i<this.getNbCities();i++) {
-			for (int j=0; j<i; j++) {
-				this.pheromones[i][j]=TSPSolver.CONSTANTE_PHEROMONE;
-				this.pheromones[j][i]=this.pheromones[i][j];
-			}
-		}
+		
+		this.pheromoneSurArc = new double[m_nbCities][m_nbCities];
 		this.bestLongueur=-1;
 		this.solutionTemp = new ArrayList<Integer>();
 		this.listeFourmis = new ArrayList<Fourmi>();
-		for (int i=0; i<TSPSolver.NOMBRE_FOURMI;i++) {
+		for (int i=0; i<m_nbCities;i++) {
+			for (int j=0; j<=i;j++) {
+				this.pheromoneSurArc[i][j]=TSPSolver.c_ini_pheromone;
+				this.pheromoneSurArc[j][i]=this.pheromoneSurArc[i][j];
+			}
+		}
+		this.nombreFourmi=TSPSolver.NOMBRE_FOURMI;
+		for (int i=0; i<this.nombreFourmi;i++) {
 			this.listeFourmis.add(new Fourmi(this,i));
 		}
 	}

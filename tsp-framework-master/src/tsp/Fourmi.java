@@ -7,32 +7,26 @@ public class Fourmi {
 	private ArrayList<Integer> villesVisitees;
 	private Instance m_instance;
 	private double longueur;
-	private int numeroFourmi;
-	private boolean elite;
+	private int[][] passageSurArc;
+	private boolean elitiste;
 	
 	public Fourmi(Instance m_instance, int num) {
-		this.numeroFourmi=num;
+		this.elitiste=false;
 		this.m_instance=m_instance;
 		this.villesNonVisitees = new ArrayList<Integer>();
-		this.villesNonVisitees = new ArrayList<Integer>(m_instance.getListeVilles());
+		for (int i=0;i<this.m_instance.getNbCities();i++) {
+			this.villesNonVisitees.add(i);
+		}
 		this.villesVisitees = new ArrayList<Integer>();
-		this.elite=false;
-		
-		/*int availableProcessors = Runtime.getRuntime().availableProcessors();
-		for(int i=0; i<availableProcessors; i++) {
-			final int i2=i;
-			new Thread( () -> {
-				for(int j=0; j<10; j++) {
-					System.out.println("Le coeur " + i2 + " affiche " + j);
-				}
-			}).start();
-		}*/
+		this.passageSurArc=new int[m_instance.getNbCities()][m_instance.getNbCities()];
+		for (int i=0; i<this.m_instance.getNbCities();i++) {
+			for (int j=0; j<=i;j++) {
+				this.passageSurArc[i][j]=0;
+				this.passageSurArc[j][i]=0;
+			}
+		}
 	}
 	
-	public int getNumeroFourmi() {
-		return this.numeroFourmi;
-	}
-
 	public ArrayList<Integer> getVillesNonVisitees() {
 		return this.villesNonVisitees;
 	}
@@ -41,35 +35,30 @@ public class Fourmi {
 		return this.villesVisitees;
 	}
 	
-	public double getLongueur() {
-		return this.longueur;
+	public boolean getElitiste() {
+		return this.elitiste;
 	}
 	
-	public void addLongueur(double l) {
-		this.longueur+=l;
+	public void setElitiste(boolean t) {
+		this.elitiste=t;	
+	}
+	
+	public int[][] getPassage() {
+		return this.passageSurArc;
+	}
+	
+	public double getLongueur() {
+		return this.longueur;
 	}
 	
 	public Instance getInstance() {
 		return this.m_instance;
 	}
 	
-	public boolean getElite() {
-		return this.elite;
-	}
-	
-	public void setElite(boolean t) {
-		this.elite=t;
-	}
-	
-	public void resetFourmi() {
-		this.villesNonVisitees = new ArrayList<Integer>(this.getInstance().getListeVilles());
-		this.villesVisitees = new ArrayList<Integer>();
-	}
-	
-	public void ajouterVillesVisitee(int numeroVille) throws Exception {
-		/*if (this.getDerniereVilleVisitee()!=-1) {
-			this.longueur+=this.getInstance().getDistances(numeroVille, this.getDerniereVilleVisitee());
-		}*/
+	public void ajouterVillesVisitee(int numeroVille) {
+		if (this.getDerniereVilleVisitee()!=-1) {
+			this.getPassage()[this.getDerniereVilleVisitee()][numeroVille]=1;
+		}
 		this.villesVisitees.add(numeroVille);
 		int index=this.villesNonVisitees.indexOf(numeroVille);
 		this.villesNonVisitees.remove(index);
@@ -97,11 +86,11 @@ public class Fourmi {
 	}
 	
 	public double getProbaIaJ(int i, int j) throws Exception {
-		double num = Math.pow(this.getInstance().getPheromones()[i][j], TSPSolver.ALPHA)
+		double num = Math.pow(this.getInstance().getPheromoneSurArc()[i][j], TSPSolver.ALPHA)
 				*Math.pow(1.0/this.m_instance.getDistances(i, j), TSPSolver.BETA);
 		double den = 0;
 		for (int numVille : this.getVillesNonVisitees()) {
-			den+=Math.pow(this.getInstance().getPheromones()[i][numVille], TSPSolver.ALPHA)
+			den+=Math.pow(this.getInstance().getPheromoneSurArc()[i][numVille], TSPSolver.ALPHA)
 					*Math.pow(1.0/this.m_instance.getDistances(i, numVille), TSPSolver.BETA);
 		}
 		return (num/den);
@@ -117,20 +106,5 @@ public class Fourmi {
 		l+=this.m_instance.getDistances(this.getVillesVisitees().get(0), 
 				this.getVillesVisitees().get(index));
 		this.longueur=l;
-	}
-	
-	public void majPheromones() {
-		for (int i=this.getVillesVisitees().size()-1;i>0;i--) {
-			int index1=this.getVillesVisitees().get(i);
-			int index2=this.getVillesVisitees().get(i-1);
-			if (this.elite) {
-				this.getInstance().getPheromones()[index1][index2]+=(TSPSolver.NOMBRE_ELITISTE*TSPSolver.Q)/this.getLongueur();
-				this.getInstance().getPheromones()[index2][index1]+=(TSPSolver.NOMBRE_ELITISTE*TSPSolver.Q)/this.getLongueur();
-				this.setElite(false);
-			} else {
-				this.getInstance().getPheromones()[index1][index2]+=TSPSolver.Q/this.getLongueur();
-				this.getInstance().getPheromones()[index2][index1]+=TSPSolver.Q/this.getLongueur();
-			}
-		}
 	}
 }

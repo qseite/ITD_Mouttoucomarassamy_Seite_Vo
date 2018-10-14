@@ -33,15 +33,18 @@ public class TSPSolver {
 	/** Time given to solve the problem. */
 	private long m_timeLimit;
 	
-	public static int NOMBRE_FOURMI=51;
 	public static double ALPHA=1; 
 	public static double BETA=2; 
 	public static double Q=100; 
 	public static double P=0.5;
-	public static boolean ELITISTE=false;
-	public static int NOMBRE_ELITISTE=10;
+	public static boolean ELITISTE=true;
+	public static int NOMBRE_ELITISTE=50;
+	public static double COEF_ELITISTE=20;
 	public static int MAX_TIME=60;
-	public static double CONSTANTE_PHEROMONE=0.1;
+	public static double c_ini_pheromone=0.1;
+	public static int NOMBRE_FOURMI=51;
+
+	
 	// -----------------------------
 	// ----- CONSTRUCTOR -----------
 	// -----------------------------
@@ -81,48 +84,41 @@ public class TSPSolver {
 		// Example of a time loop
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
-		long t0=0;
-		long t1=0;
 		double index=0;
 		boolean sameWay = false;
 		
 		do {
-			t0=System.currentTimeMillis();
 			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
 				this.getInstance().getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
 			}
-			//System.err.println("Liste des villes : "+this.getInstance().getListeVilles());
-			//System.err.println("Villes visitées par f8 : "+this.getInstance().getFourmi(8).getVillesVisitees());
-			//System.err.println("Villes non visitées par f8 : "+this.getInstance().getFourmi(8).getVillesNonVisitees());
-			//System.err.println("Quantité de phéromone entre v8 et v1 : "+this.getInstance().getPheromones()[8][1]);
-			//System.err.println("Distance entre v8 et v1 : "+m_instance.getDistances(8,1));
-			//System.err.println("Proba pour f8 d'aller de v8 à v1 : "+this.getInstance().getFourmi(8).getProbaIaJ(8, 1));
-			//System.err.println("Derniere ville visitée par f8 : "+this.getInstance().getFourmi(8).getDerniereVilleVisitee());
+			/*System.err.println("Villes visitées par f8 : "+piste.getFourmi(8).getVillesVisitees());
+			System.err.println("Villes non visitées par f8 : "+piste.getFourmi(8).getVillesNonVisitees());
+			System.err.println("Quantité de phéromone entre v8 et v1 : "+piste.getPheromoneSurArc()[8][1]);
+			System.err.println("Distance entre v8 et v1 : "+m_instance.getDistances(8,1));
+			System.err.println("Proba pour f8 d'aller de v8 à v1 : "+piste.getFourmi(8).getProbaIaJ(8, 1));
+			System.err.println("Derniere ville visitée par f8 : "+piste.getFourmi(8).getDerniereVilleVisitee());
+			double num = Math.pow(piste.getFourmi(8).getPiste().getPheromoneSurArc()[8][1], Piste.ALPHA)
+					*Math.pow(1.0/this.m_instance.getDistances(8, 1), Piste.BETA);
+			System.err.println("Numérateur proba f8 d'aller de v8 à v1 : "+num);*/
 			
 			for (Fourmi four : this.getInstance().getFourmis()) {
 				for (int i=0;i<m_instance.getNbCities()-1;i++) {
 					four.setProchaineVille();	
 				}
 				four.setLongueur();
-	
 			}
 
 			this.getInstance().majBestSolution();
-			if (TSPSolver.ELITISTE) {
+			if (ELITISTE) {
 				this.getInstance().setElitiste(NOMBRE_ELITISTE);
 			}
-			this.getInstance().evaporation();
-			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
-				this.getInstance().getFourmi(i).majPheromones();
-				this.getInstance().getFourmi(i).resetFourmi();
-			}
+			this.getInstance().majPheromone();
+			this.getInstance().resetFourmis();
 			
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;	
-			t1=System.currentTimeMillis();
-			//System.err.println(this.getInstance().getBestLongueur());
-			System.err.println((t1-t0)+" ms");
-		} while(spentTime < (TSPSolver.MAX_TIME * 1000 - 100) && index<100 && !sameWay);
+			System.err.println(this.getInstance().getBestLongueur());
+		} while(spentTime < (MAX_TIME * 1000 - 100) && index<100 && !sameWay);
 		
 		for (int i=0;i<m_instance.getNbCities();i++) {
 			this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(i), i);
