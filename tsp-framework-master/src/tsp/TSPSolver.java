@@ -38,8 +38,8 @@ public class TSPSolver {
 	public static double Q=100; 
 	public static double P=0.5;
 	public static boolean ELITISTE=true;
-	public static int NOMBRE_ELITISTE=50;
-	public static double COEF_ELITISTE=20;
+	public static int NOMBRE_ELITISTE=20;
+	public static double COEF_ELITISTE=10;
 	public static int MAX_TIME=60;
 	public static double c_ini_pheromone=0.1;
 	public static int NOMBRE_FOURMI=51;

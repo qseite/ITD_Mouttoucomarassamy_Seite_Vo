@@ -132,6 +132,15 @@ public class Instance {
 				}
 			}
 			bestF.setElitiste(true);
+			if (i==0) {
+				if (this.getBestLongueur()<0) {
+					this.bestLongueur=best;
+					this.solutionTemp=bestF.getVillesVisitees();			
+				} else if (this.getBestLongueur()>best) {
+					this.bestLongueur=best;
+					this.solutionTemp=bestF.getVillesVisitees();
+				}
+			}
 		}
 	}
 	
