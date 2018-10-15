@@ -87,6 +87,8 @@ public class TSPSolver {
 		double index=0;
 		boolean sameWay = false;
 		
+		int rien =0;
+		
 		do {
 			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
 				this.getInstance().getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
