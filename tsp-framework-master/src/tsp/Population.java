@@ -17,6 +17,7 @@ public class Population {
 		for (int i=1;i<this.population.size();i++) {
 			double inter = this.population.get(i).getValeur();
 			if (inter<valeur){
+				valeur=inter;
 				index=i;
 			}
 		}return this.population.get(index);
