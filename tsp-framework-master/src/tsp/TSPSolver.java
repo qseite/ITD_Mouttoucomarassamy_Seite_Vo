@@ -36,10 +36,10 @@ public class TSPSolver {
 	public static double ALPHA=1; 
 	public static double BETA=2; 
 	public static double Q=100; 
-	public static double P=0.5;
-	public static boolean ELITISTE=true;
-	public static int NOMBRE_ELITISTE=20;
-	public static double COEF_ELITISTE=10;
+	public static double P=0.2;
+	public static boolean ELITISTE=false;
+	public static int NOMBRE_ELITISTE=200;
+	public static double COEF_ELITISTE=100;
 	public static int MAX_TIME=60;
 	public static double c_ini_pheromone=0.1;
 	public static int NOMBRE_FOURMI=51;
@@ -120,7 +120,7 @@ public class TSPSolver {
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;	
 			System.err.println(this.getInstance().getBestLongueur());
-		} while(spentTime < (MAX_TIME * 1000 - 100) && index<100 && !sameWay);
+		} while(spentTime < (MAX_TIME * 1000 - 100) && index<50 && !sameWay);
 		
 		for (int i=0;i<m_instance.getNbCities();i++) {
 			this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(i), i);
