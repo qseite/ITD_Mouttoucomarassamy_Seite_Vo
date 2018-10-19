@@ -5,9 +5,23 @@ import java.util.ArrayList;
 public class Population {
 	
 	ArrayList<Individu> population;
+	int nombreIndividus;
+	Instance g_instance;
 	
-	public Population() {
-		
+	public Population(int nbIndividu, Instance g_instance) {
+		this.population = new ArrayList<Individu>();
+		this.nombreIndividus=nbIndividu;
+		this.g_instance=g_instance;
+		ArrayList<Integer> temp=new ArrayList<Integer>();
+		for (int i=0;i<g_instance.getNbCities();i++) {
+			temp.add(i);
+		}
+		Individu temp2=new Individu(g_instance,temp);
+		this.population.add(temp2);
+		for (int i=1;i<nbIndividu;i++) {
+			temp2.mutation();
+			this.population.add(new Individu(g_instance,temp2.getOrdreVisite()));
+		}
 	}
 	
 	//retourne le meilleur individu
@@ -23,7 +37,7 @@ public class Population {
 	}
 	
 	
-	// insere l'individu en argument et enlève et retourne l'individu retiré (celui qui a la plus grande distance)
+	// insere l'individu en argument et enlï¿½ve et retourne l'individu retirï¿½ (celui qui a la plus grande distance)
 	public Individu insertion(Individu aInserer) throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
