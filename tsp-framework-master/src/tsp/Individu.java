@@ -7,6 +7,7 @@ public class Individu {
 	private Instance g_instance;
 	private ArrayList<Integer> ordreVisite;
 	
+
 	
 	public Individu(Instance g_instance, ArrayList<Integer> ordreVisite) {
 		this.g_instance=g_instance;
@@ -16,6 +17,10 @@ public class Individu {
 	
 	public ArrayList<Integer> getOrdreVisite(){
 		return this.ordreVisite;
+	}
+	
+	public Instance getInstance() {
+		return this.g_instance;
 	}
 
 	public double getValeur() throws Exception {
@@ -30,13 +35,59 @@ public class Individu {
 	
 	public Individu crossover(Individu ind1, Individu ind2) {
 		ArrayList<Integer> ordre = new ArrayList<Integer>();
-		int alea = ((int)Math.random()*ind1.getOrdreVisite().size())-1;
+		int taille = ind1.getOrdreVisite().size();
+		int alea = ((int)Math.random()*taille)-1;
 		int index=0;
 		while (index<alea) {
 			ordre.add(ind1.getOrdreVisite().get(index));
 		}
 		
+		int i=index+1;
+		int tailleIntermediaire=ordre.size();
+		while(index<taille) {
+			int compt=0;
+			boolean present = false;
+			while (compt<tailleIntermediaire) {
+				if(ind2.getOrdreVisite().get(i)==ordre.get(compt)) {
+					present=true;
+				}
+			}if (present==false) {
+				ordre.add(ind2.getOrdreVisite().get(i));
+			}
+			if (i<taille) {
+				i=i+1;
+			}else {
+				i=0;
+			}index++;
+		}
+
 		Individu res = new Individu(this.g_instance,ordre);
 		return res;
+	}
+	
+	public void mutation() {
+		int nombreVille=this.getInstance().getNbCities();
+		int index1=(int)(Math.random()*nombreVille)-1;
+		int index2=index1+(int)(Math.random()*(nombreVille-index1-1));
+		int index3=index2+(int)(Math.random()*(nombreVille-index2-1));
+		int index4=index2+(int)(Math.random()*(nombreVille-index3-1));
+		ArrayList<Integer> mutation = new ArrayList<Integer>();
+		for (int i=0;i<index1;i++) {
+			mutation.add(this.getOrdreVisite().get(i));
+		}
+		for (int i=index1;i<index2;i++) {
+			mutation.add(this.getOrdreVisite().get(i));
+		}
+		for (int i=index2;i<index3;i++) {
+			mutation.add(this.getOrdreVisite().get(i));
+		}
+		for (int i=index3;i<index4;i++) {
+			mutation.add(this.getOrdreVisite().get(i));
+		}
+		for (int i=index4;i<nombreVille;i++) {
+		    mutation.add(this.getOrdreVisite().get(i));
+		}
+		
+		this.ordreVisite=mutation;
 	}
 }
