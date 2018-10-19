@@ -23,6 +23,7 @@ public class LocalSearch {
 		return d;
 	}
 	
+	
 	public static void main(String[] args)  {
 			try{
 				Instance graph = new Instance("instances/eil10.tsp",0);
@@ -37,13 +38,13 @@ public class LocalSearch {
 				double verifcondition=distanceMin;
 				while(condition) {
 					
-					while(i<tab.length){
+					while(i<tab.length){ //on prend tous les i du tableau pour les swaps a des emplacements indexj
 						j=i+1;
 						indexj=j%tab.length;
-						while(indexj!=i) {
-							boucletab=tab;
+						while(indexj!=i) {//tant qu'on revient pas à l'emplacement de départ, on swap
+							boucletab=tab;//copie du tableau d'origine
 							LS.swap(boucletab,i,indexj);
-							if(LS.distance(boucletab)<distanceMin) {
+							if(LS.distance(boucletab)<distanceMin) {//on campare les distances pour voir si on trouve mieux
 								LS.solution=boucletab;
 								distanceMin=LS.distance(LS.solution);
 								System.out.println(LS.solution.toString()+" : "+LS.distance(LS.solution)+"km"+"\n");
@@ -57,6 +58,7 @@ public class LocalSearch {
 					}else {
 						verifcondition=distanceMin;
 				}
+				tab=LS.solution;//on mémorise le changement si il y en a eu
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
