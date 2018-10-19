@@ -103,6 +103,7 @@ public class TSPSolver {
 					*Math.pow(1.0/this.m_instance.getDistances(8, 1), Piste.BETA);
 			System.err.println("Numérateur proba f8 d'aller de v8 à v1 : "+num);*/
 			
+			//this.getInstance().setHeuristic();
 			for (Fourmi four : this.getInstance().getFourmis()) {
 				for (int i=0;i<m_instance.getNbCities()-1;i++) {
 					four.setProchaineVille();	
@@ -173,5 +174,4 @@ public class TSPSolver {
 	public void setTimeLimit(long time) {
 		this.m_timeLimit = time;
 	}
-
 }

@@ -53,15 +53,15 @@ public class Instance {
 	private int m_typeInstance;
 	
 	private double[][] pheromoneSurArc;
+	//private double[][] heuristic;
 	private double bestLongueur;
 	private ArrayList<Integer> solutionTemp;
 	private ArrayList<Fourmi> listeFourmis;
-	private Instance m_instance;
 	private int nombreFourmi;
 
 
 	// -----------------------------
-	// ----- METHODES --------------
+	// ----- METHODS --------------
 	// -----------------------------
 	
 	public Fourmi getFourmi(int index) {
@@ -83,6 +83,10 @@ public class Instance {
 	public ArrayList<Integer> getSolutionTemp() {
 		return this.solutionTemp;
 	}
+	
+	/*public double[][] getHeuristic() {
+		return this.heuristic;
+	}*/
 	
 	public void majPheromone() {
 		for (int i=0;i<m_nbCities;i++) {
@@ -148,9 +152,18 @@ public class Instance {
 		this.listeFourmis.clear();
 		this.listeFourmis = new ArrayList<Fourmi>();
 		for (int i=0; i<m_nbCities;i++) {
-			this.listeFourmis.add(new Fourmi(this,i));
+			this.listeFourmis.add(new Fourmi(this));
 		}
 	}
+	
+	/*public void setHeuristic() throws Exception {
+		for (int i=0; i<this.getNbCities();i++) {
+			for (int j=0; i<this.getNbCities();j++) {
+				this.heuristic[i][j]=Math.pow(this.getPheromoneSurArc()[i][j], TSPSolver.ALPHA)*
+						Math.pow(1.0/this.getDistances(i, j), TSPSolver.BETA);
+			}
+		}
+	}*/
 
 	// -----------------------------
 	// ----- CONSTRUCTOR -----------
@@ -177,6 +190,7 @@ public class Instance {
 		
 		
 		this.pheromoneSurArc = new double[m_nbCities][m_nbCities];
+		//this.heuristic=new double[m_nbCities][m_nbCities];
 		this.bestLongueur=-1;
 		this.solutionTemp = new ArrayList<Integer>();
 		this.listeFourmis = new ArrayList<Fourmi>();
@@ -188,7 +202,7 @@ public class Instance {
 		}
 		this.nombreFourmi=TSPSolver.NOMBRE_FOURMI;
 		for (int i=0; i<this.nombreFourmi;i++) {
-			this.listeFourmis.add(new Fourmi(this,i));
+			this.listeFourmis.add(new Fourmi(this));
 		}
 	}
 	

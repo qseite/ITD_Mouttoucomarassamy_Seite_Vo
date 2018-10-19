@@ -10,7 +10,7 @@ public class Fourmi {
 	private int[][] passageSurArc;
 	private boolean elitiste;
 	
-	public Fourmi(Instance m_instance, int num) {
+	public Fourmi(Instance m_instance) {
 		this.elitiste=false;
 		this.m_instance=m_instance;
 		this.villesNonVisitees = new ArrayList<Integer>();
@@ -88,10 +88,12 @@ public class Fourmi {
 	public double getProbaIaJ(int i, int j) throws Exception {
 		double num = Math.pow(this.getInstance().getPheromoneSurArc()[i][j], TSPSolver.ALPHA)
 				*Math.pow(1.0/this.m_instance.getDistances(i, j), TSPSolver.BETA);
+		/*double num=this.getInstance().getHeuristic()[i][j];*/
 		double den = 0;
 		for (int numVille : this.getVillesNonVisitees()) {
 			den+=Math.pow(this.getInstance().getPheromoneSurArc()[i][numVille], TSPSolver.ALPHA)
 					*Math.pow(1.0/this.m_instance.getDistances(i, numVille), TSPSolver.BETA);
+			/*den+=this.getInstance().getHeuristic()[i][numVille];*/
 		}
 		return (num/den);
 	}
