@@ -1,3 +1,4 @@
+
 package tsp;
 
 /**
@@ -174,5 +175,4 @@ public class TSPSolver {
 	public void setTimeLimit(long time) {
 		this.m_timeLimit = time;
 	}
-
 }
