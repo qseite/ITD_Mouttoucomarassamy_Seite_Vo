@@ -25,5 +25,6 @@ public class TeSteurLocalSearch {
 	
 	public static void main(String[] args) throws IOException {
 		Instance graph = new Instance("instances/eil51.tsp",0);
+		
 	} 
 }
