@@ -10,8 +10,16 @@ public class Population {
 		
 	}
 	
-	//retourne le meilleur individu
-	public Individu getBest() throws Exception {
+    public Population(ArrayList<Individu> population) {
+    	this.population=population;
+    }
+	
+	
+	public ArrayList<Individu> getPopulation(){
+		return this.population;
+	}
+	
+	public int getIndexBest() throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
 		for (int i=1;i<this.population.size();i++) {
@@ -19,8 +27,12 @@ public class Population {
 			if (inter<valeur){
 				valeur=inter;
 				index=i;
-			}
-		}return this.population.get(index);
+			}	
+	 }return index;	
+	}
+	//retourne le meilleur individu
+	public Individu getBest() throws Exception {
+		return this.population.get(this.getIndexBest());
 	}
 	
 	
@@ -38,4 +50,20 @@ public class Population {
 		this.population.add(aInserer);
 		return res;
      }
+	
+	public ArrayList<Individu> selection() throws Exception {
+		
+		int index = this.getIndexBest();
+		Individu ind1 = this.population.get(index);
+		Population copie = new Population(this.getPopulation());
+		copie.getPopulation().remove(index);
+		Individu ind2=copie.getBest();
+		
+		ArrayList<Individu> res = new ArrayList<Individu>();
+		res.add(ind1);
+		res.add(ind2);
+		
+		return res;
+		
+	}
 }
