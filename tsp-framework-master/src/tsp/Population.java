@@ -87,10 +87,37 @@ public class Population {
 		return res;
 	}
 	
-	/*public Individu crossover2(Individu i1, Individu i2) {
-		int index1 = (int)(Math.random());
-		
-	}*/
+	public Individu crossover2(Individu i1, Individu i2) {
+		int index1 = (int)(Math.random()*this.getInstance().getNbCities())-1;
+		int index2 = index1 + (int)(Math.random()*(this.getInstance().getNbCities()-index1-1));
+		ArrayList<Integer> child = new ArrayList<Integer>();
+		for (int i=0;i<index1;i++) {
+			child.add(i1.getOrdreVisite().get(i));
+		}
+		for (int i=index1;i<index2;i++) {
+			if (!child.contains(i2.getOrdreVisite().get(i))) {
+				child.add(i2.getOrdreVisite().get(i));
+			} else {
+				int k=0; 
+				while (child.contains(i2.getOrdreVisite().get(k)) && k<i2.getOrdreVisite().size()) {
+					k++;
+				}
+				child.add(i2.getOrdreVisite().get(k));
+			}
+		}
+		for (int i=index2;i<this.getInstance().getNbCities();i++) {
+			if (!child.contains(i1.getOrdreVisite().get(i))) {
+				child.add(i1.getOrdreVisite().get(i));
+			} else {
+				int k=index1; 
+				while (child.contains(i1.getOrdreVisite().get(k)) && k<i2.getOrdreVisite().size()) {
+					k++;
+				}
+				child.add(i1.getOrdreVisite().get(k));
+			}
+		}
+		return new Individu(this.getInstance(),child);
+	}
 	
 	
 	// insere l'individu en argument et enl�ve et retourne l'individu retir� (celui qui a la plus grande distance)
