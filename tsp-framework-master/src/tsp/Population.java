@@ -1,6 +1,7 @@
 package tsp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Population {
 	
@@ -16,11 +17,10 @@ public class Population {
 		for (int i=0;i<g_instance.getNbCities();i++) {
 			temp.add(i);
 		}
-		Individu temp2=new Individu(g_instance,temp);
-		this.population.add(temp2);
+		this.population.add(new Individu(this.g_instance,temp));
+		Collections.shuffle(temp);
 		for (int i=1;i<nbIndividu;i++) {
-			temp2.mutation();
-			this.population.add(new Individu(g_instance,temp2.getOrdreVisite()));
+			this.population.add(new Individu(this.g_instance,temp));
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class Population {
 	}
 	
 	public Individu crossover2(Individu i1, Individu i2) {
-		int index1 = (int)(Math.random()*this.getInstance().getNbCities())-1;
+		int index1 = (int)(Math.random()*(this.getInstance().getNbCities()-1));
 		int index2 = index1 + (int)(Math.random()*(this.getInstance().getNbCities()-index1-1));
 		ArrayList<Integer> child = new ArrayList<Integer>();
 		for (int i=0;i<index1;i++) {
@@ -109,18 +109,18 @@ public class Population {
 			if (!child.contains(i1.getOrdreVisite().get(i))) {
 				child.add(i1.getOrdreVisite().get(i));
 			} else {
-				int k=index1; 
-				while (child.contains(i1.getOrdreVisite().get(k)) && k<i2.getOrdreVisite().size()) {
-					k++;
+				int j=index1; 
+				while (child.contains(i1.getOrdreVisite().get(j)) && j<i2.getOrdreVisite().size()) {
+					j++;
 				}
-				child.add(i1.getOrdreVisite().get(k));
+				child.add(i1.getOrdreVisite().get(j));
 			}
 		}
 		return new Individu(this.getInstance(),child);
 	}
 	
 	
-	// insere l'individu en argument et enlève et retourne l'individu retirï¿½ (celui qui a la plus grande distance)
+	// insere l'individu en argument et enlï¿½ve et retourne l'individu retirï¿½ (celui qui a la plus grande distance)
 	public Individu insertion(Individu aInserer) throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;

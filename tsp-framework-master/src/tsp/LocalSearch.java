@@ -5,29 +5,56 @@ import java.io.IOException;
 public class LocalSearch {
 	private Instance instance;
 	private int[] solution;
+	private int[] temp;
+	
 	public LocalSearch(Instance instance, int[] sol) {
 		super();
 		this.instance = instance;
 		this.solution=sol;
+		this.temp= new int[this.instance.getNbCities()];
 	}
 	public void swap(int[] tab, int i,int j) {
 		int a=tab[i];
 		tab[i]=tab[j];
 		tab[j]=a;
 	}
+	
+	public Instance getInstance() {
+		return this.instance;
+	}
+	
+	public int[] getSolution() {
+		return this.solution;
+	}
+	
+	public int[] getTemp() {
+		return this.temp;
+	}
+	
 	public double distance(int[] tab) throws Exception {
 		double d=0;
 		for (int i=0;i<tab.length-1;i++) {
 			d=d+this.instance.getDistances(tab[i],tab[i+1]);
 		}
+		d+=this.getInstance().getDistances(0, tab.length-1);
 		return d;
 	}
+	
 	public String tostring(int[] tab) {
 		String stringsol="";
 		for(int t=0;t<tab.length;t++) {
 				stringsol+=" "+tab[t];
 		}
 		return stringsol;
+	}
+	
+	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
+		for (int i=0;i<index;i++) {
+			this.swap(this.temp, i, index);
+			if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
+				this.solution=this.temp;
+			}
+		}
 	}
 	
 	public static void main(String[] args)  {
@@ -44,7 +71,6 @@ public class LocalSearch {
 				int i=0;/*indice qui va être swappé en position indexj*/
 				double verifcondition=distanceMin;
 				while(condition) {
-					
 					while(i<tab.length){ //on prend tous les i du tableau pour les swaps a des emplacements indexj
 						j=i+1;
 						indexj=j%tab.length;
