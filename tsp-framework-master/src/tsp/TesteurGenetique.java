@@ -8,7 +8,7 @@ public class TesteurGenetique {
 	
 	public static void main(String[] args) throws Exception {
 		
-		int nbIndividus = 49;
+		int nbIndividus = 15;
 		Instance g_instance = new Instance("instances/eil51.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nombreIterations=20;

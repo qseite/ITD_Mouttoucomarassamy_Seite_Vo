@@ -58,7 +58,7 @@ public class Population {
 	public Individu crossover1(Individu ind1, Individu ind2) {
 		ArrayList<Integer> ordre = new ArrayList<Integer>();
 		int taille = ind1.getOrdreVisite().size();
-		int alea = ((int)Math.random()*taille-1);
+		int alea = (int)(Math.random()*taille-1);
 		int index=0;
 		while (index<alea) {
 			ordre.add(ind1.getOrdreVisite().get(index));
