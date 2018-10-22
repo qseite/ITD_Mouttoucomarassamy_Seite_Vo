@@ -18,17 +18,24 @@ public class LocalSearch {
 	public double distance(int[] tab) throws Exception {
 		double d=0;
 		for (int i=0;i<tab.length-1;i++) {
-			d=d+this.instance.getDistances(i,i+1);
+			d=d+this.instance.getDistances(tab[i],tab[i+1]);
 		}
 		return d;
 	}
-	
+	public String tostring(int[] tab) {
+		String stringsol="";
+		for(int t=0;t<tab.length;t++) {
+				stringsol+=" "+tab[t];
+		}
+		return stringsol;
+	}
 	
 	public static void main(String[] args)  {
 			try{
 				Instance graph = new Instance("instances/eil10.tsp",0);
-				int[] tab = {1,2,3,4,5,6,7,8,9,10};
-				LocalSearch LS=new LocalSearch(graph,tab);
+				int[] tab = {0,7,6,5,3,4,9,8,1,2}; //0765349812
+				int[] LStab=tab;
+				LocalSearch LS=new LocalSearch(graph,LStab);
 				int j;
 				int[] boucletab;
 				int indexj; /* index de j repositionné pour parcourir la liste de i+1 à i-1*/
@@ -44,10 +51,13 @@ public class LocalSearch {
 						while(indexj!=i) {//tant qu'on revient pas à l'emplacement de départ, on swap
 							boucletab=tab;//copie du tableau d'origine
 							LS.swap(boucletab,i,indexj);
-							if(LS.distance(boucletab)<distanceMin) {//on campare les distances pour voir si on trouve mieux
+							//System.out.println("distance actuelle "+LS.distance(boucletab));
+							//System.out.println("distanceMin trouvée "+distanceMin);
+							if(LS.distance(boucletab)<distanceMin) {//on compare les distances pour voir si on trouve mieux
 								LS.solution=boucletab;
+								System.out.println(LS.tostring(LS.solution)+"\n"+LS.tostring(boucletab));
 								distanceMin=LS.distance(LS.solution);
-								System.out.println(LS.solution.toString()+" : "+LS.distance(LS.solution)+"km"+"\n");
+								System.out.println("Nouvelle solution:"+" : "+LS.distance(LS.solution)+"km");
 							}
 							indexj=(indexj+1)%tab.length;
 						}
@@ -57,9 +67,11 @@ public class LocalSearch {
 						condition=false;
 					}else {
 						verifcondition=distanceMin;
-				}
+					}
 				tab=LS.solution;//on mémorise le changement si il y en a eu
 			}
+			
+				System.out.println(LS.tostring(LS.solution));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
