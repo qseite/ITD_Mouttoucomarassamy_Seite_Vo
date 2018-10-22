@@ -114,7 +114,7 @@ public class Population {
 		Individu ind1 = this.population.get(index);
 		Population copie = new Population(this.getPopulation());
 		copie.getPopulation().remove(index);
-		int alea = (int)(Math.random()*copie.getPopulation().size())-1;
+		int alea = (int)(Math.random()*copie.getPopulation().size()-1);
 		Individu ind2=copie.getPopulation().get(alea);
 		
 		ArrayList<Individu> res = new ArrayList<Individu>();
