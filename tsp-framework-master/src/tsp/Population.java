@@ -68,12 +68,12 @@ public class Population {
 		int i=index;
 		int tailleIntermediaire=ordre.size();
 		while(index<taille) {
-			int compt=0;
+			int compteur=0;
 			boolean present = false;
-			while (compt<tailleIntermediaire) {
-				if(ind2.getOrdreVisite().get(i)==ordre.get(compt)) {
+			while (compteur<tailleIntermediaire) {
+				if(ind2.getOrdreVisite().get(i)==ordre.get(compteur)) {
 					present=true;
-				}
+				}compteur++;
 			}if (present==false) {
 				ordre.add(ind2.getOrdreVisite().get(i));
 			}
