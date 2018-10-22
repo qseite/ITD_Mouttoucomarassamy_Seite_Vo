@@ -62,9 +62,10 @@ public class Population {
 		int index=0;
 		while (index<alea) {
 			ordre.add(ind1.getOrdreVisite().get(index));
+			index++;
 		}
 		
-		int i=index+1;
+		int i=index;
 		int tailleIntermediaire=ordre.size();
 		while(index<taille) {
 			int compt=0;
