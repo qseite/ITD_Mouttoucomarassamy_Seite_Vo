@@ -17,6 +17,7 @@ public class TesteurGenetique {
 			Individu enfant = population.crossover1(parents.get(0),parents.get(1));
 			population.insertion(enfant);
 		}System.out.println(population.getPopulation().toString());
+		System.out.println(population.getBest().getValeur());
 		
 	}
 }
