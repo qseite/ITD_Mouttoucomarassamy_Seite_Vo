@@ -58,13 +58,12 @@ public class Population {
 	public Individu crossover1(Individu ind1, Individu ind2) {
 		ArrayList<Integer> ordre = new ArrayList<Integer>();
 		int taille = ind1.getOrdreVisite().size();
-		int alea = (int)(Math.random()*taille-1);
+		int alea = (int)(Math.random()*taille-2);
 		int index=0;
 		while (index<alea) {
 			ordre.add(ind1.getOrdreVisite().get(index));
 			index++;
 		}
-		
 		int i=index;
 		int tailleIntermediaire=ordre.size();
 		while(index<taille) {
@@ -77,7 +76,7 @@ public class Population {
 			}if (present==false) {
 				ordre.add(ind2.getOrdreVisite().get(i));
 			}
-			if (i<taille) {
+			if (i<taille && i>0) {
 				i=i+1;
 			}else {
 				i=0;
@@ -89,7 +88,7 @@ public class Population {
 	}
 	
 	public Individu crossover2(Individu i1, Individu i2) {
-		int index1 = (int)(Math.random()*this.getInstance().getNbCities())-1;
+		int index1 = (int)(Math.random()*this.getInstance().getNbCities()-1);
 		int index2 = index1 + (int)(Math.random()*(this.getInstance().getNbCities()-index1-1));
 		ArrayList<Integer> child = new ArrayList<Integer>();
 		for (int i=0;i<index1;i++) {
@@ -110,11 +109,11 @@ public class Population {
 			if (!child.contains(i1.getOrdreVisite().get(i))) {
 				child.add(i1.getOrdreVisite().get(i));
 			} else {
-				int k=index1; 
-				while (child.contains(i1.getOrdreVisite().get(k)) && k<i2.getOrdreVisite().size()) {
-					k++;
+				int j=index1; 
+				while (child.contains(i1.getOrdreVisite().get(j)) && j<i2.getOrdreVisite().size()) {
+					j++;
 				}
-				child.add(i1.getOrdreVisite().get(k));
+				child.add(i1.getOrdreVisite().get(j));
 			}
 		}
 		return new Individu(this.getInstance(),child);
@@ -129,6 +128,7 @@ public class Population {
 			double inter = this.population.get(i).getValeur();
 			if (inter>valeur){
 				index=i;
+				valeur=inter;
 			}
 	    }Individu res = this.population.get(index);
 		this.population.remove(index);
@@ -140,10 +140,11 @@ public class Population {
 		
 		int index = this.getIndexBest();
 		Individu ind1 = this.population.get(index);
-		Population copie = new Population(this.getPopulation());
-		copie.getPopulation().remove(index);
-		int alea = (int)(Math.random()*copie.getPopulation().size()-1);
-		Individu ind2=copie.getPopulation().get(alea);
+		//Population copie = new Population(this.getPopulation());
+		//copie.getPopulation().remove(index);
+		int alea = (int)(Math.random()*this.getPopulation().size()-1);
+	    System.out.print(alea+"/");
+		Individu ind2=this.getPopulation().get(alea);
 		
 		ArrayList<Individu> res = new ArrayList<Individu>();
 		res.add(ind1);
