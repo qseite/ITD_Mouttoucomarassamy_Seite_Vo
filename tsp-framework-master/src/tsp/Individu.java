@@ -35,8 +35,8 @@ public class Individu {
 
 	
 	public void mutation() {
-		int nombreVille=this.getInstance().getNbCities();
-		int index1=(int)(Math.random()*nombreVille)-1;
+		int nombreVille=this.getOrdreVisite().size();
+		int index1=(int)(Math.random()*nombreVille-1);
 		int index2=index1+(int)(Math.random()*(nombreVille-index1-1));
 		int index3=index2+(int)(Math.random()*(nombreVille-index2-1));
 		int index4=index2+(int)(Math.random()*(nombreVille-index3-1));
