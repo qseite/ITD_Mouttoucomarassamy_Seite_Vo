@@ -1,11 +1,12 @@
 package tsp;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 public class TesteurGenetique {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		
 		int nbIndividus = 50;
 		Instance g_instance = new Instance("instances/eil51.tsp",0);
@@ -19,5 +20,4 @@ public class TesteurGenetique {
 		
 	}
 }
-
 

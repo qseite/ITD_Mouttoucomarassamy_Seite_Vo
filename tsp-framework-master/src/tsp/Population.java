@@ -33,6 +33,10 @@ public class Population {
 		return this.population;
 	}
 	
+	public Instance getInstance() {
+		return this.g_instance;
+	}
+	
 	public int getIndexBest() throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
@@ -42,12 +46,51 @@ public class Population {
 				valeur=inter;
 				index=i;
 			}	
-	 }return index;	
+		}
+		return index;	
 	}
+	
 	//retourne le meilleur individu
 	public Individu getBest() throws Exception {
 		return this.population.get(this.getIndexBest());
 	}
+	
+	public Individu crossover1(Individu ind1, Individu ind2) {
+		ArrayList<Integer> ordre = new ArrayList<Integer>();
+		int taille = ind1.getOrdreVisite().size();
+		int alea = ((int)Math.random()*taille)-1;
+		int index=0;
+		while (index<alea) {
+			ordre.add(ind1.getOrdreVisite().get(index));
+		}
+		
+		int i=index+1;
+		int tailleIntermediaire=ordre.size();
+		while(index<taille) {
+			int compt=0;
+			boolean present = false;
+			while (compt<tailleIntermediaire) {
+				if(ind2.getOrdreVisite().get(i)==ordre.get(compt)) {
+					present=true;
+				}
+			}if (present==false) {
+				ordre.add(ind2.getOrdreVisite().get(i));
+			}
+			if (i<taille) {
+				i=i+1;
+			}else {
+				i=0;
+			}index++;
+		}
+
+		Individu res = new Individu(this.g_instance,ordre);
+		return res;
+	}
+	
+	/*public Individu crossover2(Individu i1, Individu i2) {
+		int index1 = (int)(Math.random());
+		
+	}*/
 	
 	
 	// insere l'individu en argument et enlève et retourne l'individu retirï¿½ (celui qui a la plus grande distance)
