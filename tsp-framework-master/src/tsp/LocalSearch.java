@@ -10,24 +10,27 @@ public class LocalSearch {
 	private Instance instance;
 	private int[] solution;
 	private int[] temp;
+	private int[] ini;
+	private int compteurStop;
 	
 
 	public LocalSearch(Instance instance) {
-
 		super();
 		this.instance = instance;
 		this.temp= new int[this.instance.getNbCities()];
-
+		this.solution= new int[this.instance.getNbCities()];
+		this.ini=new int[this.instance.getNbCities()];
 		ArrayList<Integer> sol= new ArrayList<Integer>();	
 		for(int i=0;i<instance.getNbCities();i++) {
 			sol.add(i);
 		}
 		Collections.shuffle(sol);
-		int[] solution= new int[instance.getNbCities()];
 		for(int j=0;j<instance.getNbCities();j++) {
-			solution[j]=sol.get(j);
+			this.ini[j]=sol.get(j);
+			this.solution[j]=sol.get(j);
 		}
-		this.solution=solution;
+		this.compteurStop=0;
+		
 
 	}
 	public void swap(int[] tab, int i,int j) {
@@ -44,8 +47,30 @@ public class LocalSearch {
 		return this.solution;
 	}
 	
+	public void setSolution(int[] tab) {
+		for (int i=0;i<tab.length;i++) {
+			this.solution[i]=tab[i];
+		}
+	}
+	
 	public int[] getTemp() {
 		return this.temp;
+	}
+	
+	public void setTemp(int[] tab) {
+		for (int i=0;i<tab.length;i++) {
+			this.temp[i]=tab[i];
+		}
+	}
+	
+	public int[] getIni() {
+		return this.ini;
+	}
+	
+	public void setIni(int[] tab) {
+		for (int i=0;i<tab.length;i++) {
+			this.ini[i]=tab[i];
+		}
 	}
 	
 	public double distance(int[] tab) throws Exception {
@@ -67,25 +92,44 @@ public class LocalSearch {
 
 	
 	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
-		for (int i=0;i<index;i++) {
+		this.setTemp(this.getIni());
+		for (int i=index;i<this.getInstance().getNbCities();i++) {
 			this.swap(this.temp, i, index);
+			//System.out.println(this.distance(this.getTemp()));
 			if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
-				this.solution=this.temp;
+				this.setSolution(this.getTemp());
 			}
 		}
 	}
 	
-	public static void main(String[] args)  {
+	public void setInitial() {
+		this.setIni(this.getSolution());
+	}
+	
+	public int getCompteurStop() {
+		return this.compteurStop;
+	}
+	
+	public void setCompteurPlus() {
+		this.compteurStop++;
+	}
+	
+	public boolean iniEqualsSol() throws Exception {
+		return (this.distance(this.getIni())==this.distance(this.getSolution()));
+	}
+
+	
+	/*public static void main(String[] args)  {
 			try{
 				Instance graph = new Instance("instances/eil10.tsp",0);
 				LocalSearch LS=new LocalSearch(graph);
 				int[] tab = LS.solution; //0765349812
 				int j;
 				int[] boucletab;
-				int indexj; /* index de j repositionné pour parcourir la liste de i+1 à i-1*/
+				int indexj; // index de j repositionné pour parcourir la liste de i+1 à i-1
 				double distanceMin=LS.distance(tab);
-				boolean condition=true;/*condition d'arret de la recherche locale*/
-				int i=0;/*indice qui va être swappé en position indexj*/
+				boolean condition=true;//condition d'arret de la recherche locale
+				int i=0;//indice qui va être swappé en position indexj
 				double verifcondition=distanceMin;
 				while(condition) {
 					while(i<tab.length){ //on prend tous les i du tableau pour les swaps a des emplacements indexj
@@ -119,5 +163,33 @@ public class LocalSearch {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}*/
+	
+	public static void main(String[] args) throws Exception {
+		long t0;
+		long t1=0;
+		int k=0;
+		t0=System.currentTimeMillis();
+		Instance graph = new Instance("instances/pcb442.tsp",0);
+		LocalSearch ls = new LocalSearch(graph);
+		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
+		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
+		do {
+			for (int j=0;j<graph.getNbCities();j++) {
+				ls.swapCycle(j);
+			}
+			if (ls.iniEqualsSol()) {
+				ls.setCompteurPlus();
+				System.err.println(ls.getCompteurStop());
+			}
+			System.out.println(k);
+			k++;
+			ls.setInitial();
+			t1=System.currentTimeMillis();
+		} while (ls.getCompteurStop()<10 && (t1-t0)<60000);
+		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
+		System.out.println("Distance finale : "+ls.distance(ls.getSolution()));
+		System.out.println("Durée totale d'exécution : "+(t1-t0)+" ms");
+		System.out.println("Durée d'une itération : "+(t1-t0)/k+ "ms");
 	}
 }
