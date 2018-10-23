@@ -1,10 +1,8 @@
 package tsp;
- 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class LocalSearch {
 	private Instance instance;
@@ -31,7 +29,6 @@ public class LocalSearch {
 		}
 		this.compteurStop=0;
 		
-
 	}
 	public void swap(int[] tab, int i,int j) {
 		int a=tab[i];
@@ -72,16 +69,14 @@ public class LocalSearch {
 			this.ini[i]=tab[i];
 		}
 	}
-	
+
 	public double distance(int[] tab) throws Exception {
 		double d=0;
 		for (int i=0;i<tab.length-1;i++) {
 			d=d+this.instance.getDistances(tab[i],tab[i+1]);
 		}
-		d=d+this.instance.getDistances(tab[tab.length-1],tab[0]);		
 		return d;
 	}
-	
 	public String tostring(int[] tab) {
 		String stringsol="";
 		for(int t=0;t<tab.length;t++) {
@@ -89,6 +84,7 @@ public class LocalSearch {
 		}
 		return stringsol;
 	}
+
 
 	
 	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
@@ -101,7 +97,7 @@ public class LocalSearch {
 			}
 		}
 	}
-	
+
 	public void setInitial() {
 		this.setIni(this.getSolution());
 	}
@@ -122,8 +118,9 @@ public class LocalSearch {
 	/*public static void main(String[] args)  {
 			try{
 				Instance graph = new Instance("instances/eil10.tsp",0);
-				LocalSearch LS=new LocalSearch(graph);
-				int[] tab = LS.solution; //0765349812
+				int[] tab = {0,7,6,5,3,4,9,8,1,2}; //0765349812
+				int[] LStab=tab;
+				LocalSearch LS=new LocalSearch(graph,LStab);
 				int j;
 				int[] boucletab;
 				int indexj; // index de j repositionné pour parcourir la liste de i+1 à i-1
@@ -132,6 +129,7 @@ public class LocalSearch {
 				int i=0;//indice qui va être swappé en position indexj
 				double verifcondition=distanceMin;
 				while(condition) {
+					
 					while(i<tab.length){ //on prend tous les i du tableau pour les swaps a des emplacements indexj
 						j=i+1;
 						indexj=j%tab.length;
@@ -142,9 +140,9 @@ public class LocalSearch {
 							//System.out.println("distanceMin trouvée "+distanceMin);
 							if(LS.distance(boucletab)<distanceMin) {//on compare les distances pour voir si on trouve mieux
 								LS.solution=boucletab;
-								System.out.println(LS.tostring(LS.solution));
+								System.out.println(LS.tostring(LS.solution)+"\n"+LS.tostring(boucletab));
 								distanceMin=LS.distance(LS.solution);
-								System.out.println("Nouvelle solution:"+LS.tostring(LS.solution)+" : "+LS.distance(LS.solution)+"km");
+								System.out.println("Nouvelle solution:"+" : "+LS.distance(LS.solution)+"km");
 							}
 							indexj=(indexj+1)%tab.length;
 						}
