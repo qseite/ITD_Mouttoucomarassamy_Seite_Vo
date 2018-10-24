@@ -32,7 +32,8 @@ public class LocalSearch {
 	}
 	public void swap(int[] tab, int i,int j) {
 		int a=tab[i];
-		tab[i]=tab[j];
+		int b=tab[j];
+		tab[i]=b;
 		tab[j]=a;
 	}
 	
@@ -96,38 +97,43 @@ public class LocalSearch {
 		return stringsol;
 	}
 
-
-	
 	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
 		int n = this.getInstance().getNbCities();
 
-		for (int i=index;i<this.getInstance().getNbCities();i++) {
+		for (int i=index+1;i<this.getInstance().getNbCities();i++) {
 			this.setTemp(this.getIni());
-
-			double g1=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[index])
-					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(index+1)%n]);
-			double d1=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[i])
-					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(i+1)%n]);
+			
+			double g1=this.getInstance().getDistances(this.getIni()[(n+index-1)%n],this.getIni()[index])
+					+this.getInstance().getDistances(this.getIni()[index], this.getIni()[(index+1)%n]);
+			double d1=this.getInstance().getDistances(this.getIni()[(n+i-1)%n],this.getIni()[i])
+					+this.getInstance().getDistances(this.getIni()[i], this.getIni()[(i+1)%n]);
 			//distance au voisinage des points encore non swapés
 			
-			double g2=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[i])
-					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(index+1)%n]);
-			double d2=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[index])
-					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(i+1)%n]);
-			//distance au voisinage des points swapés
-			
 			this.swap(this.temp, i, index);
-			//System.err.println(this.distance(this.getSolution()));
 
+			double g2=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[index])
+					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(index+1)%n]);
+			double d2=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[i])
+					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(i+1)%n]);
+			//distance au voisinage des points swapés		
+			
 			//if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
 			if (g1+d1-g2-d2>this.getGain()) { 
 			//plus la somme est importante plus g2 et d2 son petits donc plus la distance de la nvlle sol est courte
+				
 				this.setSolution(this.getTemp());
-				System.out.println(this.getGain());
-				System.err.println(g1+d1-g2-d2);
 				this.setGain(g1+d1-g2-d2);
+
 			}
+			
+
 		}
+	}
+	
+	public void swapIteration() throws Exception {
+		for (int i=0; i<this.getInstance().getNbCities();i++) {
+			this.swapCycle(i);
+		}		
 	}
 
 	public void setInitial() {
@@ -145,16 +151,15 @@ public class LocalSearch {
 		long t1=0;
 		int k=0;
 		t0=System.currentTimeMillis();
-		Instance graph = new Instance("instances/eil51.tsp",0);
+		Instance graph = new Instance("instances/d657.tsp",0);
 		LocalSearch ls = new LocalSearch(graph);
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
+		
 		do {
-			for (int j=0;j<graph.getNbCities();j++) {
-				ls.swapCycle(j);
-			}
+			ls.swapIteration();
 			ls.setGain(0);
-			//System.err.println(ls.distance(ls.getSolution()));
+			System.err.println(ls.distance(ls.getSolution()));
 			
 			if (ls.iniEqualsSol()) {
 				testEgalite=false;
@@ -163,8 +168,9 @@ public class LocalSearch {
 			k++;
 			ls.setInitial();
 			t1=System.currentTimeMillis();
-		} while (testEgalite && (t1-t0)<10000 && k<200); /* condition d'arrêt de l'algo
+		} while (testEgalite && (t1-t0)<20000); /* condition d'arrêt de l'algo
 		un tour de boucle correspond à une itération de l'algo, O(n) */
+		
 		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
 		System.out.println("Distance finale : "+ls.distance(ls.getSolution()));
 		System.out.println("Durée totale d'exécution : "+(t1-t0)+" ms");
