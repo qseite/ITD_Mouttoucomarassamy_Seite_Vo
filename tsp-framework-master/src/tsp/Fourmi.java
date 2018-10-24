@@ -9,8 +9,10 @@ public class Fourmi {
 	private double longueur;
 	private int[][] passageSurArc;
 	private boolean elitiste;
+	private Piste piste;
 	
-	public Fourmi(Instance m_instance) {
+	public Fourmi(Instance m_instance, Piste piste) {
+		this.piste=piste;
 		this.elitiste=false;
 		this.m_instance=m_instance;
 		this.villesNonVisitees = new ArrayList<Integer>();
@@ -25,6 +27,10 @@ public class Fourmi {
 				this.passageSurArc[j][i]=0;
 			}
 		}
+	}
+	
+	public Piste getPiste() {
+		return this.piste;
 	}
 	
 	public ArrayList<Integer> getVillesNonVisitees() {
@@ -86,12 +92,12 @@ public class Fourmi {
 	}
 	
 	public double getProbaIaJ(int i, int j) throws Exception {
-		double num = Math.pow(this.getInstance().getPheromoneSurArc()[i][j], TSPSolver.ALPHA)
+		double num = Math.pow(this.getPiste().getPheromoneSurArc()[i][j], TSPSolver.ALPHA)
 				*Math.pow(1.0/this.m_instance.getDistances(i, j), TSPSolver.BETA);
 		/*double num=this.getInstance().getHeuristic()[i][j];*/
 		double den = 0;
 		for (int numVille : this.getVillesNonVisitees()) {
-			den+=Math.pow(this.getInstance().getPheromoneSurArc()[i][numVille], TSPSolver.ALPHA)
+			den+=Math.pow(this.getPiste().getPheromoneSurArc()[i][numVille], TSPSolver.ALPHA)
 					*Math.pow(1.0/this.m_instance.getDistances(i, numVille), TSPSolver.BETA);
 			/*den+=this.getInstance().getHeuristic()[i][numVille];*/
 		}

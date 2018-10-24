@@ -37,9 +37,9 @@ public class TSPSolver {
 	public static double BETA=2; 
 	public static double Q=100; 
 	public static double P=0.2;
-	public static boolean ELITISTE=false;
-	public static int NOMBRE_ELITISTE=200;
-	public static double COEF_ELITISTE=100;
+	public static boolean ELITISTE=true;
+	public static int NOMBRE_ELITISTE=20;
+	public static double COEF_ELITISTE=10;
 	public static int MAX_TIME=60;
 	public static double c_ini_pheromone=0.1;
 	public static int NOMBRE_FOURMI=51;
@@ -84,14 +84,15 @@ public class TSPSolver {
 		// Example of a time loop
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
+		Piste piste = new Piste(this.getInstance());
 		double index=0;
 		boolean sameWay = false;
 		
 		int rien =0;
 		
 		do {
-			for (int i=0;i<this.getInstance().getFourmis().size();i++) {
-				this.getInstance().getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
+			for (int i=0;i<piste.getFourmis().size();i++) {
+				piste.getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
 			}
 			/*System.err.println("Villes visitées par f8 : "+piste.getFourmi(8).getVillesVisitees());
 			System.err.println("Villes non visitées par f8 : "+piste.getFourmi(8).getVillesNonVisitees());
@@ -104,29 +105,29 @@ public class TSPSolver {
 			System.err.println("Numérateur proba f8 d'aller de v8 à v1 : "+num);*/
 			
 			//this.getInstance().setHeuristic();
-			for (Fourmi four : this.getInstance().getFourmis()) {
+			for (Fourmi four : piste.getFourmis()) {
 				for (int i=0;i<m_instance.getNbCities()-1;i++) {
 					four.setProchaineVille();	
 				}
 				four.setLongueur();
 			}
 
-			this.getInstance().majBestSolution();
+			piste.majBestSolution();
 			if (ELITISTE) {
-				this.getInstance().setElitiste(NOMBRE_ELITISTE);
+				piste.setElitiste(NOMBRE_ELITISTE);
 			}
-			this.getInstance().majPheromone();
-			this.getInstance().resetFourmis();
+			piste.majPheromone();
+			piste.resetFourmis();
 			
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;	
-			System.err.println(this.getInstance().getBestLongueur());
+			System.err.println(piste.getBestLongueur());
 		} while(spentTime < (MAX_TIME * 1000 - 100) && index<50 && !sameWay);
 		
 		for (int i=0;i<m_instance.getNbCities();i++) {
-			this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(i), i);
+			this.m_solution.setCityPosition(piste.getSolutionTemp().get(i), i);
 		}
-		this.m_solution.setCityPosition(this.getInstance().getSolutionTemp().get(0), m_instance.getNbCities());
+		this.m_solution.setCityPosition(piste.getSolutionTemp().get(0), m_instance.getNbCities());
 		System.err.println(index+" itérations pour obtenir ce résultat");
 		System.err.println(spentTime/index+" ms par itération");
 
