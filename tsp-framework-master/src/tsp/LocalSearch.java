@@ -1,6 +1,5 @@
 package tsp;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,11 +7,13 @@ public class LocalSearch {
 	private Instance instance;
 	private int[] solution;
 	private int[] temp;
-	private int[] ini;
+	private int[] ini; // permet uniquement de comparer si la solution optimale à évoluer au cours d'une itération
+	// on stop l'algo lorsqu'au bout d'un nombre définit de fois la solution ne s'améliore plus
+	private double gain;
 	private int compteurStop;
 	
 
-	public LocalSearch(Instance instance) {
+	public LocalSearch(Instance instance) throws Exception {
 		super();
 		this.instance = instance;
 		this.temp= new int[this.instance.getNbCities()];
@@ -27,6 +28,7 @@ public class LocalSearch {
 			this.ini[j]=sol.get(j);
 			this.solution[j]=sol.get(j);
 		}
+		this.gain=0;
 		this.compteurStop=0;
 		
 	}
@@ -69,6 +71,14 @@ public class LocalSearch {
 			this.ini[i]=tab[i];
 		}
 	}
+	
+	public double getGain() {
+		return this.gain;
+	}
+	
+	public void setGain(int g) {
+		this.gain=g;
+	}
 
 	public double distance(int[] tab) throws Exception {
 		double d=0;
@@ -77,6 +87,8 @@ public class LocalSearch {
 		}
 		return d;
 	}
+	
+	
 	public String tostring(int[] tab) {
 		String stringsol="";
 		for(int t=0;t<tab.length;t++) {
@@ -89,10 +101,22 @@ public class LocalSearch {
 	
 	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
 		this.setTemp(this.getIni());
+		int n = this.getInstance().getNbCities();
 		for (int i=index;i<this.getInstance().getNbCities();i++) {
+			
+			/*double g1=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[index])
+					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(index+1)%n]);
+			double d1=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[i])
+					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(i+1)%n]);*/
 			this.swap(this.temp, i, index);
-			//System.out.println(this.distance(this.getTemp()));
+			/*double g2=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[index])
+					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(index+1)%n]);
+			double d2=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[i])
+					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(i+1)%n]);*/
+			//System.err.println(this.distance(this.getTemp()));
+			
 			if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
+			//if (g1+d1-g2-d2>this.gain) {
 				this.setSolution(this.getTemp());
 			}
 		}
@@ -102,7 +126,7 @@ public class LocalSearch {
 		this.setIni(this.getSolution());
 	}
 	
-	public int getCompteurStop() {
+	public int getCompteurStop() { 
 		return this.compteurStop;
 	}
 	
@@ -110,7 +134,8 @@ public class LocalSearch {
 		this.compteurStop++;
 	}
 	
-	public boolean iniEqualsSol() throws Exception {
+	// on vérifie que pendant une itération la solution finale de l'itération à changer de la solution initiale
+	public boolean iniEqualsSol() throws Exception { 
 		return (this.distance(this.getIni())==this.distance(this.getSolution()));
 	}
 
@@ -168,7 +193,7 @@ public class LocalSearch {
 		long t1=0;
 		int k=0;
 		t0=System.currentTimeMillis();
-		Instance graph = new Instance("instances/pcb442.tsp",0);
+		Instance graph = new Instance("instances/eil51.tsp",0);
 		LocalSearch ls = new LocalSearch(graph);
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
@@ -183,8 +208,10 @@ public class LocalSearch {
 			System.out.println(k);
 			k++;
 			ls.setInitial();
+			ls.setGain(0);
 			t1=System.currentTimeMillis();
-		} while (ls.getCompteurStop()<10 && (t1-t0)<60000);
+		} while (ls.getCompteurStop()<10 && (t1-t0)<20000); /* condition d'arrêt de l'algo
+		un tour de boucle correspond à une itération de l'algo, O(n) */
 		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
 		System.out.println("Distance finale : "+ls.distance(ls.getSolution()));
 		System.out.println("Durée totale d'exécution : "+(t1-t0)+" ms");
