@@ -99,10 +99,10 @@ public class LocalSearch {
 
 	
 	public void swapCycle(int index) throws Exception { //réalise un cycle de swap sur l'élement d'index 'index'
-		this.setTemp(this.getIni());
 		int n = this.getInstance().getNbCities();
 		for (int i=index;i<this.getInstance().getNbCities();i++) {
-			
+			this.setTemp(this.getIni());
+			/*
 			double g1=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[index])
 					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(index+1)%n]);
 			double d1=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[i])
@@ -112,16 +112,16 @@ public class LocalSearch {
 			double g2=this.getInstance().getDistances(this.getTemp()[(n+index-1)%n],this.getTemp()[i])
 					+this.getInstance().getDistances(this.getTemp()[i], this.getTemp()[(index+1)%n]);
 			double d2=this.getInstance().getDistances(this.getTemp()[(n+i-1)%n],this.getTemp()[index])
-					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(i+1)%n]);
+					+this.getInstance().getDistances(this.getTemp()[index], this.getTemp()[(i+1)%n]);*/
 			//distance au voisinage des points swapés
 			
 			this.swap(this.temp, i, index);
 			//System.err.println(this.distance(this.getSolution()));
 
-			//if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
-			if (g1+d1-g2-d2>this.gain) { //plus la somme est importante plus g2 et d2 son petits donc plus la distance totale est courte
+			if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
+			//if (g1+d1-g2-d2>this.gain) { //plus la somme est importante plus g2 et d2 son petits donc plus la distance totale est courte
 				this.setSolution(this.getTemp());
-				this.setGain(g1+g1-g2-d2);
+				//this.setGain(g1+g1-g2-d2);
 			}
 		}
 	}
@@ -159,12 +159,13 @@ public class LocalSearch {
 			k++;
 			ls.setInitial();
 			t1=System.currentTimeMillis();
-		} while (testEgalite && (t1-t0)<10000 && k<1); /* condition d'arrêt de l'algo
+		} while (testEgalite && (t1-t0)<10000 && k<10000); /* condition d'arrêt de l'algo
 		un tour de boucle correspond à une itération de l'algo, O(n) */
 		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
 		System.out.println("Distance finale : "+ls.distance(ls.getSolution()));
 		System.out.println("Durée totale d'exécution : "+(t1-t0)+" ms");
 		System.out.println("Durée d'une itération : "+(t1-t0)/k+ "ms");
 		System.out.println("Nombre d'itération : "+k);
+		System.out.println("Arrêt de l'algo car ini==sol : "+!testEgalite);
 	}
 }
