@@ -28,7 +28,8 @@ public class Individu {
 		while(index<this.ordreVisite.size()-1) {
 			res+=this.g_instance.getDistances(ordreVisite.get(index),ordreVisite.get(index+1));
 			index++;
-		}res+=this.g_instance.getDistances(this.ordreVisite.get(this.ordreVisite.size()-1),0);
+		}
+		res+=this.g_instance.getDistances(this.ordreVisite.get(this.ordreVisite.size()-1),0);
 		return res;
 	}
 	
