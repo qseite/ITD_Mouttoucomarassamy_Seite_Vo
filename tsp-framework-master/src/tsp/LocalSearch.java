@@ -51,6 +51,10 @@ public class LocalSearch {
 		}
 	}
 	
+	public void setSolution(int index, int val) {
+		this.solution[index]=val;
+	}
+	
 	public int[] getTemp() {
 		return this.temp;
 	}
@@ -59,6 +63,10 @@ public class LocalSearch {
 		for (int i=0;i<tab.length;i++) {
 			this.temp[i]=tab[i];
 		}
+	}
+	
+	public void setTemp(int index, int val) {
+		this.temp[index]=val;
 	}
 	
 	public int[] getIni() {
