@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import tsp.gui.TSPGUI;
+
 public class TwoOpt extends LocalSearch{
-	
-	private boolean test=true;
 
 	public TwoOpt(Instance instance) throws Exception {
 		super(instance);
@@ -28,10 +28,6 @@ public class TwoOpt extends LocalSearch{
 		return tab;
 	}
 	
-	public void setTest(boolean b) {
-		this.test=b;
-	}
-	
 	/*
 	 * @param int index : on réalise une série de 2-opt entre index et les villes [index+1;n[
 	 * Réalise une série de renversement 2-opt entre 'index' et 'nombreDeVilles'
@@ -46,17 +42,6 @@ public class TwoOpt extends LocalSearch{
 			double d2=this.getInstance().getDistances(this.getSolution()[index],this.getSolution()[(i+1)%n]);
 			
 			if (g1+d1-g2-d2>0) {
-				//this.setTemp(this.getIni());
-				
-				System.err.println(index);
-				System.out.println("g1 "+g1);
-				System.out.println("d1 "+d1);
-				System.err.println(i);
-				System.out.println("g2 "+g2);
-				System.out.println("d2 "+d2);
-				System.out.println(this.tostring(this.getSolution()));
-				System.out.println(this.distance(this.getSolution()));
-				
 				int[] tempon=new int[this.getInstance().getNbCities()];
 				for (int j=index;j<=i;j++) {
 					int a=this.getSolution()[i+index-j];
@@ -65,16 +50,6 @@ public class TwoOpt extends LocalSearch{
 				for (int j=index;j<=i;j++) {
 					this.setSolution(j,tempon[j]);
 				}
-				
-				System.err.println(this.tostring(this.getSolution()));
-				System.err.println(this.distance(this.getSolution()));
-				System.out.println("");
-
-				
-				//this.setGain(g1+d1-g2-d2);
-				this.setTest(true);
-			} else {
-				this.setTest(false);
 			}
 		}
 	}
@@ -98,17 +73,17 @@ public class TwoOpt extends LocalSearch{
 		
 		do {
 			ls.twoOptIteration();
-			//ls.setGain(0);
-			//System.err.println(ls.distance(ls.getSolution()));
-			/*
+			System.err.println(ls.distance(ls.getSolution()));
+			
 			if (ls.iniEqualsSol()) {
 				testEgalite=false;
-			}*/
-			//System.out.println(k);
+				System.out.println("Il y a égalité");
+			}
+
 			k++;
-			//ls.setInitial();
+			ls.setInitial();
 			t1=System.currentTimeMillis();
-		} while (testEgalite && (t1-t0)<20000 && k<5); /* condition d'arrêt de l'algo
+		} while (testEgalite && (t1-t0)<20000 && k<10); /* condition d'arrêt de l'algo
 		un tour de boucle correspond à une itération de l'algo, O(n) */
 		
 		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
@@ -117,7 +92,13 @@ public class TwoOpt extends LocalSearch{
 		System.out.println("Durée d'une itération : "+(t1-t0)/k+ "ms");
 		System.out.println("Nombre d'itération : "+k);
 		System.out.println("Arrêt de l'algo car ini==sol : "+!testEgalite);
-		//graph.print(System.err);
+		
+		Solution sol = new Solution(graph);
+		for (int i=0;i<ls.getSolution().length;i++) {
+			sol.setCityPosition(ls.getSolution()[i], i);
+		}
+		sol.setCityPosition(ls.getSolution()[0], ls.getSolution().length);
+		TSPGUI gui = new TSPGUI(sol);
 	}
 	
 }
