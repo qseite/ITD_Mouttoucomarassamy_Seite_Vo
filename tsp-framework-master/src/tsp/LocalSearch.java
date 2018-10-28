@@ -55,6 +55,10 @@ public class LocalSearch {
 		this.solution[index]=val;
 	}
 	
+	public void swapSolution(int i1,int i2) {
+		this.swap(this.solution, i1, i2);
+	}
+	
 	public int[] getTemp() {
 		return this.temp;
 	}
@@ -63,10 +67,6 @@ public class LocalSearch {
 		for (int i=0;i<tab.length;i++) {
 			this.temp[i]=tab[i];
 		}
-	}
-	
-	public void setTemp(int index, int val) {
-		this.temp[index]=val;
 	}
 	
 	public int[] getIni() {
@@ -128,10 +128,8 @@ public class LocalSearch {
 			//if (this.distance(this.getTemp())<this.distance(this.getSolution())) {
 			if (g1+d1-g2-d2>this.getGain()) { 
 			//plus la somme est importante plus g2 et d2 son petits donc plus la distance de la nvlle sol est courte
-				
 				this.setSolution(this.getTemp());
 				this.setGain(g1+d1-g2-d2);
-
 			}
 			
 

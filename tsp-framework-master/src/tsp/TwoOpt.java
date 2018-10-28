@@ -12,6 +12,7 @@ public class TwoOpt extends LocalSearch{
 		super(instance);
 	}
 	
+	/*
 	public int[] cavacouper(int[] tab,int gauche,int droite) {
 		ArrayList<Integer> coupe= new ArrayList<Integer>();
 		ArrayList<Integer> tablist= new ArrayList<Integer>();
@@ -26,7 +27,7 @@ public class TwoOpt extends LocalSearch{
 			tab[i]=tablist.get(i);
 		} 
 		return tab;
-	}
+	}*/
 	
 	/*
 	 * @param int index : on réalise une série de 2-opt entre index et les villes [index+1;n[
@@ -71,20 +72,47 @@ public class TwoOpt extends LocalSearch{
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
 		
+		int r=0;
+		int n=ls.getInstance().getNbCities();
+		int[] sol1=new int[n];
 		do {
+			
 			ls.twoOptIteration();
 			System.err.println(ls.distance(ls.getSolution()));
 			
 			if (ls.iniEqualsSol()) {
 				testEgalite=false;
 				System.out.println("Il y a égalité");
+				System.out.println("");
+				r++;
 			}
+			if (r==1) {
+				ls.setTemp(ls.getSolution());
+				System.err.println("Solution actuelle : "+ls.distance(ls.getTemp()));
+				System.out.println("On balance une série de swap pour sortir de l'extremum local");
+				System.out.println("");
+				for (int i=0;i<15;i++) {
+					ls.swapSolution((int)(Math.random()*(n-1)), (int)(Math.random()*(n-1)));
+				}
+				testEgalite=true;
+				r++;
+			}
+			
 
 			k++;
 			ls.setInitial();
+			
 			t1=System.currentTimeMillis();
-		} while (testEgalite && (t1-t0)<20000 && k<10); /* condition d'arrêt de l'algo
+		} while (testEgalite && (t1-t0)<20000 && k<20); /* condition d'arrêt de l'algo
 		un tour de boucle correspond à une itération de l'algo, O(n) */
+
+		if (ls.distance(ls.getTemp())<ls.distance(ls.getSolution())) {
+			System.out.println("La 1ere solution vaut : "+ls.distance(ls.getTemp()));
+			System.out.println("La 2nd solution vaut : "+ls.distance(ls.getSolution()));
+			System.out.println("La première solution était meilleure");
+			System.out.println("");
+			ls.setSolution(ls.getTemp());		
+		}
 		
 		System.out.println("Solution finale : "+ls.tostring(ls.getSolution()));
 		System.out.println("Distance finale : "+ls.distance(ls.getSolution()));
