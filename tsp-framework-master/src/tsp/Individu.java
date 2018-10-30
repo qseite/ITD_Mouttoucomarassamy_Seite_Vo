@@ -11,7 +11,6 @@ public class Individu {
 	public Individu(Instance g_instance, ArrayList<Integer> ordreVisite) {
 		this.g_instance=g_instance;
 		this.ordreVisite=ordreVisite;
-		
 	}
 	
 	public ArrayList<Integer> getOrdreVisite(){
@@ -26,12 +25,11 @@ public class Individu {
 		double res=0;
 		int index=0;
 		while(index<this.ordreVisite.size()-1) {
-			res+=this.g_instance.getDistances(ordreVisite.get(index),ordreVisite.get(index+1));
+			res+=this.g_instance.getDistances(this.ordreVisite.get(index),this.ordreVisite.get(index+1));
 			index++;
-		}res+=this.g_instance.getDistances(this.ordreVisite.get(this.ordreVisite.size()-1),0);
+		}res+=this.g_instance.getDistances(this.ordreVisite.get(this.ordreVisite.size()-1),this.ordreVisite.get(0));
 		return res;
 	}
-	
 
 	
 	public void mutation() {
@@ -39,7 +37,7 @@ public class Individu {
 		int index1=(int)(Math.random()*nombreVille-1);
 		int index2=index1+(int)(Math.random()*(nombreVille-index1-1));
 		int index3=index2+(int)(Math.random()*(nombreVille-index2-1));
-		int index4=index2+(int)(Math.random()*(nombreVille-index3-1));
+		int index4=index3+(int)(Math.random()*(nombreVille-index3-1));
 		ArrayList<Integer> mutation = new ArrayList<Integer>();
 		for (int i=0;i<index1;i++) {
 			mutation.add(this.getOrdreVisite().get(i));
