@@ -31,8 +31,11 @@ public class Population {
 		
 	}
 	
-    public Population(ArrayList<Individu> population) {
+    public Population(int nbIndividus, Instance g_instance, ArrayList<Individu> population) {
     	this.population=population;
+    	this.nombreIndividus=nbIndividus;
+    	this.g_instance=g_instance;
+    	
     }
 	
 	
@@ -203,6 +206,44 @@ public class Population {
 		res.add(ind1);
 		res.add(ind2);
 		return res;
+	}
+	
+	public ArrayList<Individu> selectionRoulette() throws Exception {
+		Population copie = new Population(this.nombreIndividus,this.g_instance,this.getPopulation());
+		System.out.println(copie.nombreIndividus);
+		ArrayList<Double> emplacement1 = new ArrayList<Double>();
+		double probaCumulee1=0;
+		for (int i=0;i<copie.getPopulation().size();i++) {
+			probaCumulee1+=copie.getPopulation().get(i).getValeur();
+			emplacement1.add(probaCumulee1);
+		}double alea1 = Math.random()*probaCumulee1;
+		double temp1=emplacement1.get(0);
+		int index1=0;
+		while(alea1<temp1 && index1<copie.nombreIndividus) {
+			index1++;
+			temp1=emplacement1.get(index1);
+		}Individu parent1=copie.getPopulation().get(index1);
+		copie.getPopulation().remove(index1);
+		
+		ArrayList<Double> emplacement2 = new ArrayList<Double>();
+		double probaCumulee2=0;
+		for (int i=0;i<copie.getPopulation().size();i++) {
+			probaCumulee2+=copie.getPopulation().get(i).getValeur();
+			emplacement2.add(probaCumulee2);
+		}double alea2 = Math.random()*probaCumulee2;
+		double temp2=emplacement2.get(0);
+		int index2=0;
+		while(alea2<temp2 && index2<copie.nombreIndividus) {
+			index2++;
+			temp2=emplacement2.get(index2);
+		}Individu parent2=copie.getPopulation().get(index2);
+		
+		ArrayList<Individu> res = new ArrayList<Individu>();
+		res.add(parent1);
+		res.add(parent2);
+		return res;
+		
+		
 	}
 	
 	

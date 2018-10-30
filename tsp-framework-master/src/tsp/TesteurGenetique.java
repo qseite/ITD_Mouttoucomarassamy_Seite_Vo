@@ -32,6 +32,7 @@ public class TesteurGenetique {
 			ArrayList<Individu> parents = population.selectionElitiste();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
 			population.insertion(enfant);
+			//Optimis
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
 			}
@@ -41,7 +42,7 @@ public class TesteurGenetique {
 		//Itérations avec une sélection des parents aléatoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionAleatoire();
+			ArrayList<Individu> parents = population.selectionElitiste();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
 			population.insertion(enfant);
 			double alea = Math.random();
