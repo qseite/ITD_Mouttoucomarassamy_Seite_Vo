@@ -205,11 +205,5 @@ public class Population {
 		return res;
 	}
 	
-	public ArrayList<Individu> selectionRoulette() throws Exception {
-		double probaCumulee=0;
-		for (int i=0;i<nombreIndividus;i++) {
-			probaCumulee+=this.getPopulation().get(i).getValeur();
-		}
-		double alea = Math.random()*probaCumulee;
-	}
+	
 }
