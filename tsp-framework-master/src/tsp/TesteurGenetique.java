@@ -35,7 +35,6 @@ public class TesteurGenetique {
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
 			}
-			System.out.println("taille de ordreVisite du meilleur : "+population.getBest().getOrdreVisite().size());
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
 			
 	    }
@@ -55,7 +54,6 @@ public class TesteurGenetique {
 			}if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
 			}
-			System.out.println("taille de ordreVisite du meilleur : "+population.getBest().getOrdreVisite().size());
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
 			
 	} System.out.println("Valeur du meilleur : "+meilleur.getValeur());
