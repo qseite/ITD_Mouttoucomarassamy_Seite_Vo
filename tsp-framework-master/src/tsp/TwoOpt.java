@@ -67,7 +67,7 @@ public class TwoOpt extends LocalSearch{
 		long t1=0;
 		int k=0;
 		t0=System.currentTimeMillis();
-		Instance graph = new Instance("instances/d657.tsp",0);
+		Instance graph = new Instance("instances/lin318.tsp",0);
 		TwoOpt ls = new TwoOpt(graph);
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
@@ -103,7 +103,7 @@ public class TwoOpt extends LocalSearch{
 			ls.setInitial();
 			
 			t1=System.currentTimeMillis();
-		} while (testEgalite && (t1-t0)<20000 && k<20); /* condition d'arrêt de l'algo
+		} while (testEgalite && (t1-t0)<20000); /* condition d'arrêt de l'algo
 		un tour de boucle correspond à une itération de l'algo, O(n) */
 
 		if (ls.distance(ls.getTemp())<ls.distance(ls.getSolution())) {
