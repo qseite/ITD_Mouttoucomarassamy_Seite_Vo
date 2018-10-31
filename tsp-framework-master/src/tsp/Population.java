@@ -160,24 +160,20 @@ public class Population {
 		return new Individu(this.getInstance(),ordre);
 	}*/
 	
-	// Insere l'individu en argument et enlève et retourne l'individu le moins bon individu
-	public Individu insertion(Individu aInserer) throws Exception {
+	// Insere l'individu en argument s'il est meilleur que le moins bon de la population et enlève le moins bon
+	public void insertion(Individu aInserer) throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
 		for (int i=1;i<this.population.size();i++) {
 			double inter = this.population.get(i).getValeur();
 			if (inter>valeur){
-				index=i;
 				valeur=inter;
+				index=i;
 			}
-	    }Individu res = this.population.get(index);
+	    }
 	    if(valeur>aInserer.getValeur()) {
 	    	this.population.remove(index);
 			this.population.add(aInserer);
-			return res;
-	    }
-	    else {
-	    	return aInserer;
 	    }
      }
 	
@@ -185,7 +181,7 @@ public class Population {
 	public ArrayList<Individu> selectionElitiste() throws Exception {
 		
 		int index = this.getIndexBest();
-		Individu ind1 = this.population.get(index);
+		Individu ind1 = this.getPopulation().get(index);
 		//Population copie = new Population(this.getPopulation());
 		//copie.getPopulation().remove(index);
 		int alea = (int)(Math.random()*this.getPopulation().size()-1);
@@ -219,7 +215,7 @@ public class Population {
 		}double alea1 = Math.random()*probaCumulee1;
 		double temp1=emplacement1.get(0);
 		int index1=0;
-		while(alea1<temp1 && index1<copie.nombreIndividus) {
+		while(alea1>temp1 && index1<copie.nombreIndividus) {
 			index1++;
 			temp1=emplacement1.get(index1);
 		}Individu parent1=copie.getPopulation().get(index1);
@@ -233,7 +229,7 @@ public class Population {
 		}double alea2 = Math.random()*probaCumulee2;
 		double temp2=emplacement2.get(0);
 		int index2=0;
-		while(alea2<temp2 && index2<copie.nombreIndividus) {
+		while(alea2>temp2 && index2<copie.nombreIndividus) {
 			index2++;
 			temp2=emplacement2.get(index2);
 		}Individu parent2=copie.getPopulation().get(index2);

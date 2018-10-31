@@ -23,11 +23,10 @@ public class Individu {
 
 	public double getValeur() throws Exception {
 		double res=0;
-		int index=0;
-		while(index<this.ordreVisite.size()-1) {
-			res+=this.g_instance.getDistances(this.ordreVisite.get(index),this.ordreVisite.get(index+1));
-			index++;
-		}res+=this.g_instance.getDistances(this.ordreVisite.get(this.ordreVisite.size()-1),this.ordreVisite.get(0));
+		for (int i=0;i<this.getOrdreVisite().size()-1;i++) {
+			res+=this.g_instance.getDistances(this.getOrdreVisite().get(i),this.getOrdreVisite().get(i+1));
+			
+		}res+=this.g_instance.getDistances(this.getOrdreVisite().get(this.getOrdreVisite().size()-1),this.getOrdreVisite().get(0));
 		return res;
 	}
 
@@ -56,5 +55,18 @@ public class Individu {
 		}
 		
 		this.ordreVisite=mutation;
+	}
+	
+	public void mutationSwap(double seuil) {
+		int index1 = (int)(Math.random()*this.getOrdreVisite().size()-1);
+		int index2 = (int)(Math.random()*this.getOrdreVisite().size()-1);
+		for (int i=0;i<this.getOrdreVisite().size();i++) {
+			double alea = Math.random();
+			if(alea<seuil) {
+				int temp = this.getOrdreVisite().get(index1);
+				this.getOrdreVisite().set(index1, this.getOrdreVisite().get(index2));
+				this.getOrdreVisite().set(index2,temp);
+			}
+		}
 	}
 }
