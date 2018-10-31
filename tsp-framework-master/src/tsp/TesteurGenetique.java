@@ -27,7 +27,7 @@ public class TesteurGenetique {
 	    }*/
 		
 		//Iterations avec une sélection des parents élitiste et sans mutation
-		for(int i=0;i<nbIterationsElitistes;i++) {
+		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionElitiste();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
