@@ -62,16 +62,19 @@ public class Individu {
 		this.ordreVisite=mutation;
 	}
 	
+	/**
+	 * @param seuil, donne la probabilité de swaper les deux villes aléatoirement
+	 * @return ne retourne rien, modifie directement l'individu en swapant deux de ses gènes aléatoirement
+	 */
 	public void mutationSwap(double seuil) {
 		int index1 = (int)(Math.random()*this.getOrdreVisite().size()-1);
 		int index2 = (int)(Math.random()*this.getOrdreVisite().size()-1);
-		for (int i=0;i<this.getOrdreVisite().size();i++) {
-			double alea = Math.random();
-			if(alea<seuil) {
-				int temp = this.getOrdreVisite().get(index1);
-				this.getOrdreVisite().set(index1, this.getOrdreVisite().get(index2));
-				this.getOrdreVisite().set(index2,temp);
-			}
+		double alea = Math.random();
+		if(alea<seuil) {
+			int temp = this.getOrdreVisite().get(index1);
+			this.getOrdreVisite().set(index1, this.getOrdreVisite().get(index2));
+			this.getOrdreVisite().set(index2,temp);
+		
 		}
 	}
 }

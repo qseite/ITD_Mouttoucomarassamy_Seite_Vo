@@ -13,8 +13,8 @@ public class TesteurMethodeGen {
 		}
 		Individu i1=new Individu(graph,ordreVille);
 		System.out.println(i1.getOrdreVisite());
-		i1.mutation();
-		System.out.println("on effectue une mutation");
+		i1.mutationSwap(1);
+		System.out.println("on effectue une mutationSwap");
 		System.out.println(i1.getOrdreVisite());
 		
 	}
