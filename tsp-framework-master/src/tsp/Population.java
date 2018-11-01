@@ -9,7 +9,12 @@ public class Population {
 	int nombreIndividus;
 	Instance g_instance;
 	
-	//Constructeur qui initialise une population dont les individus sont déterminés totalement aléatoirement
+	/**
+	 * Initialise une population Ã  partir d'une instance, l'adn de chaque individu de la population est
+	 * gÃ©nÃ©rÃ© alÃ©atoirement
+	 * @param nbIndividu, nombre d'individus dans la population
+	 * @param g_instance, instance concernÃ©e
+	 */
 	public Population(int nbIndividu, Instance g_instance) {
 		this.population = new ArrayList<Individu>();
 		this.nombreIndividus=nbIndividu;
@@ -31,6 +36,12 @@ public class Population {
 		
 	}
 	
+	/**
+	 * Initialise une population Ã  partir d'une liste prÃ©dÃ©finie d'Invidus
+	 * @param nbIndividus
+	 * @param g_instance
+	 * @param population
+	 */
     public Population(int nbIndividus, Instance g_instance, ArrayList<Individu> population) {
     	this.population=population;
     	this.nombreIndividus=nbIndividus;
@@ -38,7 +49,9 @@ public class Population {
     	
     }
 	
-	
+    /**
+     * @return Retourne l'ArrayList des Individus de la population
+     */
 	public ArrayList<Individu> getPopulation(){
 		return this.population;
 	}
@@ -47,7 +60,10 @@ public class Population {
 		return this.g_instance;
 	}
 	
-	// Retourne l'index du meilleur individu
+	/**
+	 * @return Retourne l'index dans this.population de l'Individu possÃ©dant la meilleure solution
+	 * @throws Exception
+	 */
 	public int getIndexBest() throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
@@ -61,7 +77,11 @@ public class Population {
 		return index;	
 	}
 	
-	//retourne le meilleur individu
+	/**
+	 * @see getIndexBest()
+	 * @return Retourne l'Individu dans this.population possÃ©dant la meilleure solution
+	 * @throws Exception
+	 */
 	public Individu getBest() throws Exception {
 		return this.population.get(this.getIndexBest());
 	}
@@ -160,7 +180,7 @@ public class Population {
 		return new Individu(this.getInstance(),ordre);
 	}*/
 	
-	// Insere l'individu en argument s'il est meilleur que le moins bon de la population et enlève le moins bon
+	// Insere l'individu en argument s'il est meilleur que le moins bon de la population et enlï¿½ve le moins bon
 	public void insertion(Individu aInserer) throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
@@ -177,7 +197,7 @@ public class Population {
 	    }
      }
 	
-	// Retourne 2 parents : le meilleur individu de la population et un individu choisi aléatoirement
+	// Retourne 2 parents : le meilleur individu de la population et un individu choisi alï¿½atoirement
 	public ArrayList<Individu> selectionElitiste() throws Exception {
 		
 		int index = this.getIndexBest();
@@ -192,7 +212,7 @@ public class Population {
 		return res;	
 	}
 	
-	//Retourne 2 parents : tous deux choisis aléatoirement
+	//Retourne 2 parents : tous deux choisis alï¿½atoirement
 	public ArrayList<Individu> selectionAleatoire() throws Exception {
 		int index1 = (int)(Math.random()*this.getPopulation().size()-1);
 		int index2 = (int)(Math.random()*this.getPopulation().size()-1);
