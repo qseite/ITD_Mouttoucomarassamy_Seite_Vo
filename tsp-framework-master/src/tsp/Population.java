@@ -25,11 +25,9 @@ public class Population {
 		}
 		this.population.add(new Individu(g_instance,temp));
 		for (int i=1;i<nbIndividu;i++) {
-			Collections.shuffle(temp);
 			ArrayList<Integer> copie = new ArrayList<Integer>();
-			for (int j=0;j<temp.size();j++) {
-				copie.add(temp.get(j));
-			}
+			copie.addAll(temp);
+			Collections.shuffle(copie);
 			Individu aRajouter = new Individu(g_instance,copie);
 			this.population.add(aRajouter);
 		}
