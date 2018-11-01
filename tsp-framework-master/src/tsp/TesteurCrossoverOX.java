@@ -11,7 +11,7 @@ public class TesteurCrossoverOX {
 		long t1=0;
 		t0=System.currentTimeMillis();
 		int nbIndividus = 100;
-		Instance g_instance = new Instance("instances/d657.tsp",0);
+		Instance g_instance = new Instance("instances/eil51.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIterationsElitistes=1;
 		int nbIterationsNonElitistes=1000;
@@ -31,7 +31,7 @@ public class TesteurCrossoverOX {
 		//Iterations avec une s�lection des parents �litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionElitiste();
+			ArrayList<Individu> parents = population.selectionAleatoire();
 			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {
@@ -52,7 +52,7 @@ public class TesteurCrossoverOX {
 		//It�rations avec une s�lection des parents al�atoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionRoulette();
+			ArrayList<Individu> parents = population.selectionAleatoire();
 			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {

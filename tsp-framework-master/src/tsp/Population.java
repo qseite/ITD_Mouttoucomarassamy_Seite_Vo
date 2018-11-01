@@ -20,7 +20,8 @@ public class Population {
 		this.population = new ArrayList<Individu>();
 		this.nombreIndividus=nbIndividu;
 		this.g_instance=g_instance;
-		/*ArrayList<Integer> temp=new ArrayList<Integer>();
+		
+		ArrayList<Integer> temp=new ArrayList<Integer>();
 		for (int i=0;i<g_instance.getNbCities();i++) {
 			temp.add(i);
 		}
@@ -31,8 +32,9 @@ public class Population {
 			Collections.shuffle(copie);
 			Individu aRajouter = new Individu(g_instance,copie);
 			this.population.add(aRajouter);
-		}*/
+		}
 		
+		/*
 		int n=g_instance.getNbCities();
 		for (int i=0;i<nbIndividu;i++) {
 			ArrayList<Integer> tempon=new ArrayList<Integer>();
@@ -54,13 +56,13 @@ public class Population {
 				temp.setInitial();
 				t1=System.currentTimeMillis();
 				
-			} while (testEgalite && (t1-t0)<500);
+			} while (testEgalite && (t1-t0)<5);
 			for (int j=0;j<n;j++) {
 				tempon.add(temp.getSolution()[j]);
 			}
 			this.population.add(new Individu(g_instance,tempon));
 			System.out.println("Individu n°"+i+" : valeur="+temp.distance(temp.getSolution()));
-		}
+		}*/
 		
 		
 		
@@ -200,7 +202,7 @@ public class Population {
 	 * @param parent2 : parent n�2
 	 * @return une ArrayList<Individu> compos�e des 2 enfants
 	 */
-	public ArrayList<Individu> crossoverOX(Individu parent1, Individu parent2){
+	public ArrayList<Individu> crossoverOX(Individu parent1, Individu parent2) throws Exception{
 		
 		int taille = parent1.getOrdreVisite().size();
 		
@@ -239,51 +241,48 @@ public class Population {
 		Collections.rotate(enfant2, debut);
 		
 		ArrayList<Individu> res = new ArrayList<Individu>();
+		
+		
+		int n=taille;
+		for (int i=0;i<2;i++) {
+			ArrayList<Integer> tempon=new ArrayList<Integer>();
+			TwoOpt temp;
+			if (i==0) {
+				temp=new TwoOpt(this.g_instance,enfant1); 
+			} else {
+				temp=new TwoOpt(this.g_instance,enfant2);
+			}
+			boolean testEgalite=true; 
+			long t0;
+			long t1=0;
+			int k=0;
+			t0=System.currentTimeMillis();
+
+			do {
+				temp.twoOptIteration();
+				
+				if (temp.iniEqualsSol()) {
+					testEgalite=false;
+				}
+				k++;
+				temp.setInitial();
+				t1=System.currentTimeMillis();
+				
+			} while (testEgalite && (t1-t0)<500);
+			for (int j=0;j<n;j++) {
+				tempon.add(temp.getSolution()[j]);
+			}
+			res.add(new Individu(this.getInstance(),tempon));
+		}
+		
+		/*
 		Individu ind1 = new Individu(this.getInstance(),enfant1);
 		Individu ind2 = new Individu(this.getInstance(),enfant2);
 		res.add(ind1);
 		res.add(ind2);
+		*/
 		return res;
-		
 	}
-	
-	/*public Individu crossover2points(Individu ind1, Individu ind2) {
-		int alea1 = (int)(Math.random()*this.getInstance().getNbCities()-1);
-		int alea2 = (int)(Math.random()*(this.getInstance().getNbCities()-1));
-		int index1 = Math.min(alea1, alea2);
-		int index2 = Math.max(alea1, alea2);
-		int taille = ind1.getOrdreVisite().size();
-		ArrayList<Integer> ordre = new ArrayList<Integer>();
-		
-		for (int i=0;i<taille;i++) {
-			ordre.add(-1);
-		}
-		
-		// On recopie individu1 entre index1 et index2
-		for (int i=index1;i<index2;i++) {
-			ordre.set(i,ind1.getOrdreVisite().get(i));
-		}
-		
-		ArrayList<Integer> restant = new ArrayList<Integer>();
-		for (int i=0;i<taille;i++) {
-			if(!ordre.contains(ind1.getOrdreVisite().get(i))) {
-				restant.add(ind1.getOrdreVisite().get(i));
-			}
-		}
-		ArrayList<Integer> restantOrdonne = new ArrayList<Integer>();
-		for (int i=0;i<taille;i++) {
-		 if(restant.contains(ind2.getOrdreVisite().get(i))) {
-			 restantOrdonne.add(ind2.getOrdreVisite().get(i));
-		      }
-		}
-		
-		for (int i=0;i<restantOrdonne.size();i++) {
-			int index = (index2+i)%taille;
-			ordre.set(index,restantOrdonne.get(i));
-		}
-		
-		return new Individu(this.getInstance(),ordre);
-	}*/
 	
 	/**
 	 * Insere l'individu en entrée s'il est meilleur que le moins 
