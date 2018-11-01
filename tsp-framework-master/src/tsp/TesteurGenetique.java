@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class TesteurGenetique {
 	
 	public static void main(String[] args) throws Exception {
+		long t0=0;
+		long t1=0;
+		t0=System.currentTimeMillis();
 		
 		int nbIndividus = 100;
 		Instance g_instance = new Instance("instances/eil51.tsp",0);
@@ -15,6 +18,7 @@ public class TesteurGenetique {
 		int nbIterationsNonElitistes=500;
 		double seuilMutation = 0.2;
 		Individu meilleur = population.getBest();
+		double meilleur_valeur=meilleur.getValeur();
 		
 		//Iterations avec une s�lection des parents �litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {
@@ -24,8 +28,9 @@ public class TesteurGenetique {
 			population.insertion(enfant);
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
+				meilleur_valeur=meilleur.getValeur();
 			}
-			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
+			System.out.println("valeur: -----"+meilleur_valeur+"----");
 			
 	    }
 		//It�rations avec une s�lection des parents al�atoire et avec mutation
@@ -44,10 +49,10 @@ public class TesteurGenetique {
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");	
 			}
 		
-		
+		t1=System.currentTimeMillis();
 		System.out.println("Valeur du meilleur : "+meilleur.getValeur());
 	    System.out.println("Nombre d'individus : "+population.getPopulation().size());
-  
+	    System.out.println("Durée d'exécution : "+(t1-t0)+" ms");
 	}
 }
 
