@@ -259,38 +259,39 @@ public class Population {
 	 * @throws Exception
 	 */
 	public ArrayList<Individu> selectionRoulette() throws Exception {
-		Population copie = new Population(this.getNombreIndividus(),this.getInstance(),this.getPopulation());
-		System.out.println(copie.getNombreIndividus());
-		ArrayList<Double> emplacement1 = new ArrayList<Double>();
-		double probaCumulee1=0;
-		for (int i=0;i<copie.getPopulation().size();i++) {
-			probaCumulee1+=copie.getPopulation().get(i).getValeur();
-			emplacement1.add(probaCumulee1);
-		} double alea1 = Math.random()*probaCumulee1;
-		double temp1=emplacement1.get(0);
+		
+		ArrayList<Double> emplacement = new ArrayList<Double>();
+		double sommeDesChemins=0;
+		
+		for (int i=0;i<this.getPopulation().size();i++) {
+			sommeDesChemins=this.getPopulation().get(i).getValeur();
+			emplacement.add(this.getPopulation().get(i).getValeur());
+		} 
+		
+		double alea1 = Math.random();
+		double alea2= Math.random();
+		double sommeDesProbas=0;
+		boolean test1=false;
+		boolean test2=false;
 		int index1=0;
-		while(alea1>temp1 && index1<copie.getNombreIndividus()) {
-			index1++;
-			temp1=emplacement1.get(index1);
-		} Individu parent1=copie.getPopulation().get(index1);
-		copie.getPopulation().remove(index1);
-		
-		ArrayList<Double> emplacement2 = new ArrayList<Double>();
-		double probaCumulee2=0;
-		for (int i=0;i<copie.getPopulation().size();i++) {
-			probaCumulee2+=copie.getPopulation().get(i).getValeur();
-			emplacement2.add(probaCumulee2);
-		} double alea2 = Math.random()*probaCumulee2;
-		double temp2=emplacement2.get(0);
 		int index2=0;
-		while(alea2>temp2 && index2<copie.nombreIndividus) {
-			index2++;
-			temp2=emplacement2.get(index2);
-		} Individu parent2=copie.getPopulation().get(index2);
 		
-		ArrayList<Individu> res = new ArrayList<Individu>();
-		res.add(parent1);
-		res.add(parent2);
-		return res;
+		for (int i=0;i<this.getPopulation().size() && (!test1 || !test2);i++) {
+			sommeDesProbas+=(emplacement.get(i)/sommeDesChemins);
+			if (sommeDesProbas <= alea1 && !test1) {
+				test1=true;
+				index1=i;
+			} else if (sommeDesProbas <= alea2 && !test2) {
+				test2=true;
+				index2=i;
+			}
+		}
+		Individu parent1=new Individu(this.getInstance(),this.getPopulation().get(index1).getOrdreVisite());
+		Individu parent2=new Individu(this.getInstance(),this.getPopulation().get(index2).getOrdreVisite());
+		
+		ArrayList<Individu> rep=new ArrayList<Individu>();
+		rep.add(parent1);rep.add(parent2);
+		
+		return rep;
 	}
 }
