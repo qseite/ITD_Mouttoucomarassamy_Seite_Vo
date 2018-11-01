@@ -44,7 +44,6 @@ public class Population {
     	this.population=population;
     	this.nombreIndividus=nbIndividus;
     	this.g_instance=g_instance;
-    	
     }
 	
     /**
@@ -84,10 +83,17 @@ public class Population {
 		return this.population.get(this.getIndexBest());
 	}
 	
+	/**
+	 * Prend en entrée 2 individus de la population et réalise un crossover à 1 point 
+	 * pour faire naître un nouvel Individu, l'index du point est choisi aléatoirement
+	 * @param ind1 : parent n°1
+	 * @param ind2 : parent n°2
+	 * @return un Individu "enfant" de ind1 et ind2
+	 */
 	public Individu crossover1(Individu ind1, Individu ind2) {
 		ArrayList<Integer> ordre = new ArrayList<Integer>();
 		int taille = ind1.getOrdreVisite().size();
-		int alea = (int)(Math.random()*taille-1);
+		int alea = (int)(Math.random()*(taille-1));
 		for (int i=0;i<alea;i++) {
 			ordre.add(ind1.getOrdreVisite().get(i));
 		}
@@ -105,12 +111,19 @@ public class Population {
 		return res;
 	}
 	
+	/**
+	 * Prend en entrée 2 individus de la population et réalise un crossover à 2 points
+	 * pour faire naître un nouvel individu, les index des 2 points sont choisis aléatoirement
+	 * @param i1 : parent n°1
+	 * @param i2 : parent n°2
+	 * @return un individu "enfant" de i1 et i2
+	 */
 	public Individu crossover2(Individu i1, Individu i2) {
-
 		int alea1 = (int)(Math.random()*this.getInstance().getNbCities()-1);
 		int alea2 = (int)(Math.random()*(this.getInstance().getNbCities()-1));
 		int index1 = Math.min(alea1, alea2);
 		int index2 = Math.max(alea1, alea2);
+		System.err.println(index1+" "+index2);
 		ArrayList<Integer> child = new ArrayList<Integer>();
 		for (int i=0;i<index1;i++) {
 			child.add(i1.getOrdreVisite().get(i));
@@ -178,7 +191,12 @@ public class Population {
 		return new Individu(this.getInstance(),ordre);
 	}*/
 	
-	// Insere l'individu en argument s'il est meilleur que le moins bon de la population et enl�ve le moins bon
+	/**
+	 * Insere l'individu en entrée s'il est meilleur que le moins 
+	 * bon de la population et enlève le moins bon
+	 * @param aInserer : individu à insérer dans la population
+	 * @throws Exception
+	 */
 	public void insertion(Individu aInserer) throws Exception {
 		double valeur=this.population.get(0).getValeur();
 		int index=0;
@@ -195,7 +213,11 @@ public class Population {
 	    }
      }
 	
-	// Retourne 2 parents : le meilleur individu de la population et un individu choisi al�atoirement
+	/**
+	 * Retourne 2 parents : le meilleur individu de la population et un individu choisi aléatoirement
+	 * @return une ArrayList d'Individu contenant les 2 parents
+	 * @throws Exception
+	 */
 	public ArrayList<Individu> selectionElitiste() throws Exception {
 		
 		int index = this.getIndexBest();
