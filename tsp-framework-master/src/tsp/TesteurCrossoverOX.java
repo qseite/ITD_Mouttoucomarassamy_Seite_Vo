@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-public class TesteurGenetique {
+public class TesteurCrossoverOX {
 	
 	public static void main(String[] args) throws Exception {
 		
-		int nbIndividus = 200;
-		Instance g_instance = new Instance("instances/eil51.tsp",0);
+		int nbIndividus = 300;
+		Instance g_instance = new Instance("instances/eil101.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIterationsElitistes=1000;
 		int nbIterationsNonElitistes=20000;
@@ -30,12 +30,17 @@ public class TesteurGenetique {
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionElitiste();
-			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
+			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {
-				enfant.mutation();
+				enfant.get(0).mutation();
 			}
-			population.insertion(enfant);
+			double aleaBis = Math.random();
+			if(aleaBis<seuilMutation) {
+				enfant.get(1).mutation();
+			}
+			population.insertion(enfant.get(0));
+			population.insertion(enfant.get(1));
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
 			}
@@ -46,12 +51,17 @@ public class TesteurGenetique {
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionAleatoire();
-			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
-			double alea = Math.random();
+			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
+		    double alea = Math.random();
 			if(alea<seuilMutation) {
-				enfant.mutation();
+				enfant.get(0).mutation();
 			}
-			population.insertion(enfant);
+			double aleaBis = Math.random();
+			if(aleaBis<seuilMutation) {
+				enfant.get(1).mutation();
+			}
+			population.insertion(enfant.get(0));
+			population.insertion(enfant.get(1));
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
 			}

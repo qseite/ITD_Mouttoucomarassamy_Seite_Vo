@@ -157,6 +157,54 @@ public class Population {
 		return new Individu(this.getInstance(),child);
 	}
 	
+	
+	public ArrayList<Individu> crossoverOX(Individu parent1, Individu parent2){
+		
+		int taille = parent1.getOrdreVisite().size();
+		
+		int alea1 = (int)(Math.random()*taille-1);
+		int alea2 = (int)(Math.random()*taille-1);
+		
+		int debut = Math.min(alea1, alea2);
+		int fin = Math.max(alea1, alea2);
+		
+		ArrayList<Integer> enfant1 = new ArrayList<Integer>();
+		ArrayList<Integer> enfant2 = new ArrayList<Integer>();
+		
+		enfant1.addAll(parent1.getOrdreVisite().subList(debut, fin));
+		enfant2.addAll(parent2.getOrdreVisite().subList(debut, fin));
+		
+		int villeActuelle = 0;
+		int villeParent1 = 0;
+		int villeParent2 = 0;
+		for (int i=0;i<taille;i++) {
+			
+			villeActuelle = (fin+i)%taille;
+			
+			villeParent1 = parent1.getOrdreVisite().get(villeActuelle);
+			villeParent2 = parent2.getOrdreVisite().get(villeActuelle);
+			
+			if(!enfant1.contains(villeParent1)) {
+				enfant1.add(villeParent1);
+			}
+			
+			if (!enfant2.contains(villeParent2)) {
+				enfant2.add(villeParent2);
+			}
+		}
+		
+		Collections.rotate(enfant1, debut);
+		Collections.rotate(enfant2, debut);
+		
+		ArrayList<Individu> res = new ArrayList<Individu>();
+		Individu ind1 = new Individu(this.getInstance(),enfant1);
+		Individu ind2 = new Individu(this.getInstance(),enfant2);
+		res.add(ind1);
+		res.add(ind2);
+		return res;
+		
+	}
+	
 	/*public Individu crossover2points(Individu ind1, Individu ind2) {
 		int alea1 = (int)(Math.random()*this.getInstance().getNbCities()-1);
 		int alea2 = (int)(Math.random()*(this.getInstance().getNbCities()-1));
@@ -211,7 +259,13 @@ public class Population {
 				index=i;
 			}
 	    }
-	    if(valeur>aInserer.getValeur()) {
+		boolean dejaPresent =false;
+		for (int i=0;i<this.getPopulation().size();i++) {
+			if(aInserer.getOrdreVisite().equals(this.getPopulation().get(i).getOrdreVisite())) {
+				dejaPresent=true;
+			}
+		}
+	    if(valeur>aInserer.getValeur() && !dejaPresent) {
 	    	this.population.remove(index);
 			this.population.add(aInserer);
 	    }
