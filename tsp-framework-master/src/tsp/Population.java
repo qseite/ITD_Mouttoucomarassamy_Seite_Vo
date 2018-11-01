@@ -38,7 +38,6 @@ public class Population {
 			ArrayList<Integer> tempon=new ArrayList<Integer>();
 			TwoOpt temp=new TwoOpt(this.g_instance);
 			boolean testEgalite=true; 
-			int[] sol1=new int[n];
 			long t0;
 			long t1=0;
 			int k=0;
