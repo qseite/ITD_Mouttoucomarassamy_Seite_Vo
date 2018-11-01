@@ -9,7 +9,17 @@ import com.sun.deploy.util.SystemPropertyUtil;
 public class TesteurMethodeGen {
 	
 	public static void main(String[] args) throws Exception {
-		Instance graph = new Instance("instances/eil51.tsp",0);
+		Instance graph = new Instance("instances/eil10.tsp",0);
+		Population pop=new Population(15,graph);
+		for (int i=0;i<pop.getNombreIndividus();i++) {
+			System.out.println(pop.getPopulation().get(i).getValeur()+" "+i+"\n");
+		}
+		ArrayList<Individu> p=pop.selectionRoulette();
+		for (int i=0;i<p.size();i++) {
+			System.out.println(p.get(i).getValeur());
+		}
+		
+		/*
 		ArrayList<Integer> ordreVille=new ArrayList<Integer>();
 		for (int i=0;i<graph.getNbCities();i++) {
 			ordreVille.add(i);
@@ -39,9 +49,11 @@ public class TesteurMethodeGen {
 		System.out.println("valeur de i1 "+i1.getValeur());
 		System.out.println("valeur de i2 "+i2.getValeur());
 		System.out.println("valeur de i3 "+i3.getValeur()+"\n");
-		pop.insertion(i3);
+		pop.add(i3);
 		System.out.println("valeur du 1er ind de pop "+pop.getPopulation().get(0).getValeur());
 		System.out.println("valeur du 2e ind de pop "+pop.getPopulation().get(1).getValeur());
+		System.out.println("valeur du 3e ind de pop "+pop.getPopulation().get(2).getValeur());
+		*/
 		
 		
 		

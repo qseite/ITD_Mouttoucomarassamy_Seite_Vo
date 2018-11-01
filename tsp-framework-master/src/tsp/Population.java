@@ -88,6 +88,14 @@ public class Population {
 	}
 	
 	/**
+	 * Ajoute arbitrairement un individu à la population
+	 * @param ind : individu ajouté à la population
+	 */
+	public void add(Individu ind) {
+		this.population.add(ind);
+		this.nombreIndividus++;
+	}
+	/**
 	 * Prend en entrée 2 individus de la population et réalise un crossover à 1 point 
 	 * pour faire naître un nouvel Individu, l'index du point est choisi aléatoirement
 	 * @param ind1 : parent n°1
@@ -264,7 +272,7 @@ public class Population {
 		double sommeDesChemins=0;
 		
 		for (int i=0;i<this.getPopulation().size();i++) {
-			sommeDesChemins=this.getPopulation().get(i).getValeur();
+			sommeDesChemins+=this.getPopulation().get(i).getValeur();
 			emplacement.add(this.getPopulation().get(i).getValeur());
 		} 
 		
