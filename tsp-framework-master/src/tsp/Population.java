@@ -245,8 +245,6 @@ public class Population {
 		
 		Individu ind1 = new Individu(this.getInstance(),enfant1);
 		Individu ind2 = new Individu(this.getInstance(),enfant2);
-		ind1.optimisation();
-		ind2.optimisation();
 		res.add(ind1);
 		res.add(ind2);
 
