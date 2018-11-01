@@ -127,7 +127,6 @@ public class Population {
 		int alea2 = (int)(Math.random()*(this.getInstance().getNbCities()-1));
 		int index1 = Math.min(alea1, alea2);
 		int index2 = Math.max(alea1, alea2);
-		System.err.println(index1+" "+index2);
 		ArrayList<Integer> child = new ArrayList<Integer>();
 		for (int i=0;i<index1;i++) {
 			child.add(i1.getOrdreVisite().get(i));
@@ -293,9 +292,5 @@ public class Population {
 		res.add(parent1);
 		res.add(parent2);
 		return res;
-		
-		
 	}
-	
-	
 }

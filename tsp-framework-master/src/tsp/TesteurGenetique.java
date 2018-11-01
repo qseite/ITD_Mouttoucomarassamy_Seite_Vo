@@ -16,17 +16,7 @@ public class TesteurGenetique {
 		double seuilMutation = 0.2;
 		Individu meilleur = population.getBest();
 		
-		//Test pour les crossovers
-	  /*  for (int i=0;i<2;i++) {
-	    	Individu parent1 =population.selectionElitiste().get(0);
-	    	Individu parent2 = population.selectionElitiste().get(1);
-	    	System.out.println(parent1.getOrdreVisite());
-	    	System.out.println(parent2.getOrdreVisite());
-	    	Individu enfant = population.crossover2(parent1, parent2);
-	    	System.out.println(enfant.getOrdreVisite());
-	    }*/
-		
-		//Iterations avec une sélection des parents élitiste et sans mutation
+		//Iterations avec une sï¿½lection des parents ï¿½litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionElitiste();
@@ -38,7 +28,7 @@ public class TesteurGenetique {
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
 			
 	    }
-		//Itérations avec une sélection des parents aléatoire et avec mutation
+		//Itï¿½rations avec une sï¿½lection des parents alï¿½atoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionAleatoire();
