@@ -81,4 +81,38 @@ public class Individu {
 		
 		}
 	}
+	
+	/**
+	 * Applique l'algo 2-opt au chemin de l'individu
+	 * @throws Exception
+	 */
+	public void optimisation() throws Exception {
+		int n=this.getInstance().getNbCities();
+		ArrayList<Integer> tempon=new ArrayList<Integer>();
+		TwoOpt temp;
+		temp=new TwoOpt(this.g_instance,this.getOrdreVisite()); 
+	
+		boolean testEgalite=true; 
+		long t0;
+		long t1=0;
+		int k=0;
+		t0=System.currentTimeMillis();
+		do {
+			temp.twoOptIteration();
+			
+			if (temp.iniEqualsSol()) {
+				testEgalite=false;
+			}
+			k++;
+			temp.setInitial();
+			t1=System.currentTimeMillis();	
+			
+		} while (testEgalite && (t1-t0)<500);
+		
+		for (int j=0;j<n;j++) {
+			tempon.add(temp.getSolution()[j]);
+		}
+		this.ordreVisite.clear();
+		this.ordreVisite.addAll(tempon);
+	}
 }

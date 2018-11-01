@@ -11,22 +11,12 @@ public class TesteurCrossoverOX {
 		long t1=0;
 		t0=System.currentTimeMillis();
 		int nbIndividus = 100;
-		Instance g_instance = new Instance("instances/eil51.tsp",0);
+		Instance g_instance = new Instance("instances/d657.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIterationsElitistes=1;
 		int nbIterationsNonElitistes=1000;
 		double seuilMutation = 1;
 		Individu meilleur = population.getBest();
-		
-		//Test pour les crossovers
-	  /*  for (int i=0;i<2;i++) {
-	    	Individu parent1 =population.selectionElitiste().get(0);
-	    	Individu parent2 = population.selectionElitiste().get(1);
-	    	System.out.println(parent1.getOrdreVisite());
-	    	System.out.println(parent2.getOrdreVisite());
-	    	Individu enfant = population.crossover2(parent1, parent2);
-	    	System.out.println(enfant.getOrdreVisite());
-	    }*/
 		
 		//Iterations avec une s�lection des parents �litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {

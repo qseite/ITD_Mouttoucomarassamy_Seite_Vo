@@ -197,6 +197,7 @@ public class Population {
 		}
 		return new Individu(this.getInstance(),child);
 	}
+	
 	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants
 	 * @param parent1 : parent n�1
 	 * @param parent2 : parent n�2
@@ -242,45 +243,13 @@ public class Population {
 		
 		ArrayList<Individu> res = new ArrayList<Individu>();
 		
-		
-		int n=taille;
-		for (int i=0;i<2;i++) {
-			ArrayList<Integer> tempon=new ArrayList<Integer>();
-			TwoOpt temp;
-			if (i==0) {
-				temp=new TwoOpt(this.g_instance,enfant1); 
-			} else {
-				temp=new TwoOpt(this.g_instance,enfant2);
-			}
-			boolean testEgalite=true; 
-			long t0;
-			long t1=0;
-			int k=0;
-			t0=System.currentTimeMillis();
-
-			do {
-				temp.twoOptIteration();
-				
-				if (temp.iniEqualsSol()) {
-					testEgalite=false;
-				}
-				k++;
-				temp.setInitial();
-				t1=System.currentTimeMillis();
-				
-			} while (testEgalite && (t1-t0)<500);
-			for (int j=0;j<n;j++) {
-				tempon.add(temp.getSolution()[j]);
-			}
-			res.add(new Individu(this.getInstance(),tempon));
-		}
-		
-		/*
 		Individu ind1 = new Individu(this.getInstance(),enfant1);
 		Individu ind2 = new Individu(this.getInstance(),enfant2);
+		ind1.optimisation();
+		ind2.optimisation();
 		res.add(ind1);
 		res.add(ind2);
-		*/
+
 		return res;
 	}
 	
