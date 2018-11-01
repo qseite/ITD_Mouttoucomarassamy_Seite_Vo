@@ -7,29 +7,25 @@ import java.util.ArrayList;
 public class TesteurGenetique {
 	
 	public static void main(String[] args) throws Exception {
+		long t0=0;
+		long t1=0;
+		t0=System.currentTimeMillis();
 		
 		int nbIndividus = 200;
 		Instance g_instance = new Instance("instances/eil51.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
+
 		int nbIterationsElitistes=1000;
 		int nbIterationsNonElitistes=20000;
 		double seuilMutation = 0.1;
+
 		Individu meilleur = population.getBest();
+		double meilleur_valeur=meilleur.getValeur();
 		
-		//Test pour les crossovers
-	  /*  for (int i=0;i<2;i++) {
-	    	Individu parent1 =population.selectionElitiste().get(0);
-	    	Individu parent2 = population.selectionElitiste().get(1);
-	    	System.out.println(parent1.getOrdreVisite());
-	    	System.out.println(parent2.getOrdreVisite());
-	    	Individu enfant = population.crossover2(parent1, parent2);
-	    	System.out.println(enfant.getOrdreVisite());
-	    }*/
-		
-		//Iterations avec une sélection des parents élitiste et sans mutation
+		//Iterations avec une sï¿½lection des parents ï¿½litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionElitiste();
+			ArrayList<Individu> parents = population.selectionRoulette();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {
@@ -38,14 +34,15 @@ public class TesteurGenetique {
 			population.insertion(enfant);
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
+				meilleur_valeur=meilleur.getValeur();
 			}
-			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
+			System.out.println("valeur: -----"+meilleur_valeur+"----");
 			
 	    }
-		//Itérations avec une sélection des parents aléatoire et avec mutation
+		//Itï¿½rations avec une sï¿½lection des parents alï¿½atoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionAleatoire();
+			ArrayList<Individu> parents = population.selectionRoulette();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
 			double alea = Math.random();
 			if(alea<seuilMutation) {
@@ -54,14 +51,15 @@ public class TesteurGenetique {
 			population.insertion(enfant);
 			if (meilleur.getValeur()>population.getBest().getValeur()) {
 				meilleur=population.getBest();
+				meilleur_valeur=meilleur.getValeur();
 			}
-			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");	
+			System.out.println("valeur: -----"+meilleur_valeur+"----");	
 			}
 		
-		
+		t1=System.currentTimeMillis();
 		System.out.println("Valeur du meilleur : "+meilleur.getValeur());
 	    System.out.println("Nombre d'individus : "+population.getPopulation().size());
-  
+	    System.out.println("DurÃ©e d'exÃ©cution : "+(t1-t0)+" ms");
 	}
 }
 
