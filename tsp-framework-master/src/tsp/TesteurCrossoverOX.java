@@ -10,13 +10,14 @@ public class TesteurCrossoverOX {
 		long t0=0;
 		long t1=0;
 		t0=System.currentTimeMillis();
-		
+
 		int nbIndividus = 100;
-		Instance g_instance = new Instance("instances/eil101.tsp",0);
+
+		Instance g_instance = new Instance("instances/d198.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
-		int nbIterationsElitistes=1000;
-		int nbIterationsNonElitistes=150000;
-		double seuilMutation = 0.2;
+		int nbIterationsElitistes=100;
+		int nbIterationsNonElitistes=100;
+		double seuilMutation = 0.1;
 		Individu meilleur = population.getBest();
 		
 		//Test pour les crossovers
@@ -29,7 +30,8 @@ public class TesteurCrossoverOX {
 	    	System.out.println(enfant.getOrdreVisite());
 	    }*/
 		
-		//Iterations avec une sélection des parents élitiste et avec mutation
+		//Iterations avec une sï¿½lection des parents ï¿½litiste et sans mutation
+
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionElitiste();
@@ -50,7 +52,7 @@ public class TesteurCrossoverOX {
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");
 			
 	    }
-		//Itérations avec une sélection des parents aléatoire et avec mutation
+		//Itï¿½rations avec une sï¿½lection des parents alï¿½atoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
 			ArrayList<Individu> parents = population.selectionRoulette();
@@ -71,10 +73,9 @@ public class TesteurCrossoverOX {
 			System.out.println("valeur: -----"+population.getBest().getValeur()+"----");	
 			}
 		
-		
 		System.out.println("Valeur du meilleur : "+meilleur.getValeur());
 	    System.out.println("Nombre d'individus : "+population.getPopulation().size());
-       
+
 	    t1=System.currentTimeMillis();
 	    System.out.println("DurÃ©e d'exÃ©cution : "+(t1-t0)+" ms");
 	}

@@ -14,12 +14,13 @@ public class Population {
 	 * généré aléatoirement
 	 * @param nbIndividu, nombre d'individus dans la population
 	 * @param g_instance, instance concernée
+	 * @throws Exception 
 	 */
-	public Population(int nbIndividu, Instance g_instance) {
+	public Population(int nbIndividu, Instance g_instance) throws Exception {
 		this.population = new ArrayList<Individu>();
 		this.nombreIndividus=nbIndividu;
 		this.g_instance=g_instance;
-		ArrayList<Integer> temp=new ArrayList<Integer>();
+		/*ArrayList<Integer> temp=new ArrayList<Integer>();
 		for (int i=0;i<g_instance.getNbCities();i++) {
 			temp.add(i);
 		}
@@ -30,7 +31,39 @@ public class Population {
 			Collections.shuffle(copie);
 			Individu aRajouter = new Individu(g_instance,copie);
 			this.population.add(aRajouter);
+		}*/
+		
+		int n=g_instance.getNbCities();
+		for (int i=0;i<nbIndividu;i++) {
+			ArrayList<Integer> tempon=new ArrayList<Integer>();
+			TwoOpt temp=new TwoOpt(this.g_instance);
+			boolean testEgalite=true; 
+			int[] sol1=new int[n];
+			long t0;
+			long t1=0;
+			int k=0;
+			t0=System.currentTimeMillis();
+
+			do {
+				
+				temp.twoOptIteration();
+				
+				if (temp.iniEqualsSol()) {
+					testEgalite=false;
+				}
+				k++;
+				temp.setInitial();
+				t1=System.currentTimeMillis();
+				
+			} while (testEgalite && (t1-t0)<500);
+			for (int j=0;j<n;j++) {
+				tempon.add(temp.getSolution()[j]);
+			}
+			this.population.add(new Individu(g_instance,tempon));
+			System.out.println("Individu n°"+i+" : valeur="+temp.distance(temp.getSolution()));
 		}
+		
+		
 		
 	}
 	
@@ -164,9 +197,9 @@ public class Population {
 		return new Individu(this.getInstance(),child);
 	}
 	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants
-	 * @param parent1 : parent n�1
-	 * @param parent2 : parent n�2
-	 * @return une ArrayList<Individu> compos�e des 2 enfants
+	 * @param parent1 : parent n�1
+	 * @param parent2 : parent n�2
+	 * @return une ArrayList<Individu> compos�e des 2 enfants
 	 */
 	public ArrayList<Individu> crossoverOX(Individu parent1, Individu parent2){
 		
