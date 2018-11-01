@@ -17,7 +17,7 @@ public class TesteurGenetique {
 
 		int nbIterationsElitistes=1000;
 		int nbIterationsNonElitistes=100000;
-		double seuilMutation = 0.1;
+		double seuilMutation = 0.33;
 
 		Individu meilleur = population.getBest();
 		double meilleur_valeur=meilleur.getValeur();
