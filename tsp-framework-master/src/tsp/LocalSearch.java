@@ -13,7 +13,6 @@ public class LocalSearch {
 	
 
 	public LocalSearch(Instance instance) throws Exception {
-		super();
 		this.instance = instance;
 		this.temp= new int[this.instance.getNbCities()];
 		this.solution= new int[this.instance.getNbCities()];
@@ -30,6 +29,19 @@ public class LocalSearch {
 		this.gain=0;
 		
 	}
+	
+	public LocalSearch(Instance instance, ArrayList<Integer> ini) throws Exception {
+		this.instance = instance;
+		this.temp= new int[this.instance.getNbCities()];
+		this.solution= new int[this.instance.getNbCities()];
+		this.ini=new int[this.instance.getNbCities()];
+		for (int i=0;i<instance.getNbCities();i++) {
+			this.ini[i]=ini.get(i);
+			this.solution[i]=ini.get(i);
+		}
+		this.gain=0;
+	}
+	
 	public void swap(int[] tab, int i,int j) {
 		int a=tab[i];
 		int b=tab[j];

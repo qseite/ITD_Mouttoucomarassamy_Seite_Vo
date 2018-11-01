@@ -12,7 +12,11 @@ public class TwoOpt extends LocalSearch{
 		super(instance);
 	}
 	
-	/*
+	public TwoOpt(Instance instance, ArrayList<Integer> ini) throws Exception {
+		super(instance,ini);
+	}
+	
+	/**
 	 * @param int index : on réalise une série de 2-opt entre index et les villes [index+1;n[
 	 * Réalise une série de renversement 2-opt entre 'index' et 'nombreDeVilles'
 	 */

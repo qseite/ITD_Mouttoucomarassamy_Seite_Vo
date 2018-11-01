@@ -12,12 +12,20 @@ public class TesteurCrossoverOX {
 		t0=System.currentTimeMillis();
 
 		int nbIndividus = 100;
+<<<<<<< HEAD
 
 		Instance g_instance = new Instance("instances/d198.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIterationsElitistes=100;
 		int nbIterationsNonElitistes=100;
 		double seuilMutation = 0.1;
+=======
+		Instance g_instance = new Instance("instances/eil51.tsp",0);
+		Population population = new Population(nbIndividus,g_instance);
+		int nbIterationsElitistes=1;
+		int nbIterationsNonElitistes=1000;
+		double seuilMutation = 1;
+>>>>>>> branch 'master' of https://github.com/qseite/ITD_Mouttoucomarassamy_Seite_Vo.git
 		Individu meilleur = population.getBest();
 		
 		//Test pour les crossovers
@@ -34,7 +42,7 @@ public class TesteurCrossoverOX {
 
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionElitiste();
+			ArrayList<Individu> parents = population.selectionAleatoire();
 			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {
@@ -55,7 +63,7 @@ public class TesteurCrossoverOX {
 		//It�rations avec une s�lection des parents al�atoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionRoulette();
+			ArrayList<Individu> parents = population.selectionAleatoire();
 			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {

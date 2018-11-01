@@ -20,7 +20,11 @@ public class Individu {
 	public Instance getInstance() {
 		return this.g_instance;
 	}
-
+	
+	/**
+	 * @return un double donnant la valeur du chemin de l'individu 
+	 * @throws Exception
+	 */
 	public double getValeur() throws Exception {
 		double res=0;
 		for (int i=0;i<this.getOrdreVisite().size()-1;i++) {
