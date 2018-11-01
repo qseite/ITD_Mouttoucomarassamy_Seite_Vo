@@ -272,8 +272,8 @@ public class Population {
 		double sommeDesChemins=0;
 		
 		for (int i=0;i<this.getPopulation().size();i++) {
-			sommeDesChemins+=this.getPopulation().get(i).getValeur();
-			emplacement.add(this.getPopulation().get(i).getValeur());
+			sommeDesChemins+=1.0/this.getPopulation().get(i).getValeur();
+			emplacement.add(1.0/this.getPopulation().get(i).getValeur());
 		} 
 		
 		double alea1 = Math.random();
@@ -281,17 +281,19 @@ public class Population {
 		double sommeDesProbas=0;
 		boolean test1=false;
 		boolean test2=false;
-		int index1=0;
+		int index1=2;
 		int index2=0;
 		
 		for (int i=0;i<this.getPopulation().size() && (!test1 || !test2);i++) {
 			sommeDesProbas+=(emplacement.get(i)/sommeDesChemins);
-			if (sommeDesProbas <= alea1 && !test1) {
+			if (alea1 <=sommeDesProbas && !test1) {
 				test1=true;
 				index1=i;
-			} else if (sommeDesProbas <= alea2 && !test2) {
+				//System.err.println(sommeDesProbas);
+			} else if (alea2 <=sommeDesProbas && !test2) {
 				test2=true;
 				index2=i;
+				//System.err.println(sommeDesProbas);
 			}
 		}
 		Individu parent1=new Individu(this.getInstance(),this.getPopulation().get(index1).getOrdreVisite());
