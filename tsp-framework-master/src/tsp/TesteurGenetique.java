@@ -16,7 +16,7 @@ public class TesteurGenetique {
 		Population population = new Population(nbIndividus,g_instance);
 
 		int nbIterationsElitistes=1000;
-		int nbIterationsNonElitistes=20000;
+		int nbIterationsNonElitistes=100000;
 		double seuilMutation = 0.1;
 
 		Individu meilleur = population.getBest();
@@ -25,7 +25,7 @@ public class TesteurGenetique {
 		//Iterations avec une s�lection des parents �litiste et sans mutation
 		for(int i=0;i<nbIterationsElitistes;i++)  {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionRoulette();
+			ArrayList<Individu> parents = population.selectionElitiste();
 			Individu enfant = population.crossover2(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {

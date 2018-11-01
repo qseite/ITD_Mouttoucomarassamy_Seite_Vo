@@ -8,11 +8,11 @@ public class TesteurCrossoverOX {
 	
 	public static void main(String[] args) throws Exception {
 		
-		int nbIndividus = 300;
-		Instance g_instance = new Instance("instances/eil101.tsp",0);
+		int nbIndividus = 100;
+		Instance g_instance = new Instance("instances/eil51.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIterationsElitistes=1000;
-		int nbIterationsNonElitistes=20000;
+		int nbIterationsNonElitistes=10000;
 		double seuilMutation = 0.1;
 		Individu meilleur = population.getBest();
 		
@@ -50,7 +50,7 @@ public class TesteurCrossoverOX {
 		//Itérations avec une sélection des parents aléatoire et avec mutation
 		for(int i=nbIterationsElitistes;i<nbIterationsNonElitistes+nbIterationsElitistes;i++) {
 			System.out.println("iteration:"+i);
-			ArrayList<Individu> parents = population.selectionAleatoire();
+			ArrayList<Individu> parents = population.selectionRoulette();
 			ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 		    double alea = Math.random();
 			if(alea<seuilMutation) {

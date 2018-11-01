@@ -163,8 +163,11 @@ public class Population {
 		}
 		return new Individu(this.getInstance(),child);
 	}
-	
-	
+	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants
+	 * @param parent1 : parent n°1
+	 * @param parent2 : parent n°2
+	 * @return une ArrayList<Individu> composée des 2 enfants
+	 */
 	public ArrayList<Individu> crossoverOX(Individu parent1, Individu parent2){
 		
 		int taille = parent1.getOrdreVisite().size();
@@ -191,12 +194,12 @@ public class Population {
 			villeParent1 = parent1.getOrdreVisite().get(villeActuelle);
 			villeParent2 = parent2.getOrdreVisite().get(villeActuelle);
 			
-			if(!enfant1.contains(villeParent1)) {
-				enfant1.add(villeParent1);
+			if(!enfant1.contains(villeParent2)) {
+				enfant1.add(villeParent2);
 			}
 			
-			if (!enfant2.contains(villeParent2)) {
-				enfant2.add(villeParent2);
+			if (!enfant2.contains(villeParent1)) {
+				enfant2.add(villeParent1);
 			}
 		}
 		
