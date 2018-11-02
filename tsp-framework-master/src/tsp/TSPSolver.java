@@ -1,5 +1,7 @@
 package tsp;
 
+import java.util.ArrayList;
+
 /**
  * 
  * This class is the place where you should enter your code and from which you can create your own objects.
@@ -33,17 +35,6 @@ public class TSPSolver {
 	/** Time given to solve the problem. */
 	private long m_timeLimit;
 	
-	public static double ALPHA=1; 
-	public static double BETA=2; 
-	public static double Q=100; 
-	public static double P=0.2;
-	public static boolean ELITISTE=true;
-	public static int NOMBRE_ELITISTE=20;
-	public static double COEF_ELITISTE=10;
-	public static int MAX_TIME=60;
-	public static double c_ini_pheromone=0.1;
-	public static int NOMBRE_FOURMI=51;
-
 	
 	// -----------------------------
 	// ----- CONSTRUCTOR -----------
@@ -84,53 +75,73 @@ public class TSPSolver {
 		// Example of a time loop
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
-		Piste piste = new Piste(this.getInstance());
-		double index=0;
-		boolean sameWay = false;
 		
-		int rien =0;
-		
-		do {
-			for (int i=0;i<piste.getFourmis().size();i++) {
-				piste.getFourmi(i).ajouterVillesVisitee(i%m_instance.getNbCities());
-			}
-			/*System.err.println("Villes visitées par f8 : "+piste.getFourmi(8).getVillesVisitees());
-			System.err.println("Villes non visitées par f8 : "+piste.getFourmi(8).getVillesNonVisitees());
-			System.err.println("Quantité de phéromone entre v8 et v1 : "+piste.getPheromoneSurArc()[8][1]);
-			System.err.println("Distance entre v8 et v1 : "+m_instance.getDistances(8,1));
-			System.err.println("Proba pour f8 d'aller de v8 à v1 : "+piste.getFourmi(8).getProbaIaJ(8, 1));
-			System.err.println("Derniere ville visitée par f8 : "+piste.getFourmi(8).getDerniereVilleVisitee());
-			double num = Math.pow(piste.getFourmi(8).getPiste().getPheromoneSurArc()[8][1], Piste.ALPHA)
-					*Math.pow(1.0/this.m_instance.getDistances(8, 1), Piste.BETA);
-			System.err.println("Numérateur proba f8 d'aller de v8 à v1 : "+num);*/
-			
-			//this.getInstance().setHeuristic();
-			for (Fourmi four : piste.getFourmis()) {
-				for (int i=0;i<m_instance.getNbCities()-1;i++) {
-					four.setProchaineVille();	
-				}
-				four.setLongueur();
-			}
+		int nbIndividus = 90;
 
-			piste.majBestSolution();
-			if (ELITISTE) {
-				piste.setElitiste(NOMBRE_ELITISTE);
+		Population population = new Population(nbIndividus,this.m_instance);
+
+		int nbIteElitistes=4000;
+		int nbIteAleatoires=2000;
+		double seuilMutation = 0.15;
+        double seuilOptimisation = 0.5;
+        
+        int index=0;
+
+		do {
+			
+			//Iterations avec une s�lection des parents �litiste 
+			if (index < nbIteElitistes)  {
+				System.err.println("iteration:"+index);
+				ArrayList<Individu> parents = population.selectionElitiste();
+				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
+			    double alea = Math.random();
+				if(alea<seuilMutation) {
+					enfant.get(0).mutation();
+					enfant.get(1).mutation();
+				}
+				double aleaBis = Math.random();
+				if(aleaBis<seuilOptimisation) {
+					enfant.get(0).optimisation();
+					enfant.get(1).optimisation();
+				}
+				population.insertion(enfant.get(0));
+				population.insertion(enfant.get(1));
+				System.err.println("valeur: -----"+population.getBest().getValeur()+"----");
+			
+			//It�rations avec une s�lection des parents al�atoire
+		    } else if (index<nbIteAleatoires+nbIteElitistes) {
+		    	
+				System.err.println("iteration:"+index);
+				ArrayList<Individu> parents = population.selectionAleatoire();
+				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
+			    double alea = Math.random();
+				if(alea<seuilMutation) {
+					enfant.get(0).mutation();
+					enfant.get(1).mutation();
+				}
+				double aleaBis = Math.random();
+				if(aleaBis<seuilOptimisation) {
+					enfant.get(0).optimisation();
+					enfant.get(1).optimisation();
+				}
+				population.insertion(enfant.get(0));
+				population.insertion(enfant.get(1));
+			
+				System.err.println("valeur: -----"+population.getBest().getValeur()+"----");	
 			}
-			piste.majPheromone();
-			piste.resetFourmis();
 			
 			spentTime = System.currentTimeMillis() - startTime;
-			index++;	
-			System.err.println(piste.getBestLongueur());
-		} while(spentTime < (MAX_TIME * 1000 - 100) && index<50 && !sameWay);
+			index++;
+		} while(spentTime < (this.m_timeLimit * 1000 - 100) && index<nbIteAleatoires+nbIteElitistes );
 		
 		for (int i=0;i<m_instance.getNbCities();i++) {
-			this.m_solution.setCityPosition(piste.getSolutionTemp().get(i), i);
+			this.m_solution.setCityPosition(population.getBest().getOrdreVisite().get(i), i);
 		}
-		this.m_solution.setCityPosition(piste.getSolutionTemp().get(0), m_instance.getNbCities());
-		System.err.println(index+" itérations pour obtenir ce résultat");
-		System.err.println(spentTime/index+" ms par itération");
-
+		this.m_solution.setCityPosition(population.getBest().getOrdreVisite().get(0), this.m_instance.getNbCities());
+		System.err.println("");
+		System.err.println("Nombre d'itérations/reproduction : "+index);
+		System.err.println("Durée d'une itération : "+spentTime/index+" ms");
+		System.err.println("Durée d'éxécution : "+spentTime+" ms"+"\n");
 	}
 
 	// -----------------------------

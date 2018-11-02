@@ -92,14 +92,12 @@ public class Fourmi {
 	}
 	
 	public double getProbaIaJ(int i, int j) throws Exception {
-		double num = Math.pow(this.getPiste().getPheromoneSurArc()[i][j], TSPSolver.ALPHA)
-				*Math.pow(1.0/this.m_instance.getDistances(i, j), TSPSolver.BETA);
-		/*double num=this.getInstance().getHeuristic()[i][j];*/
+		double num = Math.pow(this.getPiste().getPheromoneSurArc()[i][j], Piste.ALPHA)
+				*Math.pow(1.0/this.m_instance.getDistances(i, j), Piste.BETA);
 		double den = 0;
 		for (int numVille : this.getVillesNonVisitees()) {
-			den+=Math.pow(this.getPiste().getPheromoneSurArc()[i][numVille], TSPSolver.ALPHA)
-					*Math.pow(1.0/this.m_instance.getDistances(i, numVille), TSPSolver.BETA);
-			/*den+=this.getInstance().getHeuristic()[i][numVille];*/
+			den+=Math.pow(this.getPiste().getPheromoneSurArc()[i][numVille], Piste.ALPHA)
+					*Math.pow(1.0/this.m_instance.getDistances(i, numVille), Piste.BETA);
 		}
 		return (num/den);
 	}

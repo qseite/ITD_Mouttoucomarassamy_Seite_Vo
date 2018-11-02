@@ -3,6 +3,17 @@ package tsp;
 import java.util.ArrayList;
 
 public class Piste {
+	public static double ALPHA=1; 
+	public static double BETA=2; 
+	public static double Q=100; 
+	public static double P=0.2;
+	public static boolean ELITISTE=true;
+	public static int NOMBRE_ELITISTE=20;
+	public static double COEF_ELITISTE=10;
+	public static int MAX_TIME=60;
+	public static double c_ini_pheromone=0.1;
+	public static int NOMBRE_FOURMI=51;
+	
 	private Instance m_instance;
 	private double[][] pheromoneSurArc;
 	private double bestLongueur;
@@ -23,11 +34,11 @@ public class Piste {
 		this.listeFourmis = new ArrayList<Fourmi>();
 		for (int i=0; i<instance.getNbCities();i++) {
 			for (int j=0; j<=i;j++) {
-				this.pheromoneSurArc[i][j]=TSPSolver.c_ini_pheromone;
+				this.pheromoneSurArc[i][j]=c_ini_pheromone;
 				this.pheromoneSurArc[j][i]=this.pheromoneSurArc[i][j];
 			}
 		}
-		this.nombreFourmi=TSPSolver.NOMBRE_FOURMI;
+		this.nombreFourmi=NOMBRE_FOURMI;
 		for (int i=0; i<this.nombreFourmi;i++) {
 			this.listeFourmis.add(new Fourmi(this.m_instance, this));
 		}
@@ -64,14 +75,14 @@ public class Piste {
 	public void majPheromone() {
 		for (int i=0;i<this.getInstance().getNbCities();i++) {
 			for (int j=0;j<=i;j++) {
-				this.getPheromoneSurArc()[i][j]=TSPSolver.P*this.getPheromoneSurArc()[i][j];
+				this.getPheromoneSurArc()[i][j]=P*this.getPheromoneSurArc()[i][j];
 				for (Fourmi four : this.getFourmis()) {
 					if (!four.getElitiste()) {
 						this.getPheromoneSurArc()[i][j]
-								+=four.getPassage()[i][j]*(TSPSolver.Q/four.getLongueur());
+								+=four.getPassage()[i][j]*(Q/four.getLongueur());
 					} else {
 						this.getPheromoneSurArc()[i][j]
-								+=four.getPassage()[i][j]*TSPSolver.COEF_ELITISTE*(TSPSolver.Q/four.getLongueur());
+								+=four.getPassage()[i][j]*COEF_ELITISTE*(Q/four.getLongueur());
 					}
 				}
 				this.getPheromoneSurArc()[j][i]=this.getPheromoneSurArc()[i][j];				
