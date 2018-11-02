@@ -54,7 +54,7 @@ public class TwoOpt extends LocalSearch{
 		long t1=0;
 		int k=0;
 		t0=System.currentTimeMillis();
-		Instance graph = new Instance("instances/lin318.tsp",0);
+		Instance graph = new Instance("instances/brazil58.tsp",1);
 		TwoOpt ls = new TwoOpt(graph);
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
@@ -113,7 +113,7 @@ public class TwoOpt extends LocalSearch{
 			sol.setCityPosition(ls.getSolution()[i], i);
 		}
 		sol.setCityPosition(ls.getSolution()[0], ls.getSolution().length);
-		TSPGUI gui = new TSPGUI(sol);
+		//TSPGUI gui = new TSPGUI(sol);
 	}
 	
 }
