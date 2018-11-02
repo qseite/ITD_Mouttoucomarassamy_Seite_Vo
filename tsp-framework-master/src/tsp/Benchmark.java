@@ -44,7 +44,7 @@ public class Benchmark {
 				
 				//Iterations avec une s�lection des parents �litiste 
 				if (index < nbIteElitistes)  {
-					System.err.println("iteration:"+index);
+					//System.err.println("iteration:"+index);
 					ArrayList<Individu> parents = population.selectionElitiste();
 					ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
 				    double alea = Math.random();
@@ -59,7 +59,7 @@ public class Benchmark {
 					}
 					population.insertion(enfant.get(0));
 					population.insertion(enfant.get(1));
-					System.err.println("valeur: -----"+population.getBest().getValeur()+"----");
+					//System.err.println("valeur: -----"+population.getBest().getValeur()+"----");
 				
 				//It�rations avec une s�lection des parents al�atoire
 			    } else if (index<nbIteAleatoires+nbIteElitistes) {
@@ -80,7 +80,7 @@ public class Benchmark {
 					population.insertion(enfant.get(0));
 					population.insertion(enfant.get(1));
 				
-					System.err.println("valeur: -----"+population.getBest().getValeur()+"----");	
+					//System.err.println("valeur: -----"+population.getBest().getValeur()+"----");	
 				}
 				
 				spentTime = System.currentTimeMillis() - startTime;

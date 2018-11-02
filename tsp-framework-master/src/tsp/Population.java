@@ -10,7 +10,7 @@ public class Population {
 	Instance g_instance;
 	
 	/**
-	 * Initialise une population √† partir d'une instance, l'adn de chaque individu de la population est
+	 * Initialise une population √† partir d'une instance, l'adn (c'est ‡ dire l'ordre des villes visitÈes) de chaque individu de la population est
 	 * g√©n√©r√© al√©atoirement
 	 * @param nbIndividu, nombre d'individus dans la population
 	 * @param g_instance, instance concern√©e
@@ -33,39 +33,6 @@ public class Population {
 			Individu aRajouter = new Individu(g_instance,copie);
 			this.population.add(aRajouter);
 		}
-		
-		/*
-		int n=g_instance.getNbCities();
-		for (int i=0;i<nbIndividu;i++) {
-			ArrayList<Integer> tempon=new ArrayList<Integer>();
-			TwoOpt temp=new TwoOpt(this.g_instance);
-			boolean testEgalite=true; 
-			long t0;
-			long t1=0;
-			int k=0;
-			t0=System.currentTimeMillis();
-
-			do {
-				
-				temp.twoOptIteration();
-				
-				if (temp.iniEqualsSol()) {
-					testEgalite=false;
-				}
-				k++;
-				temp.setInitial();
-				t1=System.currentTimeMillis();
-				
-			} while (testEgalite && (t1-t0)<5);
-			for (int j=0;j<n;j++) {
-				tempon.add(temp.getSolution()[j]);
-			}
-			this.population.add(new Individu(g_instance,tempon));
-			System.out.println("Individu n¬∞"+i+" : valeur="+temp.distance(temp.getSolution()));
-		}*/
-		
-		
-		
 	}
 	
 	/**
@@ -112,7 +79,7 @@ public class Population {
 		return index;	
 	}
 	
-	/**
+	/** Retourne le meilleur individu de la population
 	 * @see getIndexBest()
 	 * @return Retourne l'Individu dans this.population poss√©dant la meilleure solution
 	 * @throws Exception
@@ -198,7 +165,9 @@ public class Population {
 		return new Individu(this.getInstance(),child);
 	}
 	
-	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants
+	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants.
+	 * Le croisement se fait avec 2 points de coupure choisis alÈatoirement entre lesquels les villes d'un des parents sont recopiÈs. Dans les esapces restants, 
+	 * ce sont les villes de l'autre parent qui sont recopiÈs.
 	 * @param parent1 : parent nÔøΩ1
 	 * @param parent2 : parent nÔøΩ2
 	 * @return une ArrayList<Individu> composÔøΩe des 2 enfants
@@ -253,7 +222,7 @@ public class Population {
 	
 	/**
 	 * Insere l'individu en entr√©e s'il est meilleur que le moins 
-	 * bon de la population et enl√®ve le moins bon
+	 * bon de la population et qu'il n'est pas dÈj‡ prÈsent dans la population et enl√®ve le moins bon
 	 * @param aInserer : individu √† ins√©rer dans la population
 	 * @throws Exception
 	 */

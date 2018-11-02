@@ -5,18 +5,27 @@ import java.util.ArrayList;
 public class Individu {
 	
 	private Instance g_instance;
-	private ArrayList<Integer> ordreVisite;
+	private ArrayList<Integer> ordreVisite;  // L'ordre des villes visitées
 	
-	
+	/*Constructeur d'un individu à partir d'une instance et d'une ArrayList<integer> représentant l'ordre des villes visitées
+	 * @param g_instance
+	 * @param ordreVisite
+	 */
 	public Individu(Instance g_instance, ArrayList<Integer> ordreVisite) {
 		this.g_instance=g_instance;
 		this.ordreVisite=ordreVisite;
 	}
 	
+	/* Getter pour ordreVisite
+	 * @return l'ArrayList<Individu> représentant l'ordre des villes visitées
+	 */
 	public ArrayList<Integer> getOrdreVisite(){
 		return this.ordreVisite;
 	}
 	
+	/*Getter pour l'instance
+	 * @return l'instance 
+	 */
 	public Instance getInstance() {
 		return this.g_instance;
 	}
