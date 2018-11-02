@@ -24,7 +24,7 @@ public class Benchmark {
 	public static void main(String[] args) throws Exception {
 		Instance[] instances = buildInstances();
 		for(int i = 0; i<instances.length; i++) {
-			System.err.println("======="+instances[i].getFileName()+"========");
+			System.err.println("========"+instances[i].getFileName()+"========");
 			
 			long startTime = System.currentTimeMillis();
 			long spentTime = 0;
@@ -41,7 +41,6 @@ public class Benchmark {
 	        int index=0;
 
 			do {
-				
 				//Iterations avec une s�lection des parents �litiste 
 				if (index < nbIteElitistes)  {
 					System.err.println("iteration:"+index);

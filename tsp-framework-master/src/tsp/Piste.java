@@ -12,7 +12,7 @@ public class Piste {
 	public static double COEF_ELITISTE=10;
 	public static int MAX_TIME=60;
 	public static double c_ini_pheromone=0.1;
-	public static int NOMBRE_FOURMI=51;
+	public static int NOMBRE_FOURMI=101;
 	
 	private Instance m_instance;
 	private double[][] pheromoneSurArc;

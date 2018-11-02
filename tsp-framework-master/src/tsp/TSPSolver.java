@@ -81,7 +81,7 @@ public class TSPSolver {
 		Population population = new Population(nbIndividus,this.m_instance);
 
 		int nbIteElitistes=4000;
-		int nbIteAleatoires=2000;
+		int nbIteAleatoires=4000;
 		double seuilMutation = 0.15;
         double seuilOptimisation = 0.5;
         

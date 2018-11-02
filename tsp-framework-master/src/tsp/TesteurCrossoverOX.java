@@ -12,7 +12,7 @@ public class TesteurCrossoverOX {
 		t0=System.currentTimeMillis();
 
 		int nbIndividus = 90;
-		Instance g_instance = new Instance("instances/d657.tsp",0);
+		Instance g_instance = new Instance("instances/brazil58.tsp",1);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIteElitistes=4000;
 		int nbIteAleatoires=2000;
