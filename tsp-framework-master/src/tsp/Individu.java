@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Individu {
 	
+	
 	private Instance g_instance;
 	private ArrayList<Integer> ordreVisite;  // L'ordre des villes visitées
 	
