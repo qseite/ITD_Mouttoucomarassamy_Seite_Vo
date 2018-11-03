@@ -6,6 +6,10 @@ import java.util.Collections;
 
 import tsp.gui.TSPGUI;
 
+/**
+ * Cette classe permet d'appliquer à un chemin un algorithme de recherche Local utilisant du 2-opt
+ */
+
 public class TwoOpt extends LocalSearch{
 
 	/**

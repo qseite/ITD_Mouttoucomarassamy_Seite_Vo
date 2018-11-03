@@ -3,19 +3,24 @@ package tsp;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Cette classe modélise une population d'individu 
+ */
+
 public class Population {
 	
+	/** Mémorise tous les Individus de la population */
 	ArrayList<Individu> population;
+	
+	/** Mémorise le nombre d'Individus dans la population */
 	int nombreIndividus;
+	
+	/** Contient toutes les données du problème */
 	Instance g_instance;
 	
 	/**
-<<<<<<< HEAD
-	 * Initialise une population à partir d'une instance, l'adn (c'est à dire l'ordre des villes visitées) de chaque individu de la population est
-=======
-	 * Initialise une population à partir d'une instance, l'adn (c'est � dire l'ordre des villes visit�es) de chaque individu de la population est
->>>>>>> branch 'master' of https://github.com/qseite/ITD_Mouttoucomarassamy_Seite_Vo.git
-	 * généré aléatoirement
+	 * Initialise une population à partir d'une instance
+	 * Le chemin/l'adn de chaque individu est généré aléatoirement
 	 * @param nbIndividu, nombre d'individus dans la population
 	 * @param g_instance, instance concernée
 	 * @throws Exception 

@@ -2,11 +2,19 @@ package tsp;
 
 import java.util.ArrayList;
 
+/**
+ * Cette classe modélise un individu et son ADN
+ * L'ADN correspond à la liste des villes visitées
+ * Un gène correspond à la position d'une ville dans cette liste
+ */
+
 public class Individu {
 	
-	
+	/** Contient les données du problème */
 	private Instance g_instance;
-	private ArrayList<Integer> ordreVisite;  // L'ordre des villes visit�es
+	
+	/** Mémorise l'ordre des villes visitées = l'adn de l'individu */
+	private ArrayList<Integer> ordreVisite;  
 	
 	/*Constructeur d'un individu à partir d'une instance et d'une ArrayList<integer> représentant l'ordre des villes visitées
 	 * @param g_instance

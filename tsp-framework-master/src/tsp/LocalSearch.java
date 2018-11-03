@@ -3,6 +3,10 @@ package tsp;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Cette classe permet d'appliquer à un chemin un algorithme de recherche locale utilisant du swap
+ */
+
 public class LocalSearch {
 	private Instance instance;
 	private int[] solution; // permet de stocker la solution au bout d'un cycle de swap
