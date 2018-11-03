@@ -6,9 +6,9 @@ public class Individu {
 	
 	
 	private Instance g_instance;
-	private ArrayList<Integer> ordreVisite;  // L'ordre des villes visitées
+	private ArrayList<Integer> ordreVisite;  // L'ordre des villes visitï¿½es
 	
-	/*Constructeur d'un individu à partir d'une instance et d'une ArrayList<integer> représentant l'ordre des villes visitées
+	/*Constructeur d'un individu Ã  partir d'une instance et d'une ArrayList<integer> reprÃ©sentant l'ordre des villes visitÃ©es
 	 * @param g_instance
 	 * @param ordreVisite
 	 */
@@ -18,7 +18,7 @@ public class Individu {
 	}
 	
 	/* Getter pour ordreVisite
-	 * @return l'ArrayList<Individu> représentant l'ordre des villes visitées
+	 * @return l'ArrayList<Individu> reprÃ©sentant l'ordre des villes visitÃ©es
 	 */
 	public ArrayList<Integer> getOrdreVisite(){
 		return this.ordreVisite;

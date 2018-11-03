@@ -10,7 +10,11 @@ public class Population {
 	Instance g_instance;
 	
 	/**
+<<<<<<< HEAD
+	 * Initialise une population à partir d'une instance, l'adn (c'est à dire l'ordre des villes visitées) de chaque individu de la population est
+=======
 	 * Initialise une population à partir d'une instance, l'adn (c'est � dire l'ordre des villes visit�es) de chaque individu de la population est
+>>>>>>> branch 'master' of https://github.com/qseite/ITD_Mouttoucomarassamy_Seite_Vo.git
 	 * généré aléatoirement
 	 * @param nbIndividu, nombre d'individus dans la population
 	 * @param g_instance, instance concernée
@@ -165,6 +169,7 @@ public class Population {
 		return new Individu(this.getInstance(),child);
 	}
 	
+
 	/**Effectue un croisement entre 2 individus parents pour donner 2 individus enfants.
 	 * Le croisement se fait avec 2 points de coupure choisis al�atoirement entre lesquels les villes d'un des parents sont recopi�s. Dans les esapces restants, 
 	 * ce sont les villes de l'autre parent qui sont recopi�s.
@@ -247,6 +252,32 @@ public class Population {
 			this.population.add(aInserer);
 	    }
      }
+	
+	/* Insère l'invidu en argument en enlevant celui qui ressemblance le plus dans la population sauf
+	 * si c'est le meilleur (dans ce cas, insertion est appellée)
+	 * @param aInserer l'individu à insérer
+	 */
+	public void insertionRessemblance(Individu aInserer) throws Exception {
+		double ressemblanceMax=0;
+		int index=0;
+		for (int i=0;i<this.getPopulation().size();i++) {
+			double ressemblanceIndividu=0;
+			for (int j=0;j<this.getPopulation().get(i).getOrdreVisite().size();j++) {
+				if (aInserer.getOrdreVisite().get(j)==this.getPopulation().get(i).getOrdreVisite().get(j) && aInserer.getOrdreVisite().get(j)==this.getPopulation().get(i).getOrdreVisite().get(j) ) {
+					ressemblanceIndividu++;
+				}
+			}if (ressemblanceIndividu>ressemblanceMax) {
+				index=i;
+				ressemblanceMax=ressemblanceIndividu;
+			}
+		}Individu meilleur = this.getBest();
+		if (!this.getPopulation().get(index).equals(meilleur)) {
+			this.getPopulation().remove(index);
+			this.getPopulation().add(aInserer); 
+		}else {
+			this.insertion(aInserer);
+		}
+	}
 	
 	/**
 	 * Retourne 2 parents : le meilleur individu de la population et un individu choisi aléatoirement
