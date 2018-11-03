@@ -11,12 +11,12 @@ public class TesteurCrossoverOX {
 		long t1=0;
 		t0=System.currentTimeMillis();
 
-		int nbIndividus = 90;
-		Instance g_instance = new Instance("instances/brazil58.tsp",1);
+		int nbIndividus = 100;
+		Instance g_instance = new Instance("instances/d657.tsp",0);
 		Population population = new Population(nbIndividus,g_instance);
 		int nbIteElitistes=4000;
-		int nbIteAleatoires=2000;
-		double seuilMutation = 0.15;
+		int nbIteAleatoires=4000;
+		double seuilMutation = 0.1;
         double seuilOptimisation = 0.5;
 	
 
