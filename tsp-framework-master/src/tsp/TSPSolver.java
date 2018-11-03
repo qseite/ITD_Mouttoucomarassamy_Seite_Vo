@@ -76,13 +76,13 @@ public class TSPSolver {
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
 		
-		int nbIndividus = 90;
+		int nbIndividus = 40;
 
 		Population population = new Population(nbIndividus,this.m_instance);
 
 		int nbIteElitistes=4000;
-		int nbIteAleatoires=4000;
-		double seuilMutation = 0.15;
+		int nbIteAleatoires=6000;
+		double seuilMutation = 0.1;
         double seuilOptimisation = 0.5;
         
         int index=0;
@@ -94,14 +94,22 @@ public class TSPSolver {
 				System.err.println("iteration:"+index);
 				ArrayList<Individu> parents = population.selectionElitiste();
 				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
-			    double alea = Math.random();
-				if(alea<seuilMutation) {
+			    double alea1 = Math.random();
+			    double alea2 = Math.random();
+				if(alea1<seuilMutation) {
 					enfant.get(0).mutation();
+					//enfant.get(1).mutation();
+				}
+				if (alea2<seuilMutation) {
 					enfant.get(1).mutation();
 				}
-				double aleaBis = Math.random();
-				if(aleaBis<seuilOptimisation) {
+ 				double aleaBis1 = Math.random();
+				double aleaBis2 = Math.random();
+				if(aleaBis1<seuilOptimisation) {
 					enfant.get(0).optimisation();
+					//enfant.get(1).optimisation();
+				}
+				if(aleaBis2<seuilOptimisation) {
 					enfant.get(1).optimisation();
 				}
 				population.insertion(enfant.get(0));
@@ -114,14 +122,22 @@ public class TSPSolver {
 				System.err.println("iteration:"+index);
 				ArrayList<Individu> parents = population.selectionAleatoire();
 				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
-			    double alea = Math.random();
-				if(alea<seuilMutation) {
+			    double alea1 = Math.random();
+			    double alea2 = Math.random();
+				if(alea1<seuilMutation) {
 					enfant.get(0).mutation();
+					//enfant.get(1).mutation();
+				}
+				if (alea2<seuilMutation) {
 					enfant.get(1).mutation();
 				}
-				double aleaBis = Math.random();
-				if(aleaBis<seuilOptimisation) {
+ 				double aleaBis1 = Math.random();
+				double aleaBis2 = Math.random();
+				if(aleaBis1<seuilOptimisation) {
 					enfant.get(0).optimisation();
+					//enfant.get(1).optimisation();
+				}
+				if(aleaBis2<seuilOptimisation) {
 					enfant.get(1).optimisation();
 				}
 				population.insertion(enfant.get(0));
