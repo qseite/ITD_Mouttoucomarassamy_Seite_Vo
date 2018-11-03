@@ -5,7 +5,7 @@ public class TesteurFourmi {
 	public static void main(String[] args) throws Exception {
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
-		Instance graph = new Instance("instances/eil101.tsp",0);
+		Instance graph = new Instance("instances/eil51.tsp",0);
 		Piste piste = new Piste(graph);
 		double index=0;
 		boolean sameWay = false;

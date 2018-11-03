@@ -10,7 +10,7 @@ public class Population {
 	Instance g_instance;
 	
 	/**
-	 * Initialise une population Ã  partir d'une instance, l'adn (c'est à dire l'ordre des villes visitées) de chaque individu de la population est
+	 * Initialise une population Ã  partir d'une instance, l'adn (c'est ï¿½ dire l'ordre des villes visitï¿½es) de chaque individu de la population est
 	 * gÃ©nÃ©rÃ© alÃ©atoirement
 	 * @param nbIndividu, nombre d'individus dans la population
 	 * @param g_instance, instance concernÃ©e
@@ -165,9 +165,9 @@ public class Population {
 		return new Individu(this.getInstance(),child);
 	}
 	
-	/*Effectue un croisement entre 2 individus parents pour donner 2 individus enfants.
-	 * Le croisement se fait avec 2 points de coupure choisis aléatoirement entre lesquels les villes d'un des parents sont recopiés. Dans les esapces restants, 
-	 * ce sont les villes de l'autre parent qui sont recopiés.
+	/**Effectue un croisement entre 2 individus parents pour donner 2 individus enfants.
+	 * Le croisement se fait avec 2 points de coupure choisis alï¿½atoirement entre lesquels les villes d'un des parents sont recopiï¿½s. Dans les esapces restants, 
+	 * ce sont les villes de l'autre parent qui sont recopiï¿½s.
 	 * @param parent1 : parent nï¿½1
 	 * @param parent2 : parent nï¿½2
 	 * @return une ArrayList<Individu> composï¿½e des 2 enfants
@@ -222,7 +222,7 @@ public class Population {
 	
 	/**
 	 * Insere l'individu en entrÃ©e s'il est meilleur que le moins 
-	 * bon de la population et qu'il n'est pas déjà présent dans la population et enlÃ¨ve le moins bon
+	 * bon de la population et qu'il n'est pas dï¿½jï¿½ prï¿½sent dans la population et enlÃ¨ve le moins bon
 	 * @param aInserer : individu Ã  insÃ©rer dans la population
 	 * @throws Exception
 	 */

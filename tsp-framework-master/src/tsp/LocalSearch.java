@@ -169,7 +169,7 @@ public class LocalSearch {
 		long t1=0;
 		int k=0;
 		t0=System.currentTimeMillis();
-		Instance graph = new Instance("instances/d657.tsp",0);
+		Instance graph = new Instance("instances/rat575.tsp",0);
 		LocalSearch ls = new LocalSearch(graph);
 		System.out.println("Solution initiale : "+ls.tostring(ls.getIni()));
 		System.out.println("Distance initiale : "+ls.distance(ls.getIni()));
