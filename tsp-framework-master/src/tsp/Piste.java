@@ -2,6 +2,13 @@ package tsp;
 
 import java.util.ArrayList;
 
+/**
+ * Cette classe mémorise les principales caractéristiques de la Piste parcourue par les Fourmis
+ * 
+ * @author romai
+ *
+ */
+
 public class Piste {
 	public static double ALPHA=1; 
 	public static double BETA=2; 
@@ -14,11 +21,22 @@ public class Piste {
 	public static double c_ini_pheromone=0.1;
 	public static int NOMBRE_FOURMI=101;
 	
+	/** L'Instance contenant toutes les données du problème */
 	private Instance m_instance;
+	
+	/** Tableau de double mémorisant la quantité de phéromone sur la Piste */
 	private double[][] pheromoneSurArc;
+	
+	/** Mémorise la longueur du meilleur chemin trouvé par l'une des Fourmis */
 	private double bestLongueur;
+	
+	/** Mémorise le meilleur chemin actuel trouvé par l'une des Fourmis */
 	private ArrayList<Integer> solutionTemp;
+	
+	/** Contient la liste de toutes les Fourmis parcourant la Piste */
 	private ArrayList<Fourmi> listeFourmis;
+	
+	/** Mémorise le nombre de Fourmis sur la Piste */
 	private int nombreFourmi;
 
 
@@ -26,6 +44,12 @@ public class Piste {
 	// ----- CONSTRUCTOR -----------
 	// -----------------------------
 	
+	/**
+	 * Génère une Piste en fonction d'une Instance et des données du problème
+	 * Le nombre de Fourmis parcourant la piste ainsi que la quantité de phéromone initiale 
+	 * est déterminé arbitrairement 
+	 * @param instance
+	 */
 	public Piste(Instance instance) {
 		this.m_instance=instance;
 		this.pheromoneSurArc = new double[instance.getNbCities()][instance.getNbCities()];
@@ -48,30 +72,55 @@ public class Piste {
 	// ----- METHODS ---------------
 	// -----------------------------
 	
+	/**
+	 * @return l'Instance du problème
+	 */
 	public Instance getInstance() {
 		return this.m_instance;
 	}
 	
+	/**
+	 * @param index
+	 * @return la Fourmi d'index 'index'
+	 */
 	public Fourmi getFourmi(int index) {
 		return this.listeFourmis.get(index);
 	}
 	
+	/**
+	 * @return l'ArrayList des Fourmi parcourant la Piste
+	 */
 	public ArrayList<Fourmi> getFourmis() {
 		return this.listeFourmis;
 	}
 	
+	/**
+	 * @return un tableau de double donnant la quantité de phéromone sur chaque arc
+	 */
 	public double[][] getPheromoneSurArc() {
 		return this.pheromoneSurArc;
 	}
 	
+	/**
+	 * @return un double représentant la meilleur longueur actuelle
+	 */
 	public double getBestLongueur() {
 		return this.bestLongueur;
 	}
 	
+	/**
+	 * @return une ArrayList d'Intger représentant le meilleur chemin actuel
+	 */
 	public ArrayList<Integer> getSolutionTemp() {
 		return this.solutionTemp;
 	}
 	
+	/**
+	 * Met à jour la quantité de phéromone en fonction de la longueur du chemin
+	 * parcouru par les Fourmi ainsi qu'en fonction du coefficient d'évaporation
+	 * P des phéromones
+	 * Plus le chemin parcouru est faible plus la quantité de phéromone déposée est importante
+	 */
 	public void majPheromone() {
 		for (int i=0;i<this.getInstance().getNbCities();i++) {
 			for (int j=0;j<=i;j++) {
@@ -90,6 +139,9 @@ public class Piste {
 		}
 	}
 	
+	/**
+	 * Met à jour le meilleur chemin trouvée et sa longueur
+	 */
 	public void majBestSolution() {
 		double best=this.getFourmi(0).getLongueur();
 		Fourmi bestF=this.getFourmi(0);
@@ -109,6 +161,11 @@ public class Piste {
 
 	}
 	
+	/**
+	 * Définit un nombre arbitraire de fourmis élitistes, les Fourmis élitistes
+	 * sont les Fourmis ayant parcouru la plus petite distance
+	 * @param int nbr : donne le nombre de fourmi élitiste
+	 */
 	public void setElitiste(int nbr) {
 		for (int i=0;i<nbr;i++) {
 			double best=this.getFourmi(0).getLongueur();
@@ -132,6 +189,9 @@ public class Piste {
 		}
 	}
 	
+	/**
+	 * Après un tour complet la mémoire de chaque fourmi est réinitialisée
+	 */
 	public void resetFourmis() {
 		this.listeFourmis.clear();
 		this.listeFourmis = new ArrayList<Fourmi>();
