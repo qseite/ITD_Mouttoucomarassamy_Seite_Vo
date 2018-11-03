@@ -76,13 +76,13 @@ public class TSPSolver {
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
 		
-		int nbIndividus = 40;
+		int nbIndividus = 100;
 
 		Population population = new Population(nbIndividus,this.m_instance);
 
 		int nbIteElitistes=4000;
-		int nbIteAleatoires=6000;
-		double seuilMutation = 0.1;
+		int nbIteAleatoires=100000;
+		double seuilMutation = 0.125;
         double seuilOptimisation = 0.5;
         
         int index=0;
