@@ -53,7 +53,7 @@ public class TesteurCrossoverOX {
 			double aleaBis = Math.random();
 			if(aleaBis<seuilOptimisation) {
 				enfant.get(0).optimisation();
-				enfant.get(1).optimisation();
+				enfant.get(1).optimisation() ;
 			}
 			population.insertion(enfant.get(0));
 			population.insertion(enfant.get(1));
