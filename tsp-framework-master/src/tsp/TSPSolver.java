@@ -140,7 +140,7 @@ public class TSPSolver {
 			
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;
-		} while(spentTime < (m_timeLimit * 1000 - 100) && index<nbIteAleatoires+nbIteElitistes );
+		} while(spentTime < (m_timeLimit * 1000 - 150) && index<nbIteAleatoires+nbIteElitistes );
 		
 		// on crée une solution qui part de la ville 0 à partir des résultats de l'algorithme
 		Individu best = population.getBest();
