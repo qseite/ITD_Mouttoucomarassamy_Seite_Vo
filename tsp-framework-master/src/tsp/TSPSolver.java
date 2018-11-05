@@ -100,7 +100,6 @@ public class TSPSolver {
 					enfant.get(0).mutation();
 					enfant.get(1).mutation();
 				}
-		
  				double aleaBis1 = Math.random();
 				if(aleaBis1<seuilOptimisation) {
 					enfant.get(0).optimisation();
