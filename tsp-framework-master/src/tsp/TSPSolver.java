@@ -82,7 +82,7 @@ public class TSPSolver {
 
 		int nbIteElitistes=4000;
 		int nbIteAleatoires=100000;
-		double seuilMutation = 0.125;
+		double seuilMutation = 0.1;
         double seuilOptimisation = 0.5;
         
         int index=0;
