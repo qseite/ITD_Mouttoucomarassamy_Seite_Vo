@@ -86,7 +86,7 @@ public class TSPSolver {
         
 		// choix des paramètres
 		int nbIteElitistes=4000;
-		int nbIteAleatoires=100000;
+		int nbIteAleatoires=100000; // pour que le programme s'approche des 60sec mêmes pour les petites et moyennes instances
 		double seuilMutation = 0.1;
         double seuilOptimisation = 0.5;
         
@@ -141,6 +141,8 @@ public class TSPSolver {
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;
 		} while(spentTime < (m_timeLimit * 1000 - 100) && index<nbIteAleatoires+nbIteElitistes );
+		
+		// on crée une solution qui part de la ville 0 à partir des résultats de l'algorithme
 		Individu best = population.getBest();
 		int indexRotate=0;
 		for (int i=0;i<this.getInstance().getNbCities();i++) {
@@ -149,8 +151,9 @@ public class TSPSolver {
 			}
 		}
 		ArrayList<Integer> bestSolution=best.getOrdreVisite();
+		// on remet la ville 0 en début de circuit
 		Collections.rotate(bestSolution, bestSolution.size()-indexRotate);
-		
+		// on crée la solution
 		for (int i=0;i<m_instance.getNbCities();i++) {
 			this.m_solution.setCityPosition(bestSolution.get(i), i);
 		}
