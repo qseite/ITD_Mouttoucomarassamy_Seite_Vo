@@ -84,10 +84,20 @@ public class TSPSolver {
 		// on crée une population d'individus avec le constructeur de la classe Population qui génère des individus aléatoirement
 		Population population = new Population(nbIndividus,this.m_instance);
         
-		// choix des paramètres
+		// ----------------------------
+		// --- choix des paramètres ---
+		// ----------------------------
+		
+		// nombre de reproduction avec selectionElitiste()
 		int nbIteElitistes=4000;
+		
+		// nombre de reproduction avec selectionAleatoire()
 		int nbIteAleatoires=100000; // pour que le programme s'approche des 60sec mêmes pour les petites et moyennes instances
+		
+		// probabilité d'effectuer une mutation sur l'enfant
 		double seuilMutation = 0.1;
+		
+		// probabilité d'effectuer une optimisation 2-opt sur l'enfant
         double seuilOptimisation = 0.5;
         
         int index=0;
@@ -97,8 +107,14 @@ public class TSPSolver {
 			//Iterations avec une sélection des parents élitiste 
 			if (index < nbIteElitistes)  {
 				System.err.println("iteration:"+index);
+				
+				// choix des parents
 				ArrayList<Individu> parents = population.selectionElitiste();
+				
+				// création des individus enfants
 				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
+				
+				// mutation puis optimisation des enfants suivant la probabilité choisie
 			    double alea1 = Math.random();
 				if(alea1<seuilMutation) {
 					enfant.get(0).mutation();
@@ -109,7 +125,8 @@ public class TSPSolver {
 					enfant.get(0).optimisation();
 					enfant.get(1).optimisation();
 				}
-
+				
+				// insertion des enfants dans la population
 				population.insertion(enfant.get(0));
 				population.insertion(enfant.get(1));
 				System.err.println("valeur: -----"+population.getBest().getValeur()+"----");
@@ -118,23 +135,28 @@ public class TSPSolver {
 		    } else if (index<nbIteAleatoires+nbIteElitistes) {
 		    	
 				System.err.println("iteration:"+index);
+				
+				// choix des parents
 				ArrayList<Individu> parents = population.selectionAleatoire();
+				
+				// création des individus enfants
 				ArrayList<Individu> enfant = population.crossoverOX(parents.get(0),parents.get(1));
+				
+				// mutation puis optimisation des enfants suivant la probabilité choisie
 			    double alea1 = Math.random();
 				if(alea1<seuilMutation) {
 					enfant.get(0).mutation();
 					enfant.get(1).mutation();
 				}
-
  				double aleaBis1 = Math.random();
 				if(aleaBis1<seuilOptimisation) {
 					enfant.get(0).optimisation();
 					enfant.get(1).optimisation();
 				}
-
+				
+				// insertion des enfants dans la population
 				population.insertion(enfant.get(0));
 				population.insertion(enfant.get(1));
-			
 				System.err.println("valeur: -----"+population.getBest().getValeur()+"----");	
 			}
 			
@@ -150,6 +172,7 @@ public class TSPSolver {
 				indexRotate=i;
 			}
 		}
+		
 		ArrayList<Integer> bestSolution=best.getOrdreVisite();
 		// on remet la ville 0 en début de circuit
 		Collections.rotate(bestSolution, bestSolution.size()-indexRotate);
