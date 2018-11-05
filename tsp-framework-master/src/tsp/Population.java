@@ -258,7 +258,7 @@ public class Population {
 	    }
      }
 	
-	/* Insère l'invidu en argument en enlevant celui qui ressemblance le plus dans la population sauf
+	/** Insère l'invidu en argument en enlevant celui qui ressemblance le plus dans la population sauf
 	 * si c'est le meilleur (dans ce cas, insertion est appellée)
 	 * @param aInserer l'individu à insérer
 	 */
