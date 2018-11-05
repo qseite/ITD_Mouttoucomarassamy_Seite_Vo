@@ -16,7 +16,8 @@ public class Individu {
 	/** Mémorise l'ordre des villes visitées = l'adn de l'individu */
 	private ArrayList<Integer> ordreVisite;  
 	
-	/*Constructeur d'un individu à partir d'une instance et d'une ArrayList<integer> représentant l'ordre des villes visitées
+	/**
+	 * Constructeur d'un individu à partir d'une instance et d'une ArrayList<integer> représentant l'ordre des villes visitées
 	 * @param g_instance
 	 * @param ordreVisite
 	 */
@@ -25,14 +26,16 @@ public class Individu {
 		this.ordreVisite=ordreVisite;
 	}
 	
-	/* Getter pour ordreVisite
+	/**
+	 *  Getter pour ordreVisite
 	 * @return l'ArrayList<Individu> représentant l'ordre des villes visitées
 	 */
 	public ArrayList<Integer> getOrdreVisite(){
 		return this.ordreVisite;
 	}
 	
-	/*Getter pour l'instance
+	/**
+	 * Getter pour l'instance
 	 * @return l'instance 
 	 */
 	public Instance getInstance() {
