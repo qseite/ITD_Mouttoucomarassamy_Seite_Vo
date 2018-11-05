@@ -1,6 +1,7 @@
 package tsp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * 
@@ -136,12 +137,22 @@ public class TSPSolver {
 			
 			spentTime = System.currentTimeMillis() - startTime;
 			index++;
-		} while(spentTime < (this.m_timeLimit * 1000 - 100) && index<nbIteAleatoires+nbIteElitistes );
+		} while(spentTime < (m_timeLimit * 1000 - 100) && index<nbIteAleatoires+nbIteElitistes );
+		Individu best = population.getBest();
+		int indexRotate=0;
+		for (int i=0;i<this.getInstance().getNbCities();i++) {
+			if (best.getOrdreVisite().get(i)==0) {
+				indexRotate=i;
+			}
+		}
+		ArrayList<Integer> bestSolution=best.getOrdreVisite();
+		Collections.rotate(bestSolution, bestSolution.size()-indexRotate);
 		
 		for (int i=0;i<m_instance.getNbCities();i++) {
-			this.m_solution.setCityPosition(population.getBest().getOrdreVisite().get(i), i);
+			this.m_solution.setCityPosition(bestSolution.get(i), i);
 		}
-		this.m_solution.setCityPosition(population.getBest().getOrdreVisite().get(0), this.m_instance.getNbCities());
+		this.m_solution.setCityPosition(bestSolution.get(0), this.m_instance.getNbCities());
+		
 		System.err.println("");
 		System.err.println("Nombre d'itérations/reproduction : "+index);
 		System.err.println("Durée d'une itération : "+spentTime/index+" ms");
