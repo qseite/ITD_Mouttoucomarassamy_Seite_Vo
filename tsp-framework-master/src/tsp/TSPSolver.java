@@ -69,17 +69,21 @@ public class TSPSolver {
 	 * 
 	 * @throws Exception may return some error, in particular if some vertices index are wrong.
 	 */
+	
+	// Nous avons choisis d'implémenter une combinaison de l'algorithme génétique et du 2-opt (cf rapport)
 	public void solve() throws Exception
 	{
 		m_solution.print(System.err);
 		// Example of a time loop
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
-		
+		// choix du nombre d'individus
 		int nbIndividus = 100;
-
+        
+		// on crée une population d'individus avec le constructeur de la classe Population qui génère des individus aléatoirement
 		Population population = new Population(nbIndividus,this.m_instance);
-
+        
+		// choix des paramètres
 		int nbIteElitistes=4000;
 		int nbIteAleatoires=100000;
 		double seuilMutation = 0.1;
@@ -89,7 +93,7 @@ public class TSPSolver {
 
 		do {
 			
-			//Iterations avec une s�lection des parents �litiste 
+			//Iterations avec une sélection des parents élitiste 
 			if (index < nbIteElitistes)  {
 				System.err.println("iteration:"+index);
 				ArrayList<Individu> parents = population.selectionElitiste();
@@ -109,7 +113,7 @@ public class TSPSolver {
 				population.insertion(enfant.get(1));
 				System.err.println("valeur: -----"+population.getBest().getValeur()+"----");
 			
-			//It�rations avec une s�lection des parents al�atoire
+			//Itérations avec une sélection des parents aléatoire
 		    } else if (index<nbIteAleatoires+nbIteElitistes) {
 		    	
 				System.err.println("iteration:"+index);
